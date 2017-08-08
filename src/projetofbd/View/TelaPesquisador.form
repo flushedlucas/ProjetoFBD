@@ -89,11 +89,11 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnAdicionarPesquisador" linkSize="2" min="-2" pref="93" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                               <Component id="btnEditarPesquisador" linkSize="2" min="-2" pref="93" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnBuscarPesquisador" linkSize="2" min="-2" pref="81" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Component id="btnDeletarPesquisador" linkSize="2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>

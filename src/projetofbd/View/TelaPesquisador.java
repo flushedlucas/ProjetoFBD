@@ -194,11 +194,11 @@ public class TelaPesquisador extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAdicionarPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
+                                .addGap(43, 43, 43)
                                 .addComponent(btnEditarPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnBuscarPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
+                                .addGap(41, 41, 41)
                                 .addComponent(btnDeletarPesquisador)))
                         .addGap(9, 9, 9)))
                 .addGap(119, 119, 119))
@@ -242,9 +242,10 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-            TelaPrincipal telaprincipal = new TelaPrincipal();
-            telaprincipal.setVisible(true);
-            this.dispose();
+           
+        TelaPrincipal telaprincipal = new TelaPrincipal();
+        telaprincipal.setVisible(true);
+        this.dispose();
       
     }//GEN-LAST:event_btnVoltarActionPerformed
 
@@ -275,26 +276,14 @@ public class TelaPesquisador extends javax.swing.JFrame {
         PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
         int adicionadao = pesquisadorDAO.update(pesquisador);
         if (adicionadao > 0){
-            JOptionPane.showMessageDialog(null, "Cliente editado com sucesso.");
+            JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
             limparCampos();
-            listarTabelaPesquisador();   
+            listarTabelaPesquisador();
+            btnAdicionarPesquisador.setEnabled(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Pesquisador não editado.");
         }
-        limparCampos();
-            
     }//GEN-LAST:event_btnEditarPesquisadorActionPerformed
-   
-    public static int readInt(final Scanner scanner) {
-    for (;;) {
-        final String linhaDigitada = scanner.nextLine();
-        try {
-            final int numeroInteiro = Integer.parseInt(linhaDigitada);
-            return numeroInteiro;
-        } catch (NumberFormatException e) {
-            System.out.println("Número inteiro inválido! Tente novamente.");
-        }
-    }
-}
-    
     public void setarCampos(){
         int setar = tblPesquisador.getSelectedRow();
         txtIdPesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 0).toString());
@@ -343,6 +332,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
     private void limparCampos(){
      txtIdPesquisador.setText(null);
      txtNomePesquisador.setText(null);
+     txtBuscar.setText(null);
     }
     
     private boolean validacao() {

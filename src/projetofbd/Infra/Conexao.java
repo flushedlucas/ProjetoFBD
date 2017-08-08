@@ -18,17 +18,20 @@ public class Conexao {
     private static final String SENHA = "";
     private static final String URL = "jdbc:mysql://localhost:3306/publicacoes?useTimezone=true&serverTimezone=UTC";
     private static final String DRIVER = "com.mysql.jdbc.Driver"; 
-    
+    private static Connection connection= null;
 //    Conectar ao banco
-    public static Connection abrir() throws Exception{
+    public static Connection abrir(){
 //        Registra o Driver
+        try{
         Class.forName(DRIVER);
-
 //        Captura a Conexão
-        Connection connection = DriverManager.getConnection(URL, USUARIO, SENHA);
-
+        connection = DriverManager.getConnection(URL, USUARIO, SENHA);
 //        Retorna a Conexão Aberta
         return  connection;
+        } catch(Exception e){
+           System.out.println("O ERRO É:"+ e ); 
+           return null; 
+        }
     }
     
 }

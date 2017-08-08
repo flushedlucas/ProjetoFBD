@@ -76,7 +76,7 @@ public class PesquisadorDAO {
     }
     
     public int update(Pesquisador pesquisador){
-        String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=? WHERE nome_pesq=?";
+        String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=? WHERE cod_pesq=?";
         
         int adicionado = 0;
         PreparedStatement statement = null;
@@ -84,7 +84,7 @@ public class PesquisadorDAO {
             statement = Conexao.abrir().prepareStatement(sql);
             statement.setInt(1, pesquisador.getCod_Pesq());
             statement.setString(2, pesquisador.getNome_Pesq());
-//          statement.setString(3, atualizar);
+            statement.setInt(3, pesquisador.getCod_Pesq());
             adicionado = statement.executeUpdate();
             return adicionado;         
         } catch (Exception e) {
