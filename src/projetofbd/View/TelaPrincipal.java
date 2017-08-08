@@ -199,8 +199,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-        Pesquisador pesquisador = new Pesquisador();
-        pesquisador.setVisible(true);
+        PesquisadorActionPerformed(evt);
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -225,8 +224,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void PesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisadorActionPerformed
         // TODO add your handling code here:
-        Pesquisador pesquisador = new Pesquisador();
+        TelaPesquisador pesquisador = new TelaPesquisador();
         pesquisador.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_PesquisadorActionPerformed
 
