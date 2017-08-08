@@ -343,6 +343,7 @@ public class Pesquisador extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jInternalFrame1.setClosable(true);
         jInternalFrame1.setIconifiable(true);
@@ -782,7 +783,7 @@ public class Pesquisador extends javax.swing.JFrame {
 
         btnUsuDelete2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/delete.png"))); // NOI18N
         btnUsuDelete2.setToolTipText("Apagar");
-        btnUsuDelete2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuDelete2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnUsuDelete2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuDelete2ActionPerformed(evt);
@@ -1012,6 +1013,7 @@ public class Pesquisador extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/lupa.png"))); // NOI18N
+        jButton1.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1118,7 +1120,8 @@ public class Pesquisador extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        setBounds(0, 0, 616, 438);
+        setSize(new java.awt.Dimension(616, 438));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCliNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCliNomeActionPerformed
