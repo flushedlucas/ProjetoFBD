@@ -751,44 +751,18 @@ public class Pesquisador extends javax.swing.JFrame {
 
         txtPesqId.setEditable(false);
 
-        txtPesqNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesqNomeActionPerformed(evt);
-            }
-        });
-
         btnUsuCreate2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/add.png"))); // NOI18N
         btnUsuCreate2.setToolTipText("Adicionar");
-        btnUsuCreate2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuCreate2ActionPerformed(evt);
-            }
-        });
 
         btnUsuRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/edit.png"))); // NOI18N
         btnUsuRead.setToolTipText("Consultar");
-        btnUsuRead.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuReadActionPerformed(evt);
-            }
-        });
 
         btnUsuUpdate2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/search.png"))); // NOI18N
         btnUsuUpdate2.setToolTipText("Editar");
-        btnUsuUpdate2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuUpdate2ActionPerformed(evt);
-            }
-        });
 
         btnUsuDelete2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/delete.png"))); // NOI18N
         btnUsuDelete2.setToolTipText("Apagar");
         btnUsuDelete2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnUsuDelete2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuDelete2ActionPerformed(evt);
-            }
-        });
 
         jLabel28.setForeground(new java.awt.Color(255, 0, 0));
         jLabel28.setText("*Campos Obrigatórios");
@@ -804,11 +778,6 @@ public class Pesquisador extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblPesq.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPesqMouseClicked(evt);
-            }
-        });
         jScrollPane3.setViewportView(tblPesq);
 
         jInternalFrame4.setClosable(true);
@@ -1200,35 +1169,6 @@ public class Pesquisador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCliUF1ActionPerformed
 
-    private void btnUsuCreate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuCreate2ActionPerformed
-        // Chamando o método adcionar
-     
-    }//GEN-LAST:event_btnUsuCreate2ActionPerformed
-
-    private void btnUsuReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuReadActionPerformed
-        // Chamando o método consultar
-     
-    }//GEN-LAST:event_btnUsuReadActionPerformed
-
-    private void btnUsuUpdate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuUpdate2ActionPerformed
-        // Chamado o método editar
-     
-    }//GEN-LAST:event_btnUsuUpdate2ActionPerformed
-
-    private void btnUsuDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuDelete2ActionPerformed
-        // Chamando o método excluir
-       
-    }//GEN-LAST:event_btnUsuDelete2ActionPerformed
-
-    private void txtPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesqNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesqNomeActionPerformed
-
-    private void tblPesqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesqMouseClicked
-        // Chamando o método para setar os Campos
-    
-    }//GEN-LAST:event_tblPesqMouseClicked
-
     private void txtCliNome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCliNome2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCliNome2ActionPerformed
@@ -1302,7 +1242,7 @@ public class Pesquisador extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCliClientes4MouseClicked
 
     private void txtCliUF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCliUF3ActionPerformed
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_txtCliUF3ActionPerformed
 
     /**
