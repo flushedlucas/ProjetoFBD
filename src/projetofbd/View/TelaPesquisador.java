@@ -199,6 +199,12 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
         jLabel5.setText("*Universidade:");
 
+        txtUniversidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUniversidadeActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Buscar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -314,21 +320,26 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnEditarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPesquisadorActionPerformed
         // TODO add your handling code here:
-        Pesquisador pesquisador = new Pesquisador();
-        int id = Integer.parseInt(txtIdPesquisador.getText());
-        pesquisador.setCod_Pesq((id));
-        pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-        int universidade = Integer.parseInt(txtIdPesquisador.getText());
-        pesquisador.setUniversidade(universidade);
-        PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-        int adicionadao = pesquisadorDAO.update(pesquisador);
-        if (adicionadao > 0){
-            JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
-            limparCampos();
-            listarTabelaPesquisador();
-            btnAdicionarPesquisador.setEnabled(true);
+        if (validacao()){
+               JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
         }else{
-            JOptionPane.showMessageDialog(null, "Pesquisador não editado.");
+            Pesquisador pesquisador = new Pesquisador();
+            int id = Integer.parseInt(txtIdPesquisador.getText());
+            pesquisador.setCod_Pesq((id));
+            pesquisador.setNome_Pesq(txtNomePesquisador.getText());
+            int universidade = Integer.parseInt(txtIdPesquisador.getText());
+            pesquisador.setUniversidade(universidade);
+            PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
+            int adicionadao = pesquisadorDAO.update(pesquisador);
+            if (adicionadao > 0){
+                JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
+                limparCampos();
+                listarTabelaPesquisador();
+                btnAdicionarPesquisador.setEnabled(true);
+                tblPesquisador.setEnabled(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Pesquisador não editado.");
+            }
         }
     }//GEN-LAST:event_btnEditarPesquisadorActionPerformed
     public void setarCampos(){
@@ -375,29 +386,32 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnDeletarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarPesquisadorActionPerformed
         // TODO add your handling code here:
-        int remove = 0;
-        int confirma = JOptionPane.showConfirmDialog(null,"Tem certza que deseja excluir"
-                + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
-        if (confirma == JOptionPane.YES_OPTION){
-            Pesquisador pesquisador =  new Pesquisador();
-            int id = Integer.parseInt(txtIdPesquisador.getText());
-            pesquisador.setCod_Pesq((id));
-            pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-            int universidade = Integer.parseInt(txtIdPesquisador.getText());
-            pesquisador.setUniversidade(universidade);
-            
-            PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-            pesquisadorDAO.delete(pesquisador);
-            if (remove > 0){
-                 JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
-                 limparCampos();
-                 listarTabelaPesquisador();
-                 btnAdicionarPesquisador.setEnabled(true);
-             }else{
-                 JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
-            }      
+        if ((txtIdPesquisador.getText().isEmpty())){
+               JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
+        }else{
+            int remove = 0;
+            int confirma = JOptionPane.showConfirmDialog(null,"Tem certza que deseja excluir"
+                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+            if (confirma == JOptionPane.YES_OPTION){
+                Pesquisador pesquisador =  new Pesquisador();
+                int id = Integer.parseInt(txtIdPesquisador.getText());
+                pesquisador.setCod_Pesq((id));
+                pesquisador.setNome_Pesq(txtNomePesquisador.getText());
+                int universidade = Integer.parseInt(txtIdPesquisador.getText());
+                pesquisador.setUniversidade(universidade);
+
+                PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
+                remove = pesquisadorDAO.delete(pesquisador);
+                if (remove > 0){
+                     JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
+                     limparCampos();
+                     listarTabelaPesquisador();
+                     btnAdicionarPesquisador.setEnabled(true);
+                 }else{
+                     JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
+                }      
+            }
         }
-        
     }//GEN-LAST:event_btnDeletarPesquisadorActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -422,6 +436,10 @@ public class TelaPesquisador extends javax.swing.JFrame {
         // TODO add your handling code here:
         voltar();
     }//GEN-LAST:event_formWindowClosed
+
+    private void txtUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUniversidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUniversidadeActionPerformed
     
     
     private void limparCampos(){
@@ -432,7 +450,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
     }
     
     private boolean validacao() {
-        return (txtNomePesquisador.getText().isEmpty());
+        return (txtNomePesquisador.getText().isEmpty()|| txtUniversidade.getText().isEmpty());
     }
 
     

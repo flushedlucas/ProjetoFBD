@@ -365,7 +365,7 @@ public class TelaRevista extends javax.swing.JFrame {
     private void voltar() {
         TelaPrincipal telaprincipal = new TelaPrincipal();
         telaprincipal.setVisible(true);
-        this.dispose();
+        dispose();
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:

@@ -99,14 +99,14 @@ public class PesquisadorDAO {
     }
 
     public int delete(Pesquisador pesquisador){
-        String sql = "DELETE FROM pesquisador WHERE nome_pesq=?";
+        String sql = "DELETE FROM pesquisador WHERE cod_pesq=?";
 
         PreparedStatement statement = null;
         int remove = 0;
         
         try {
             statement = Conexao.abrir().prepareStatement(sql);
-            statement.setString(1, pesquisador.getNome_Pesq());
+            statement.setInt(1, pesquisador.getCod_Pesq());
             remove = statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
