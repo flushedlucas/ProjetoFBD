@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import projetofbd.Infra.Conexao;
 import projetofbd.Model.Revista;
 
@@ -18,7 +19,9 @@ import projetofbd.Model.Revista;
  */
 public class RevistaDAO {
     
-    public void crate(Revista revista) {
+    ResultSet resultSet = null;
+    
+    public void create(Revista revista) {
         String sql  = "INSERT INTO revista_cientifica (cod_revista, nome, editora, issn) VALUES (?, ?, ?, ?)";
 
         try {
@@ -57,11 +60,32 @@ public class RevistaDAO {
             e.printStackTrace();
         }
         return revistaArrayList;
+    
+    }
+    
+    public ResultSet read(Revista revista) {
+    String sql = "select cod_revista Número, nome Nome,editora Editora, issn ISSN from revista_cientifica where nome like ?";
+        PreparedStatement statement;
+        try {
+//            System.out.println(revista.getNome_Revista());
+            statement = Conexao.abrir().prepareCall(sql);
+            //passando o conteudo  da caixa de texto para o ?
+            //atenção ao % - continuação da string sql
+            statement.setString(1,revista.getNome_Revista()+ "%");
+//            System.out.println(statement);
+            resultSet = statement.executeQuery();
+//            System.out.println(resultSet);
+            
+            return resultSet;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            
+       }return resultSet;
     }
 
-    public void update(Revista revista, String atualizar){
+    public int update(Revista revista){
         String sql = "UPDATE revista_cientifica SET cod_revista=?, nome=?, editora=?, issn=? WHERE cod_revista=?";
-
+        int add = 0;
         try {
             PreparedStatement statement = Conexao.abrir().prepareStatement(sql);
 
@@ -69,12 +93,14 @@ public class RevistaDAO {
             statement.setString(2, revista.getNome_Revista());
             statement.setString(3, revista.getEditora());
             statement.setString(4, revista.getISSN());
-            statement.setString(5, atualizar);
+            statement.setInt(5, revista.getCod_Revista());
 
-            statement.executeUpdate();
+            add = statement.executeUpdate();
+            return add;
         } catch (Exception e){
             e.printStackTrace();
         }
+        return add;
     }
 
     public void delete(Revista revista){

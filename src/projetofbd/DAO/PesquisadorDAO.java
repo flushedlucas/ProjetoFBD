@@ -33,14 +33,17 @@ public class PesquisadorDAO {
         }
     }
 
-    public void read(){
+    public ArrayList<Pesquisador> read(){
         String sql = "SELECT * FROM pesquisador";
-
+        
+        
+        ArrayList<Pesquisador> pesquisadorArrayList= null;
         try {
-            Statement statement = Conexao.abrir().createStatement();
+            PreparedStatement statement = Conexao.abrir().prepareCall(sql);
+            
             ResultSet resultSet = statement.executeQuery(sql);
 
-            ArrayList<Pesquisador> pesquisadorArrayList = new ArrayList<Pesquisador>();
+            pesquisadorArrayList = new ArrayList<Pesquisador>();
 
             while (resultSet.next()){
                 Pesquisador pesquisador = new Pesquisador();
@@ -48,15 +51,17 @@ public class PesquisadorDAO {
                 pesquisador.setNome_Pesq(resultSet.getString("nome_pesq"));
                 pesquisadorArrayList.add(pesquisador);
             }
+            
+         
         } catch (Exception e) {
 
         }
-
+        return pesquisadorArrayList;
     }
     
     
-    public ResultSet consultar(Pesquisador pesquisador) {
-    String sql = "select cod_pesq Número, nome_pesq Nome from pesquisador where nome_pesq like ?";
+    public ResultSet read(Pesquisador pesquisador) {
+    String sql = "select cod_pesq Número, nome_pesq Nome, cod_univer Universidade from pesquisador where nome_pesq like ?";
         PreparedStatement statement;
         try {
             System.out.println(pesquisador.getNome_Pesq());
@@ -67,7 +72,6 @@ public class PesquisadorDAO {
 //            System.out.println(statement);
             resultSet = statement.executeQuery();
 //            System.out.println(resultSet);
-            
             return resultSet;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -76,7 +80,7 @@ public class PesquisadorDAO {
     }
     
     public int update(Pesquisador pesquisador){
-        String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=? WHERE cod_pesq=?";
+        String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=?, cod_univer=? WHERE cod_pesq=?";
         
         int adicionado = 0;
         PreparedStatement statement = null;
@@ -84,7 +88,8 @@ public class PesquisadorDAO {
             statement = Conexao.abrir().prepareStatement(sql);
             statement.setInt(1, pesquisador.getCod_Pesq());
             statement.setString(2, pesquisador.getNome_Pesq());
-            statement.setInt(3, pesquisador.getCod_Pesq());
+            statement.setInt(3, pesquisador.getUniversidade());
+            statement.setInt(4, pesquisador.getCod_Pesq());
             adicionado = statement.executeUpdate();
             return adicionado;         
         } catch (Exception e) {
@@ -93,18 +98,21 @@ public class PesquisadorDAO {
         return adicionado;
     }
 
-    public void delete(Pesquisador pesquisador){
+    public int delete(Pesquisador pesquisador){
         String sql = "DELETE FROM pesquisador WHERE nome_pesq=?";
 
         PreparedStatement statement = null;
-
+        int remove = 0;
+        
         try {
             statement = Conexao.abrir().prepareStatement(sql);
             statement.setString(1, pesquisador.getNome_Pesq());
-            statement.executeUpdate();
+            remove = statement.executeUpdate();
+            return remove;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return remove;
     }
     
 }
