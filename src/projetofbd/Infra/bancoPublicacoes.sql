@@ -7,7 +7,7 @@ use publicacoes;
 create table if not exists universidade(
 cod_univer int auto_increment primary key,
 nome varchar(30),
-siga varchar(30),
+sigla varchar(30),
 uf varchar(2)
 );
 
