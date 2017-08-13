@@ -394,16 +394,18 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-//        ArrayList<Pesquisador> pesquisadorArrayList =  pesquisadorDAO.read();
+//        PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
+////        ArrayList<Pesquisador> pesquisadorArrayList =  pesquisadorDAO.read();
+//        
+//        DefaultTableModel model = (DefaultTableModel) tblPesquisador.getModel();
+//        model.setNumRows(0);
+//        for (Pesquisador pesquisador: pesquisadorDAO.read()){
+//            model.addRow(new Object []{
+//                pesquisador.getNome_Pesq(), pesquisador.getUniversidade()
+//            });
         
-        DefaultTableModel model = (DefaultTableModel) tblPesquisador.getModel();
-        model.setRowCount(0);
-        for (Pesquisador pesquisador: pesquisadorDAO.read()){
-            model.addRow(new Object []{
-                pesquisador.getNome_Pesq(), pesquisador.getUniversidade()
-            });
-        }
+//        }
+       listarTabelaPesquisador();
         
         //usando a bibliboteca rs2xml.jar para preencher a tabela
 //        tblPesquisador.setModel(DbUtils.resultSetToTableModel(resultSet));
