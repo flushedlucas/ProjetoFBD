@@ -233,7 +233,7 @@ public class TelaRevista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(610, 460));
+        setSize(new java.awt.Dimension(570, 460));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

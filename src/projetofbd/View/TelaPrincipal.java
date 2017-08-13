@@ -243,7 +243,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditar, btnPesquisar, btnRevista});
 
-        setSize(new java.awt.Dimension(396, 345));
+        setSize(new java.awt.Dimension(386, 345));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
