@@ -5,6 +5,7 @@
  */
 package projetofbd.View;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.text.DateFormat;
 import java.util.Date;
@@ -74,6 +75,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(386, 348));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -126,7 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSair)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblData))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -243,7 +247,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditar, btnPesquisar, btnRevista});
 
-        setSize(new java.awt.Dimension(386, 345));
+        setSize(new java.awt.Dimension(382, 353));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,12 +268,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevistaActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
+        sair();
+    }//GEN-LAST:event_SairActionPerformed
+
+    private void sair() throws HeadlessException {
         // Saindo
         int sair = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja sair?","Atenção",JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION){
             System.exit(0);
+        }else{
+            voltar();
         }
-    }//GEN-LAST:event_SairActionPerformed
+    }
 
     private void RevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RevistaActionPerformed
         // TODO add your handling code here:
@@ -279,18 +289,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         TelaPesquisador pesquisador = new TelaPesquisador();
         pesquisador.setVisible(true);
-        this.dispose();
-        
+        this.dispose();  
         
     }//GEN-LAST:event_PesquisadorActionPerformed
 
+    private void voltar() {
+        TelaPrincipal telaprincipal = new TelaPrincipal();
+        telaprincipal.setVisible(true);
+        this.dispose();
+    }
+    
     private void ArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ArtigoActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
-        SairActionPerformed(evt);
+       sair();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -299,6 +314,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             this.dispose();
             JOptionPane.showMessageDialog(null, "Por favor, ative o banco de dados.");
         }else{
+            
             Date data = new Date();
             DateFormat formatdata = DateFormat.getDateInstance(DateFormat.FULL);
             DateFormat formatHora = DateFormat.getTimeInstance();
@@ -310,6 +326,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        sair();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

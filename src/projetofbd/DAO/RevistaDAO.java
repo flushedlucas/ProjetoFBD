@@ -21,9 +21,9 @@ public class RevistaDAO {
     
     ResultSet resultSet = null;
     
-    public void create(Revista revista) {
+    public int create(Revista revista) {
         String sql  = "INSERT INTO revista_cientifica (cod_revista, nome, editora, issn) VALUES (?, ?, ?, ?)";
-
+        int add = 0;
         try {
             PreparedStatement statement = Conexao.abrir().prepareStatement(sql);
             statement.setInt(1, revista.getCod_Revista());
@@ -31,11 +31,12 @@ public class RevistaDAO {
             statement.setString(3, revista.getEditora());
             statement.setString(4, revista.getISSN());
 
-            statement.executeUpdate();
+            add = statement.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return add;
     }
 
     public ArrayList<Revista> read(){
@@ -66,6 +67,7 @@ public class RevistaDAO {
     public ResultSet read(Revista revista) {
     String sql = "select cod_revista Número, nome Nome, editora Editora, issn ISSN from revista_cientifica where nome like ?";
         PreparedStatement statement;
+        
         try {
 //            System.out.println(revista.getNome_Revista());
             statement = Conexao.abrir().prepareCall(sql);
@@ -85,7 +87,7 @@ public class RevistaDAO {
 
     public int update(Revista revista){
         String sql = "UPDATE revista_cientifica SET cod_revista=?, nome=?, editora=?, issn=? WHERE cod_revista=?";
-        int add = 0;
+        int edt = 0;
         try {
             PreparedStatement statement = Conexao.abrir().prepareStatement(sql);
 
@@ -95,25 +97,26 @@ public class RevistaDAO {
             statement.setString(4, revista.getISSN());
             statement.setInt(5, revista.getCod_Revista());
 
-            add = statement.executeUpdate();
-            return add;
+            edt = statement.executeUpdate();
+            
         } catch (Exception e){
             e.printStackTrace();
         }
-        return add;
+        return edt;
     }
 
-    public void delete(Revista revista){
+    public int  delete(Revista revista){
         String sql = "DELETE FROM revista_cientifica WHERE cod_revista=?";
-
+        int remove = 0;
         try {
             PreparedStatement statement = Conexao.abrir().prepareStatement(sql);
             statement.setInt(1, revista.getCod_Revista());
-
-            statement.executeUpdate();
+            
+            remove = statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return remove;
     }
     
 }

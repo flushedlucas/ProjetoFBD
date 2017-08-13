@@ -88,12 +88,17 @@ public class TelaPesquisador extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(600, 430));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 0));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
             }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -194,8 +199,6 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
         jLabel5.setText("*Universidade:");
 
-        txtUniversidade.setEditable(false);
-
         jLabel6.setText("Buscar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -281,13 +284,15 @@ public class TelaPesquisador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-           
+        voltar();
+      
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void voltar() {
         TelaPrincipal telaprincipal = new TelaPrincipal();
         telaprincipal.setVisible(true);
         this.dispose();
-      
-    }//GEN-LAST:event_btnVoltarActionPerformed
+    }
 
     private void btnAdicionarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPesquisadorActionPerformed
         // Adcionar pesquisador
@@ -332,7 +337,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         txtNomePesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 1).toString());
         txtUniversidade.setText(tblPesquisador.getModel().getValueAt(setar, 2).toString());
         // A linha abaixo desabilitar o botão adicionar
-        btnAdicionarPesquisador.setEnabled(false);
+        
     }
     
     private void btnBuscarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPesquisadorActionPerformed
@@ -345,7 +350,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             listarTabelaPesquisador();
-            
+            tblPesquisador.setEnabled(true); 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na transação");
         }
@@ -360,17 +365,12 @@ public class TelaPesquisador extends javax.swing.JFrame {
         tblPesquisador.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here: 
-        TelaPrincipal telaprincipal = new TelaPrincipal();
-        telaprincipal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_formWindowClosed
-
     private void tblPesquisadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesquisadorMouseClicked
         // prencher os campos do pesquisador
         setarCampos();
-        
+        txtUniversidade.setEditable(false);
+        btnAdicionarPesquisador.setEnabled(false);
+        tblPesquisador.setEnabled(false);
     }//GEN-LAST:event_tblPesquisadorMouseClicked
 
     private void btnDeletarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarPesquisadorActionPerformed
@@ -401,25 +401,27 @@ public class TelaPesquisador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeletarPesquisadorActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-//        PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-////        ArrayList<Pesquisador> pesquisadorArrayList =  pesquisadorDAO.read();
-//        
-//        DefaultTableModel model = (DefaultTableModel) tblPesquisador.getModel();
-//        model.setNumRows(0);
-//        for (Pesquisador pesquisador: pesquisadorDAO.read()){
-//            model.addRow(new Object []{
-//                pesquisador.getNome_Pesq(), pesquisador.getUniversidade()
-//            });
-        
-//        }
+        // Popular a tabela quando iniciar o form
        listarTabelaPesquisador();
         
-        //usando a bibliboteca rs2xml.jar para preencher a tabela
-//        tblPesquisador.setModel(DbUtils.resultSetToTableModel(resultSet));
+
         
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // Halitar e limpar os campos do form
+        btnAdicionarPesquisador.setEnabled(true);
+        limparCampos();
+        tblPesquisador.setEnabled(true); 
+        txtUniversidade.setEditable(true);
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        voltar();
+    }//GEN-LAST:event_formWindowClosed
     
     
     private void limparCampos(){

@@ -80,7 +80,7 @@ public class PesquisadorDAO {
     }
     
     public int update(Pesquisador pesquisador){
-        String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=?, cod_univer=? WHERE cod_pesq=?";
+        String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=?  WHERE cod_pesq=?";
         
         int adicionado = 0;
         PreparedStatement statement = null;
@@ -88,8 +88,8 @@ public class PesquisadorDAO {
             statement = Conexao.abrir().prepareStatement(sql);
             statement.setInt(1, pesquisador.getCod_Pesq());
             statement.setString(2, pesquisador.getNome_Pesq());
-            statement.setInt(3, pesquisador.getUniversidade());
-            statement.setInt(4, pesquisador.getCod_Pesq());
+//            statement.setInt(3, pesquisador.getUniversidade());
+            statement.setInt(3, pesquisador.getCod_Pesq());
             adicionado = statement.executeUpdate();
             return adicionado;         
         } catch (Exception e) {
@@ -108,7 +108,6 @@ public class PesquisadorDAO {
             statement = Conexao.abrir().prepareStatement(sql);
             statement.setString(1, pesquisador.getNome_Pesq());
             remove = statement.executeUpdate();
-            return remove;
         } catch (Exception e) {
             e.printStackTrace();
         }
