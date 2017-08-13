@@ -53,7 +53,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
-        btnDeletar = new javax.swing.JButton();
+        btnRevista = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblData = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
@@ -95,10 +95,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnDeletar.setText("Revista");
-        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+        btnRevista.setText("Revista");
+        btnRevista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarActionPerformed(evt);
+                btnRevistaActionPerformed(evt);
             }
         });
 
@@ -199,7 +199,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -213,7 +213,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(71, 71, 71))))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDeletar, btnEditar});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEditar, btnRevista});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,12 +225,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnEditar)
                     .addComponent(btnPesquisar)
-                    .addComponent(btnDeletar))
+                    .addComponent(btnRevista))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDeletar, btnEditar, btnPesquisar});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditar, btnPesquisar, btnRevista});
 
         setSize(new java.awt.Dimension(430, 275));
         setLocationRelativeTo(null);
@@ -246,9 +246,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeletarActionPerformed
+    private void btnRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevistaActionPerformed
+            TelaRevista revista = new TelaRevista();
+            revista.setVisible(true);
+            this.dispose();  
+    }//GEN-LAST:event_btnRevistaActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
         // Saindo
@@ -335,9 +337,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Pesquisador;
     private javax.swing.JMenuItem Revista;
     private javax.swing.JMenuItem Sair;
-    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnRevista;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;

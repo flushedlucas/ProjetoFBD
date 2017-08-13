@@ -12,7 +12,15 @@ package projetofbd.Model;
 public class Pesquisador {
     private int Cod_Pesq;
     private String Nome_Pesq;
+    private int Universidade;
 
+    public int getUniversidade() {
+        return Universidade;
+    }
+
+    public void setUniversidade(int Universidade) {
+        this.Universidade = Universidade;
+    }
     public int getCod_Pesq() {
         return Cod_Pesq;
     }

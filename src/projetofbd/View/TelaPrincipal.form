@@ -102,7 +102,7 @@
               <EmptySpace pref="40" max="32767" attributes="0"/>
               <Component id="btnEditar" linkSize="3" min="-2" pref="81" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="btnDeletar" linkSize="3" min="-2" pref="81" max="-2" attributes="0"/>
+              <Component id="btnRevista" linkSize="3" min="-2" pref="81" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
           </Group>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
@@ -131,7 +131,7 @@
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="btnEditar" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPesquisar" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDeletar" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRevista" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="41" max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -165,12 +165,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnDeletar">
+    <Component class="javax.swing.JButton" name="btnRevista">
       <Properties>
         <Property name="text" type="java.lang.String" value="Revista"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeletarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRevistaActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
