@@ -68,7 +68,7 @@ public class PesquisadorDAO {
             statement = Conexao.abrir().prepareCall(sql);
             //passando o conteudo  da caixa de texto para o ?
             //atenção ao % - continuação da string sql
-            statement.setString(1,pesquisador.getNome_Pesq()+ "%");
+            statement.setString(1, "%" + pesquisador.getNome_Pesq()+ "%");
 //            System.out.println(statement);
             resultSet = statement.executeQuery();
 //            System.out.println(resultSet);

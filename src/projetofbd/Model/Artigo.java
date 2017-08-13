@@ -29,6 +29,9 @@ public class Artigo {
     private String Nome_Congresso;
     private String Cidade_congresso;
     private Date Data_congresso;
+    
+    //Código do artigo referenciado
+    private int Cod_Artigo_Referenciado;
 
     public int getCod_Artigo() {
         return Cod_Artigo;
@@ -117,7 +120,13 @@ public class Artigo {
     public void setData_congresso(Date Data_congresso) {
         this.Data_congresso = Data_congresso;
     }
-    
-    
+
+    public int getCod_Artigo_Referenciado() {
+        return Cod_Artigo_Referenciado;
+    }
+
+    public void setCod_Artigo_Referenciado(int Cod_Artigo_Referenciado) {
+        this.Cod_Artigo_Referenciado = Cod_Artigo_Referenciado;
+    }
     
 }

@@ -64,14 +64,14 @@ public class RevistaDAO {
     }
     
     public ResultSet read(Revista revista) {
-    String sql = "select cod_revista Número, nome Nome,editora Editora, issn ISSN from revista_cientifica where nome like ?";
+    String sql = "select cod_revista Número, nome Nome, editora Editora, issn ISSN from revista_cientifica where nome like ?";
         PreparedStatement statement;
         try {
 //            System.out.println(revista.getNome_Revista());
             statement = Conexao.abrir().prepareCall(sql);
             //passando o conteudo  da caixa de texto para o ?
             //atenção ao % - continuação da string sql
-            statement.setString(1,revista.getNome_Revista()+ "%");
+            statement.setString(1,"%" + revista.getNome_Revista()+ "%");
 //            System.out.println(statement);
             resultSet = statement.executeQuery();
 //            System.out.println(resultSet);

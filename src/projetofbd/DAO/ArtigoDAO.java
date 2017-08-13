@@ -43,14 +43,14 @@ public class ArtigoDAO {
         }
     }
 
-    public void read(){
+    public ArrayList<Artigo> read(){
         String sql = "SELECT * FROM artigo";
 
+        ArrayList<Artigo> revistaArrayList = new ArrayList<Artigo>();
         try {
             Statement statement = Conexao.abrir().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
-            ArrayList<Artigo> pesquisadorArrayList = new ArrayList<Artigo>();
 
             while (resultSet.next()){
                 Artigo artigo = new Artigo();
@@ -66,37 +66,38 @@ public class ArtigoDAO {
                 artigo.setCidade_congresso(resultSet.getString("cidade_congresso"));
                 artigo.setData_congresso(resultSet.getDate("data_congresso"));
 
-                pesquisadorArrayList.add(artigo);
+                revistaArrayList.add(artigo);
             }
         } catch (Exception e) {
 
         }
-
+           return revistaArrayList;
     }
     
     
-//    public ResultSet consultar(Artigo artigo) {
-//    String sql = "select cod_pesq Número, nome_pesq Nome from pesquisador where nome_pesq like ?";
-//        PreparedStatement statement;
-//        try {
-//            System.out.println(artigo.getNome_Pesq());
-//            statement = Conexao.abrir().prepareCall(sql);
-//            //passando o conteudo  da caixa de texto para o ?
-//            //atenção ao % - continuação da string sql
-//            statement.setString(1,artigo.getNome_Pesq()+ "%");
-////            System.out.println(statement);
-//            resultSet = statement.executeQuery();
-////            System.out.println(resultSet);
-//            
-//            return resultSet;
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e);
-//            
-//       }return resultSet;
-//    }
+    public ResultSet read(Artigo artigo) {
+    String sql = "select * from artigo where titulo like ?";
+        PreparedStatement statement;
+        try {
+            statement = Conexao.abrir().prepareCall(sql);
+            //passando o conteudo  da caixa de texto para o ?
+            //atenção ao % - continuação da string sql
+            statement.setString(1,"%" + artigo.getTitulo() + "%");
+//            System.out.println(statement);
+            resultSet = statement.executeQuery();
+//            System.out.println(resultSet);
+            
+            return resultSet;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            
+       }return resultSet;
+    }
     
     public int update(Artigo artigo){
-        String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=? WHERE cod_pesq=?";
+        String sql = "UPDATE pesquisador SET cod_arigo=?, titulo=?, pag_inicial=?"
+                + ", pag_final=?, ano=?, volume=?, numero=?, cod_revista=?, nome_congresso=?"
+                + ", cidade_congresso=?, data_congresso=? WHERE cod_artigo=?";
         
         int adicionado = 0;
         PreparedStatement statement = null;
