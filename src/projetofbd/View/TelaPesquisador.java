@@ -257,7 +257,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
             Pesquisador pesquisador = new Pesquisador();
             pesquisador.setNome_Pesq(txtNomePesquisador.getText());
             PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-            pesquisadorDAO.crate(pesquisador);
+            pesquisadorDAO.create(pesquisador);
             limparCampos();
         }
         }catch(Exception e){

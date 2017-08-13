@@ -35,14 +35,15 @@ public class RevistaDAO {
         }
     }
 
-    public void read(){
+    public ArrayList<Revista> read(){
         String sql = "SELECT * FROM revista_cientifica";
 
+        ArrayList<Revista> revistaArrayList = new ArrayList<Revista>();
         try {
             Statement statement = Conexao.abrir().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
-            ArrayList<Revista> revistaArrayList = new ArrayList<Revista>();
+            
             while (resultSet.next()){
                 Revista revista = new Revista();
                 revista.setCod_Revista(resultSet.getInt("cod_revista"));
@@ -55,6 +56,7 @@ public class RevistaDAO {
         } catch (Exception e){
             e.printStackTrace();
         }
+        return revistaArrayList;
     }
 
     public void update(Revista revista, String atualizar){

@@ -20,7 +20,7 @@ import projetofbd.Model.Pesquisador;
  */
 public class PesquisadorDAO {
     ResultSet resultSet = null;
-    public void crate(Pesquisador pesquisador) {
+    public void create(Pesquisador pesquisador) {
         String sql = "INSERT INTO pesquisador (nome_pesq) VALUES (?)";
 
         PreparedStatement statement = null;
