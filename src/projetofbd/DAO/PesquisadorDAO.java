@@ -65,7 +65,8 @@ public class PesquisadorDAO {
     }
 
     public ResultSet read(Pesquisador pesquisador) {
-        String sql = "select cod_pesq Número, nome_pesq Nome, cod_univer Universidade from pesquisador where nome_pesq like ?";
+        String sql = "select cod_pesq Número, nome_pesq Nome, sigla Universidade from "
+                + "pesquisador p inner join universidade u on p.cod_univer=u.cod_univer where p.nome_pesq like ?";
         PreparedStatement statement;
         try {
             System.out.println(pesquisador.getNome_Pesq());
