@@ -6,6 +6,7 @@
 package projetofbd.View;
 
 import javax.swing.JOptionPane;
+import projetofbd.DAO.UniversidadeDAO;
 import projetofbd.Model.Universidade;
 
 /**
@@ -228,10 +229,54 @@ public class TelaUniversidade extends javax.swing.JFrame {
 
     private void btnAdicionarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarUniversidadeActionPerformed
         // Adcionar pesquisador
+        try {
+            if (validacao()) {
+                JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
+            } else {
+                Universidade universidade = new Universidade();
+                universidade.setNome_Univer(txtNomeUniversidade.getText());
+                universidade.setSigla(txtSigla.getText());
+                universidade.setUF(txtUF.getText());
+                UniversidadeDAO universidadeDAO = new UniversidadeDAO();
+                int adicionadao = universidadeDAO.create(universidade);
+                if (adicionadao > 0) {
+                    JOptionPane.showMessageDialog(null, "Universidade Salva com sucesso.");
+                    limparCampos();
+                    listarTabelaRevista();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar a Universidade.");
+                    limparCampos();
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Universidade já existe");
+            limparCampos();
+        }
+
     }//GEN-LAST:event_btnAdicionarUniversidadeActionPerformed
 
     private void btnEditarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUniversidadeActionPerformed
         // TODO add your handling code here:
+        if (validacao()) {
+            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
+        } else {
+            Universidade universidade = new Universidade();
+            int id = Integer.parseInt(txtIdUniversidade.getText());
+            universidade.setCod_Univer((id));
+            universidade.setNome_Univer(txtNomeUniversidade.getText());
+            universidade.setSigla(txtSigla.getText());
+            universidade.setUF(txtUF.getText());
+            UniversidadeDAO universidadeDAO = new UniversidadeDAO();
+            int editado = universidadeDAO.update(universidade);
+            if (editado > 0) {
+                JOptionPane.showMessageDialog(null, "Universidade editada com sucesso.");
+                limparCampos();
+                listarTabelaRevista();
+                btnAdicionarUniversidade.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível editar a Universidade.");
+            }
+        }
     }//GEN-LAST:event_btnEditarUniversidadeActionPerformed
 
     private void btnDeletarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarUniversidadeActionPerformed
@@ -250,15 +295,15 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 universidade.setSigla(txtSigla.getText());
                 universidade.setUF(txtUF.getText());
                 
-                RevistaDAO revistaDAO = new RevistaDAO();
-                remove = revistaDAO.delete(universidade);
+                UniversidadeDAO universidadeDAO = new UniversidadeDAO();
+                remove = universidadeDAO.delete(universidade);
                 System.out.println(remove);
                 if (remove > 0){
                      JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
                      limparCampos();
                      listarTabelaRevista();
-                     btnAdicionarRevista.setEnabled(true);
-                     tblRevista.setEnabled(true);
+                     btnAdicionarUniversidade.setEnabled(true);
+                     tblUniversidade.setEnabled(true);
                  }else{
                      JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
                 }      
