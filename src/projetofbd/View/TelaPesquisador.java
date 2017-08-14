@@ -307,10 +307,9 @@ public class TelaPesquisador extends javax.swing.JFrame {
             } else {
                 Pesquisador pesquisador = new Pesquisador();
                 pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-                int universidade = Integer.parseInt(txtUniversidade.getText());
-                pesquisador.setUniversidade(universidade);
+                pesquisador.setUniversidade(txtUniversidade.getText());
                 PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-                int adicionadao = pesquisadorDAO.create(pesquisador);;
+                int adicionadao = pesquisadorDAO.create(pesquisador);
                 if (adicionadao > 0) {
                     JOptionPane.showMessageDialog(null, "Pesquisador Salva com sucesso.");
                     limparCampos();
@@ -319,6 +318,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Não foi possível adcionar o Pesquisador.");
                     limparCampos();
                 }
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Usuário já existe");
@@ -336,8 +336,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
             int id = Integer.parseInt(txtIdPesquisador.getText());
             pesquisador.setCod_Pesq((id));
             pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-            int universidade = Integer.parseInt(txtUniversidade.getText());
-            pesquisador.setUniversidade(universidade);
+            pesquisador.setUniversidade(txtUniversidade.getText());
             PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
             int adicionadao = pesquisadorDAO.update(pesquisador);
             if (adicionadao > 0) {
@@ -407,7 +406,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
                 pesquisador.setCod_Pesq((id));
                 pesquisador.setNome_Pesq(txtNomePesquisador.getText());
                 int universidade = Integer.parseInt(txtIdPesquisador.getText());
-                pesquisador.setUniversidade(universidade);
+                pesquisador.setUniversidade(txtUniversidade.getText());
 
                 PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
                 remove = pesquisadorDAO.delete(pesquisador);
@@ -426,6 +425,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Popular a tabela quando iniciar o form
         listarTabelaPesquisador();
+        
 
 
     }//GEN-LAST:event_formWindowOpened
