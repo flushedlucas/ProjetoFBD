@@ -38,7 +38,7 @@ public class UniversidadeDAO {
     }
 
     public ArrayList<Universidade> read() {
-        String sql = "SELECT * FROM univer";
+        String sql = "SELECT * FROM universidade";
 
         ArrayList<Universidade> universidadeArrayList = new ArrayList<Universidade>();
         try {
@@ -62,7 +62,7 @@ public class UniversidadeDAO {
     }
 
     public ResultSet read(Universidade universidade) {
-        String sql = "select cod_univer Número, nome Nome, sigla Sigla, uf UF from univer where nome like ?";
+        String sql = "select cod_univer Número, nome Nome, sigla Sigla, uf UF from universidade where nome like ?";
         PreparedStatement statement;
 
         try {

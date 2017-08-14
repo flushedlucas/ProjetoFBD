@@ -5,7 +5,9 @@
  */
 package projetofbd.View;
 
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 import projetofbd.DAO.UniversidadeDAO;
 import projetofbd.Model.Universidade;
 
@@ -14,6 +16,8 @@ import projetofbd.Model.Universidade;
  * @author lucas
  */
 public class TelaUniversidade extends javax.swing.JFrame {
+
+    ResultSet resultSet = null;
 
     /**
      * Creates new form TelaUniversidade
@@ -54,6 +58,19 @@ public class TelaUniversidade extends javax.swing.JFrame {
         setTitle("Universidade");
         setPreferredSize(new java.awt.Dimension(570, 460));
         setResizable(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         txtBuscar.setPreferredSize(new java.awt.Dimension(40, 25));
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -103,6 +120,11 @@ public class TelaUniversidade extends javax.swing.JFrame {
         jLabel6.setText("*UF:");
 
         btnVoltar1.setText("Voltar");
+        btnVoltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltar1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -221,14 +243,22 @@ public class TelaUniversidade extends javax.swing.JFrame {
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         // TODO add your handling code here:
+        try {
+            listarTabelaUniversidade();
+            tblUniversidade.setEnabled(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro na transação");
+        }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void tblUniversidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUniversidadeMouseClicked
-        // prencher os campos do pesquisador
+        // prencher os campos do universidade
+        setarCampos();
     }//GEN-LAST:event_tblUniversidadeMouseClicked
 
     private void btnAdicionarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarUniversidadeActionPerformed
-        // Adcionar pesquisador
+        // Adcionar universidade
         try {
             if (validacao()) {
                 JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
@@ -242,7 +272,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 if (adicionadao > 0) {
                     JOptionPane.showMessageDialog(null, "Universidade Salva com sucesso.");
                     limparCampos();
-                    listarTabelaRevista();
+                    listarTabelaUniversidade();
                 } else {
                     JOptionPane.showMessageDialog(null, "Não foi possível adicionar a Universidade.");
                     limparCampos();
@@ -271,7 +301,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
             if (editado > 0) {
                 JOptionPane.showMessageDialog(null, "Universidade editada com sucesso.");
                 limparCampos();
-                listarTabelaRevista();
+                listarTabelaUniversidade();
                 btnAdicionarUniversidade.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Não foi possível editar a Universidade.");
@@ -281,35 +311,97 @@ public class TelaUniversidade extends javax.swing.JFrame {
 
     private void btnDeletarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarUniversidadeActionPerformed
         // TODO add your handling code here:
-        if (txtIdUniversidade.getText().isEmpty()){
-               JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
-        }else{
+        if (txtIdUniversidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
+        } else {
             int remove = 0;
-            int confirma = JOptionPane.showConfirmDialog(null,"Tem certza que deseja excluir"
+            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
                     + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
-            if (confirma == JOptionPane.YES_OPTION){
-                Universidade universidade =  new Universidade();
+            if (confirma == JOptionPane.YES_OPTION) {
+                Universidade universidade = new Universidade();
                 int id = Integer.parseInt(txtIdUniversidade.getText());
                 universidade.setCod_Univer((id));
                 universidade.setNome_Univer(txtNomeUniversidade.getText());
                 universidade.setSigla(txtSigla.getText());
                 universidade.setUF(txtUF.getText());
-                
+
                 UniversidadeDAO universidadeDAO = new UniversidadeDAO();
                 remove = universidadeDAO.delete(universidade);
                 System.out.println(remove);
-                if (remove > 0){
-                     JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
-                     limparCampos();
-                     listarTabelaRevista();
-                     btnAdicionarUniversidade.setEnabled(true);
-                     tblUniversidade.setEnabled(true);
-                 }else{
-                     JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
-                }      
+                if (remove > 0) {
+                    JOptionPane.showMessageDialog(null, "Universidade excluída com sucesso.");
+                    limparCampos();
+                    listarTabelaUniversidade();
+                    btnAdicionarUniversidade.setEnabled(true);
+                    tblUniversidade.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível exluir a Universidade.");
+                }
             }
         }
     }//GEN-LAST:event_btnDeletarUniversidadeActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        voltar();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        btnAdicionarUniversidade.setEnabled(true);
+        limparCampos();
+        tblUniversidade.setEnabled(true);
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        listarTabelaUniversidade();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
+        // TODO add your handling code here:
+        voltar();
+    }//GEN-LAST:event_btnVoltar1ActionPerformed
+
+    public void setarCampos() {
+        int setar = tblUniversidade.getSelectedRow();
+        txtIdUniversidade.setText(tblUniversidade.getModel().getValueAt(setar, 0).toString());
+        txtNomeUniversidade.setText(tblUniversidade.getModel().getValueAt(setar, 1).toString());
+        txtSigla.setText(tblUniversidade.getModel().getValueAt(setar, 2).toString());
+        txtUF.setText(tblUniversidade.getModel().getValueAt(setar, 3).toString());
+        // A linha abaixo desabilitar o botão adicionar
+        btnAdicionarUniversidade.setEnabled(false);
+        tblUniversidade.setEnabled(false);
+    }
+
+    private void limparCampos() {
+        txtIdUniversidade.setText(null);
+        txtNomeUniversidade.setText(null);
+        txtBuscar.setText(null);
+        txtSigla.setText(null);
+        txtUF.setText(null);
+    }
+
+    private boolean validacao() {
+        return (txtNomeUniversidade.getText().isEmpty()
+                || txtSigla.getText().isEmpty()
+                || txtUF.getText().isEmpty());
+    }
+
+    private void listarTabelaUniversidade() {
+        Universidade universidade = new Universidade();
+        universidade.setNome_Univer(txtBuscar.getText());
+        UniversidadeDAO universidadeDAO = new UniversidadeDAO();
+        resultSet = universidadeDAO.read(universidade);
+        //usando a bibliboteca rs2xml.jar para preencher a tabela
+        tblUniversidade.setModel(DbUtils.resultSetToTableModel(resultSet));
+    }
+
+    private void voltar() {
+        TelaPrincipal telaprincipal = new TelaPrincipal();
+        telaprincipal.setVisible(true);
+        dispose();
+    }
 
     /**
      * @param args the command line arguments
