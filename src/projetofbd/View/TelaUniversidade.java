@@ -5,6 +5,9 @@
  */
 package projetofbd.View;
 
+import javax.swing.JOptionPane;
+import projetofbd.Model.Universidade;
+
 /**
  *
  * @author lucas
@@ -47,6 +50,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         btnDeletarUniversidade = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Universidade");
         setPreferredSize(new java.awt.Dimension(570, 460));
         setResizable(false);
 
@@ -93,9 +97,9 @@ public class TelaUniversidade extends javax.swing.JFrame {
 
         jLabel3.setText("* Nome:");
 
-        jLabel5.setText("Sigla:");
+        jLabel5.setText("*Sigla:");
 
-        jLabel6.setText("UF:");
+        jLabel6.setText("*UF:");
 
         btnVoltar1.setText("Voltar");
 
@@ -118,6 +122,11 @@ public class TelaUniversidade extends javax.swing.JFrame {
         });
 
         btnDeletarUniversidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/delete.png"))); // NOI18N
+        btnDeletarUniversidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarUniversidadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,7 +151,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,6 +215,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -223,6 +233,38 @@ public class TelaUniversidade extends javax.swing.JFrame {
     private void btnEditarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUniversidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarUniversidadeActionPerformed
+
+    private void btnDeletarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarUniversidadeActionPerformed
+        // TODO add your handling code here:
+        if (txtIdUniversidade.getText().isEmpty()){
+               JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
+        }else{
+            int remove = 0;
+            int confirma = JOptionPane.showConfirmDialog(null,"Tem certza que deseja excluir"
+                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+            if (confirma == JOptionPane.YES_OPTION){
+                Universidade universidade =  new Universidade();
+                int id = Integer.parseInt(txtIdUniversidade.getText());
+                universidade.setCod_Univer((id));
+                universidade.setNome_Univer(txtNomeUniversidade.getText());
+                universidade.setSigla(txtSigla.getText());
+                universidade.setUF(txtUF.getText());
+                
+                RevistaDAO revistaDAO = new RevistaDAO();
+                remove = revistaDAO.delete(universidade);
+                System.out.println(remove);
+                if (remove > 0){
+                     JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
+                     limparCampos();
+                     listarTabelaRevista();
+                     btnAdicionarRevista.setEnabled(true);
+                     tblRevista.setEnabled(true);
+                 }else{
+                     JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
+                }      
+            }
+        }
+    }//GEN-LAST:event_btnDeletarUniversidadeActionPerformed
 
     /**
      * @param args the command line arguments
