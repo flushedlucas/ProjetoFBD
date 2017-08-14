@@ -16,9 +16,8 @@ import projetofbd.Model.Revista;
  * @author WELLINGTON
  */
 public class TelaRevista extends javax.swing.JFrame {
-      ResultSet resultSet = null;
-    
-    
+
+    ResultSet resultSet = null;
 
     /**
      * Creates new form TelaRevista
@@ -275,25 +274,25 @@ public class TelaRevista extends javax.swing.JFrame {
     private void btnAdicionarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRevistaActionPerformed
         // Adcionar pesquisador
         try {
-            if (validacao()){
-               JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
-            }else{
-               Revista revista = new Revista();
-               revista.setNome_Revista(txtNomeRevista.getText());
-               revista.setEditora(txtEditora.getText());
-               revista.setISSN(txtISSN.getText());
-               RevistaDAO revistaDAO = new RevistaDAO();
-               int adicionadao = revistaDAO.create(revista);
-               if(adicionadao > 0){
-                   JOptionPane.showMessageDialog(null, "Revista Salva com sucesso.");
-                   limparCampos();
-                   listarTabelaRevista();
-               }else{
-               JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
-               limparCampos();
-               }
+            if (validacao()) {
+                JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
+            } else {
+                Revista revista = new Revista();
+                revista.setNome_Revista(txtNomeRevista.getText());
+                revista.setEditora(txtEditora.getText());
+                revista.setISSN(txtISSN.getText());
+                RevistaDAO revistaDAO = new RevistaDAO();
+                int adicionadao = revistaDAO.create(revista);
+                if (adicionadao > 0) {
+                    JOptionPane.showMessageDialog(null, "Revista Salva com sucesso.");
+                    limparCampos();
+                    listarTabelaRevista();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar o Pesquisador.");
+                    limparCampos();
+                }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Revista já existe");
             limparCampos();
         }
@@ -302,9 +301,9 @@ public class TelaRevista extends javax.swing.JFrame {
 
     private void btnEditarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRevistaActionPerformed
         // TODO add your handling code here:
-        if (validacao()){
-               JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
-        }else{
+        if (validacao()) {
+            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
+        } else {
             Revista revista = new Revista();
             int id = Integer.parseInt(txtIdRevista.getText());
             revista.setCod_Revista((id));
@@ -313,17 +312,17 @@ public class TelaRevista extends javax.swing.JFrame {
             revista.setISSN(txtISSN.getText());
             RevistaDAO revistaDAO = new RevistaDAO();
             int editado = revistaDAO.update(revista);
-            if (editado > 0){
+            if (editado > 0) {
                 JOptionPane.showMessageDialog(null, "Revista editado com sucesso.");
                 limparCampos();
                 listarTabelaRevista();
                 btnAdicionarRevista.setEnabled(true);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Não foi possível editar o Pesquisador.");
             }
         }
     }//GEN-LAST:event_btnEditarRevistaActionPerformed
-     public void setarCampos(){
+    public void setarCampos() {
         int setar = tblRevista.getSelectedRow();
         txtIdRevista.setText(tblRevista.getModel().getValueAt(setar, 0).toString());
         txtNomeRevista.setText(tblRevista.getModel().getValueAt(setar, 1).toString());
@@ -333,29 +332,30 @@ public class TelaRevista extends javax.swing.JFrame {
         btnAdicionarRevista.setEnabled(false);
         tblRevista.setEnabled(false);
     }
-     
-    private void limparCampos(){
-     txtIdRevista.setText(null);
-     txtNomeRevista.setText(null);
-     txtBuscar.setText(null);
-     txtEditora.setText(null);
-     txtISSN.setText(null);
-   }
-    private boolean validacao() {
-        return (txtNomeRevista.getText().isEmpty()||
-                txtEditora.getText().isEmpty() ||
-                txtISSN.getText().isEmpty());
+
+    private void limparCampos() {
+        txtIdRevista.setText(null);
+        txtNomeRevista.setText(null);
+        txtBuscar.setText(null);
+        txtEditora.setText(null);
+        txtISSN.setText(null);
     }
-    
-     private void listarTabelaRevista() {
+
+    private boolean validacao() {
+        return (txtNomeRevista.getText().isEmpty()
+                || txtEditora.getText().isEmpty()
+                || txtISSN.getText().isEmpty());
+    }
+
+    private void listarTabelaRevista() {
         Revista revista = new Revista();
         revista.setNome_Revista(txtBuscar.getText());
         RevistaDAO revistaDAO = new RevistaDAO();
-        resultSet =  revistaDAO.read(revista);
+        resultSet = revistaDAO.read(revista);
         //usando a bibliboteca rs2xml.jar para preencher a tabela
         tblRevista.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
-     
+
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
         voltar();
@@ -376,36 +376,36 @@ public class TelaRevista extends javax.swing.JFrame {
         // habilita e limpa os campos quando clica no form
         btnAdicionarRevista.setEnabled(true);
         limparCampos();
-        tblRevista.setEnabled(true); 
+        tblRevista.setEnabled(true);
     }//GEN-LAST:event_formMouseClicked
 
     private void btnDeletarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarRevistaActionPerformed
         // TODO add your handling code here:
-        if ((txtIdRevista.getText().isEmpty())){
-               JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
-        }else{
+        if ((txtIdRevista.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
+        } else {
             int remove = 0;
-            int confirma = JOptionPane.showConfirmDialog(null,"Tem certza que deseja excluir"
+            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
                     + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
-            if (confirma == JOptionPane.YES_OPTION){
-                Revista revista =  new Revista();
+            if (confirma == JOptionPane.YES_OPTION) {
+                Revista revista = new Revista();
                 int id = Integer.parseInt(txtIdRevista.getText());
                 revista.setCod_Revista((id));
                 revista.setEditora(txtEditora.getText());
                 revista.setISSN(txtISSN.getText());
-                
+
                 RevistaDAO revistaDAO = new RevistaDAO();
                 remove = revistaDAO.delete(revista);
                 System.out.println(remove);
-                if (remove > 0){
-                     JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
-                     limparCampos();
-                     listarTabelaRevista();
-                     btnAdicionarRevista.setEnabled(true);
-                     tblRevista.setEnabled(true);
-                 }else{
-                     JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
-                }      
+                if (remove > 0) {
+                    JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
+                    limparCampos();
+                    listarTabelaRevista();
+                    btnAdicionarRevista.setEnabled(true);
+                    tblRevista.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
+                }
             }
         }
     }//GEN-LAST:event_btnDeletarRevistaActionPerformed

@@ -15,23 +15,22 @@ import net.proteanit.sql.DbUtils;
 import projetofbd.DAO.PesquisadorDAO;
 import projetofbd.Model.Pesquisador;
 
-
 /**
  *
  * @author WELLINGTON
  */
 public class TelaPesquisador extends javax.swing.JFrame {
 
-  ResultSet resultSet = null;
-    
+    ResultSet resultSet = null;
+
     /**
      * Creates new form TelaPesquisador
      */
     public TelaPesquisador() {
         initComponents();
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -291,7 +290,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         voltar();
-      
+
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void voltar() {
@@ -302,66 +301,76 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnAdicionarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPesquisadorActionPerformed
         // Adcionar pesquisador
-        try {if (validacao()){
-            JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
-        }else{    
-            Pesquisador pesquisador = new Pesquisador();
-            pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-            PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-            pesquisadorDAO.create(pesquisador);
-            limparCampos();
-        }
-        }catch(Exception e){
+        try {
+            if (validacao()) {
+                JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
+            } else {
+                Pesquisador pesquisador = new Pesquisador();
+                pesquisador.setNome_Pesq(txtNomePesquisador.getText());
+                int universidade = Integer.parseInt(txtUniversidade.getText());
+                pesquisador.setUniversidade(universidade);
+                PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
+                int adicionadao = pesquisadorDAO.create(pesquisador);;
+                if (adicionadao > 0) {
+                    JOptionPane.showMessageDialog(null, "Pesquisador Salva com sucesso.");
+                    limparCampos();
+                    listarTabelaPesquisador();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível adcionar o Pesquisador.");
+                    limparCampos();
+                }
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Usuário já existe");
             limparCampos();
         }
-        
+
     }//GEN-LAST:event_btnAdicionarPesquisadorActionPerformed
 
     private void btnEditarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPesquisadorActionPerformed
         // TODO add your handling code here:
-        if (validacao()){
-               JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
-        }else{
+        if (validacao()) {
+            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
+        } else {
             Pesquisador pesquisador = new Pesquisador();
             int id = Integer.parseInt(txtIdPesquisador.getText());
             pesquisador.setCod_Pesq((id));
             pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-            int universidade = Integer.parseInt(txtIdPesquisador.getText());
+            int universidade = Integer.parseInt(txtUniversidade.getText());
             pesquisador.setUniversidade(universidade);
             PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
             int adicionadao = pesquisadorDAO.update(pesquisador);
-            if (adicionadao > 0){
+            if (adicionadao > 0) {
                 JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
                 limparCampos();
                 listarTabelaPesquisador();
                 btnAdicionarPesquisador.setEnabled(true);
                 tblPesquisador.setEnabled(true);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Pesquisador não editado.");
             }
         }
     }//GEN-LAST:event_btnEditarPesquisadorActionPerformed
-    public void setarCampos(){
+    public void setarCampos() {
         int setar = tblPesquisador.getSelectedRow();
         txtIdPesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 0).toString());
         txtNomePesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 1).toString());
         txtUniversidade.setText(tblPesquisador.getModel().getValueAt(setar, 2).toString());
         // A linha abaixo desabilitar o botão adicionar
-        
+
     }
-    
+
     private void btnBuscarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPesquisadorActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_btnBuscarPesquisadorActionPerformed
-    
+
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         // TODO add your handling code here:
         try {
             listarTabelaPesquisador();
-            tblPesquisador.setEnabled(true); 
+            tblPesquisador.setEnabled(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na transação");
         }
@@ -371,7 +380,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         Pesquisador pesquisador = new Pesquisador();
         pesquisador.setNome_Pesq(txtBuscar.getText());
         PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-        resultSet =  pesquisadorDAO.read(pesquisador);
+        resultSet = pesquisadorDAO.read(pesquisador);
         //usando a bibliboteca rs2xml.jar para preencher a tabela
         tblPesquisador.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
@@ -386,14 +395,14 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnDeletarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarPesquisadorActionPerformed
         // TODO add your handling code here:
-        if ((txtIdPesquisador.getText().isEmpty())){
-               JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
-        }else{
+        if ((txtIdPesquisador.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
+        } else {
             int remove = 0;
-            int confirma = JOptionPane.showConfirmDialog(null,"Tem certza que deseja excluir"
+            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
                     + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
-            if (confirma == JOptionPane.YES_OPTION){
-                Pesquisador pesquisador =  new Pesquisador();
+            if (confirma == JOptionPane.YES_OPTION) {
+                Pesquisador pesquisador = new Pesquisador();
                 int id = Integer.parseInt(txtIdPesquisador.getText());
                 pesquisador.setCod_Pesq((id));
                 pesquisador.setNome_Pesq(txtNomePesquisador.getText());
@@ -402,34 +411,32 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
                 PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
                 remove = pesquisadorDAO.delete(pesquisador);
-                if (remove > 0){
-                     JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
-                     limparCampos();
-                     listarTabelaPesquisador();
-                     btnAdicionarPesquisador.setEnabled(true);
-                 }else{
-                     JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
-                }      
+                if (remove > 0) {
+                    JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
+                    limparCampos();
+                    listarTabelaPesquisador();
+                    btnAdicionarPesquisador.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
+                }
             }
         }
     }//GEN-LAST:event_btnDeletarPesquisadorActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Popular a tabela quando iniciar o form
-       listarTabelaPesquisador();
-        
+        listarTabelaPesquisador();
 
-        
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // Halitar e limpar os campos do form
         btnAdicionarPesquisador.setEnabled(true);
         limparCampos();
-        tblPesquisador.setEnabled(true); 
+        tblPesquisador.setEnabled(true);
         txtUniversidade.setEditable(true);
-        
+
     }//GEN-LAST:event_formMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -440,20 +447,18 @@ public class TelaPesquisador extends javax.swing.JFrame {
     private void txtUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUniversidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUniversidadeActionPerformed
-    
-    
-    private void limparCampos(){
-     txtIdPesquisador.setText(null);
-     txtNomePesquisador.setText(null);
-     txtUniversidade.setText(null);
-     txtBuscar.setText(null);
-    }
-    
-    private boolean validacao() {
-        return (txtNomePesquisador.getText().isEmpty()|| txtUniversidade.getText().isEmpty());
+
+    private void limparCampos() {
+        txtIdPesquisador.setText(null);
+        txtNomePesquisador.setText(null);
+        txtUniversidade.setText(null);
+        txtBuscar.setText(null);
     }
 
-    
+    private boolean validacao() {
+        return (txtNomePesquisador.getText().isEmpty() || txtUniversidade.getText().isEmpty());
+    }
+
     /**
      * @param args the command line arguments
      */

@@ -254,7 +254,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
         PesquisadorActionPerformed(evt);
-        
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -262,9 +262,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevistaActionPerformed
-            TelaRevista revista = new TelaRevista();
-            revista.setVisible(true);
-            this.dispose();  
+        TelaRevista revista = new TelaRevista();
+        revista.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRevistaActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
@@ -273,10 +273,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void sair() throws HeadlessException {
         // Saindo
-        int sair = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja sair?","Atenção",JOptionPane.YES_NO_OPTION);
-        if (sair == JOptionPane.YES_OPTION){
+        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (sair == JOptionPane.YES_OPTION) {
             System.exit(0);
-        }else{
+        } else {
             voltar();
         }
     }
@@ -289,8 +289,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         TelaPesquisador pesquisador = new TelaPesquisador();
         pesquisador.setVisible(true);
-        this.dispose();  
-        
+        this.dispose();
+
     }//GEN-LAST:event_PesquisadorActionPerformed
 
     private void voltar() {
@@ -298,23 +298,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaprincipal.setVisible(true);
         this.dispose();
     }
-    
+
     private void ArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ArtigoActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
-       sair();
+        sair();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        if (StatusBanco()!= true){
+        if (StatusBanco() != true) {
             this.dispose();
             JOptionPane.showMessageDialog(null, "Por favor, ative o banco de dados.");
-        }else{
-            
+        } else {
+
             Date data = new Date();
             DateFormat formatdata = DateFormat.getDateInstance(DateFormat.FULL);
             DateFormat formatHora = DateFormat.getTimeInstance();
