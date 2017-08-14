@@ -171,9 +171,9 @@ public class TelaRevista extends javax.swing.JFrame {
                 .addComponent(jLabel1))
         );
 
-        jLabel5.setText("Editora:");
+        jLabel5.setText("*Editora:");
 
-        jLabel6.setText("ISSN:");
+        jLabel6.setText("*ISSN:");
 
         jLabel7.setText("Buscar:");
 
@@ -211,7 +211,7 @@ public class TelaRevista extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
