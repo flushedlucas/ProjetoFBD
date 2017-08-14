@@ -6,7 +6,11 @@
 package projetofbd.View;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import net.proteanit.sql.DbUtils;
 import projetofbd.DAO.RevistaDAO;
 import projetofbd.Model.Revista;
@@ -270,7 +274,16 @@ public class TelaRevista extends javax.swing.JFrame {
         setarCampos();
 
     }//GEN-LAST:event_tblRevistaMouseClicked
-
+//    private MaskFormatter maskData(JTextField textfield) throws ParseException{
+//        MaskFormatter mask = null;
+//        mask = new MaskFormatter("####-####");
+//        mask.setOverwriteMode(true);
+//        mask.setValidCharacters("0123456789");
+//        mask.setPlaceholderCharacter('_');
+////        mask.install(textfield);
+//        return mask;
+//    }
+   
     private void btnAdicionarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRevistaActionPerformed
         // Adcionar pesquisador
         try {
@@ -280,6 +293,7 @@ public class TelaRevista extends javax.swing.JFrame {
                 Revista revista = new Revista();
                 revista.setNome_Revista(txtNomeRevista.getText());
                 revista.setEditora(txtEditora.getText());
+//                maskData(txtISSN);
                 revista.setISSN(txtISSN.getText());
                 RevistaDAO revistaDAO = new RevistaDAO();
                 int adicionadao = revistaDAO.create(revista);
