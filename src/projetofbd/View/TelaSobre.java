@@ -38,6 +38,11 @@ public class TelaSobre extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(530, 267));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel3.setText("Discentes: Wellington Luiz Antonio, Lucas Vieira ");
 
@@ -137,6 +142,11 @@ public class TelaSobre extends javax.swing.JFrame {
         // Voltar página principal
         this.voltar();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       // Voltar página principal
+        this.voltar();
+    }//GEN-LAST:event_formWindowClosing
     private void voltar() {
         TelaPrincipal telaprincipal = new TelaPrincipal();
         telaprincipal.setVisible(true);

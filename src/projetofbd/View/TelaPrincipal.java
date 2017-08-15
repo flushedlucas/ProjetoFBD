@@ -60,12 +60,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         lblHora = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnUniversidade = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        universidade = new javax.swing.JMenu();
         Pesquisador = new javax.swing.JMenuItem();
         Artigo = new javax.swing.JMenuItem();
         Revista = new javax.swing.JMenuItem();
+        universidadeMenu = new javax.swing.JMenuItem();
         Sair = new javax.swing.JMenuItem();
         ajuda = new javax.swing.JMenu();
         sobre = new javax.swing.JMenuItem();
@@ -151,14 +152,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/dbOk.png"))); // NOI18N
 
-        jButton1.setText("Universidade");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnUniversidade.setText("Universidade");
+        btnUniversidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnUniversidadeActionPerformed(evt);
             }
         });
 
-        jMenu1.setText("Arquivo");
+        universidade.setText("Arquivo");
 
         Pesquisador.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         Pesquisador.setText("Pesquisador");
@@ -167,7 +168,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 PesquisadorActionPerformed(evt);
             }
         });
-        jMenu1.add(Pesquisador);
+        universidade.add(Pesquisador);
 
         Artigo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
         Artigo.setText("Artigo");
@@ -176,7 +177,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ArtigoActionPerformed(evt);
             }
         });
-        jMenu1.add(Artigo);
+        universidade.add(Artigo);
 
         Revista.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         Revista.setText("Revista");
@@ -185,7 +186,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 RevistaActionPerformed(evt);
             }
         });
-        jMenu1.add(Revista);
+        universidade.add(Revista);
+
+        universidadeMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
+        universidadeMenu.setText("Universidade");
+        universidadeMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                universidadeMenuActionPerformed(evt);
+            }
+        });
+        universidade.add(universidadeMenu);
 
         Sair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         Sair.setText("Sair");
@@ -194,12 +204,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 SairActionPerformed(evt);
             }
         });
-        jMenu1.add(Sair);
+        universidade.add(Sair);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(universidade);
 
         ajuda.setText("Ajuda");
 
+        sobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         sobre.setText("Sobre");
         sobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +239,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                            .addComponent(btnUniversidade, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +260,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnPesquisar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnUniversidade)
                     .addComponent(btnRevista))
                 .addGap(28, 28, 28)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -295,7 +306,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void RevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RevistaActionPerformed
-        // TODO add your handling code here:
+        // Chamando a tela revista
+        btnRevistaActionPerformed(evt);
+        
     }//GEN-LAST:event_RevistaActionPerformed
 
     private void PesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisadorActionPerformed
@@ -313,7 +326,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void ArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtigoActionPerformed
-        // TODO add your handling code here:
+        // Chamando a tela artigo
+        btnArtigoActionPerformed(evt);
     }//GEN-LAST:event_ArtigoActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -337,10 +351,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void btnUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUniversidadeActionPerformed
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        TelaUniversidade universidade =  new TelaUniversidade();
+        universidade.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnUniversidadeActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -353,6 +370,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         sobre.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_sobreActionPerformed
+
+    private void universidadeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_universidadeMenuActionPerformed
+        // TODO add your handling code here:
+        btnUniversidadeActionPerformed(evt);
+    }//GEN-LAST:event_universidadeMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,14 +422,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRevista;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnUniversidade;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JMenuItem sobre;
+    private javax.swing.JMenu universidade;
+    private javax.swing.JMenuItem universidadeMenu;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,7 +59,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtUniversidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnDesbloquear = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -87,17 +87,12 @@ public class TelaPesquisador extends javax.swing.JFrame {
         setTitle("Pesquisador");
         setResizable(false);
         setSize(new java.awt.Dimension(600, 0));
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -202,18 +197,12 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
         jLabel5.setText("*Universidade:");
 
-        txtUniversidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUniversidadeActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Buscar:");
 
-        jButton1.setText("Desbloquear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDesbloquear.setText("Desbloquear");
+        btnDesbloquear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDesbloquearActionPerformed(evt);
             }
         });
 
@@ -240,7 +229,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(btnDesbloquear)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -278,7 +267,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jButton1)
+                .addComponent(btnDesbloquear)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -396,6 +385,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         setarCampos();
         btnAdicionarPesquisador.setEnabled(false);
         tblPesquisador.setEnabled(false);
+        btnDesbloquear.setEnabled(true);
     }//GEN-LAST:event_tblPesquisadorMouseClicked
 
     private void btnDeletarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarPesquisadorActionPerformed
@@ -431,19 +421,11 @@ public class TelaPesquisador extends javax.swing.JFrame {
         // Popular a tabela quando iniciar o form
         btnDeletarPesquisador.setEnabled(false);
         btnEditarPesquisador.setEnabled(false);
+        btnDesbloquear.setEnabled(false);
         listarTabelaPesquisador();
 
 
     }//GEN-LAST:event_formWindowOpened
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // Halitar e limpar os campos do form
-
-    }//GEN-LAST:event_formMouseClicked
-
-    private void txtUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUniversidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUniversidadeActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Voltar página principal
@@ -460,7 +442,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDesbloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearActionPerformed
         // TODO add your handling code here:
         btnAdicionarPesquisador.setEnabled(true);
         btnDeletarPesquisador.setEnabled(false);
@@ -468,8 +450,9 @@ public class TelaPesquisador extends javax.swing.JFrame {
         limparCampos();
         tblPesquisador.setEnabled(true);
         txtUniversidade.setEditable(true);
+        btnDesbloquear.setEnabled(false);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDesbloquearActionPerformed
 
     private void limparCampos() {
         txtIdPesquisador.setText(null);
@@ -520,9 +503,9 @@ public class TelaPesquisador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarPesquisador;
     private javax.swing.JButton btnDeletarPesquisador;
+    private javax.swing.JButton btnDesbloquear;
     private javax.swing.JButton btnEditarPesquisador;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
