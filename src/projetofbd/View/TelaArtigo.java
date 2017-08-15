@@ -29,8 +29,8 @@ public class TelaArtigo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnEditarRevista = new javax.swing.JButton();
-        btnDeletarRevista = new javax.swing.JButton();
+        btnEditarArtigo = new javax.swing.JButton();
+        btnDeletarArtigo = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
@@ -53,7 +53,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         txtEditora = new javax.swing.JTextField();
         txtNomeRevista = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        btnAdicionarRevista = new javax.swing.JButton();
+        btnAdicionarArtigo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -62,17 +62,17 @@ public class TelaArtigo extends javax.swing.JFrame {
             }
         });
 
-        btnEditarRevista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/edit.png"))); // NOI18N
-        btnEditarRevista.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarArtigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/edit.png"))); // NOI18N
+        btnEditarArtigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarRevistaActionPerformed(evt);
+                btnEditarArtigoActionPerformed(evt);
             }
         });
 
-        btnDeletarRevista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/delete.png"))); // NOI18N
-        btnDeletarRevista.addActionListener(new java.awt.event.ActionListener() {
+        btnDeletarArtigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/delete.png"))); // NOI18N
+        btnDeletarArtigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarRevistaActionPerformed(evt);
+                btnDeletarArtigoActionPerformed(evt);
             }
         });
 
@@ -150,10 +150,10 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         jLabel7.setText("Buscar:");
 
-        btnAdicionarRevista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/add.png"))); // NOI18N
-        btnAdicionarRevista.addActionListener(new java.awt.event.ActionListener() {
+        btnAdicionarArtigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/add.png"))); // NOI18N
+        btnAdicionarArtigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarRevistaActionPerformed(evt);
+                btnAdicionarArtigoActionPerformed(evt);
             }
         });
 
@@ -197,11 +197,11 @@ public class TelaArtigo extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnAdicionarRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnAdicionarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnEditarRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnEditarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(47, 47, 47)
-                                        .addComponent(btnDeletarRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnDeletarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtNomeRevista))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtISSN, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,9 +232,9 @@ public class TelaArtigo extends javax.swing.JFrame {
                     .addComponent(txtNomeRevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditarRevista)
-                    .addComponent(btnAdicionarRevista)
-                    .addComponent(btnDeletarRevista))
+                    .addComponent(btnEditarArtigo)
+                    .addComponent(btnAdicionarArtigo)
+                    .addComponent(btnDeletarArtigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -244,7 +244,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRevistaActionPerformed
+    private void btnEditarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarArtigoActionPerformed
         // TODO add your handling code here:
 //        if (validacao()) {
 //            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
@@ -261,14 +261,14 @@ public class TelaArtigo extends javax.swing.JFrame {
 //                JOptionPane.showMessageDialog(null, "Revista editado com sucesso.");
 //                limparCampos();
 //                listarTabelaRevista();
-//                btnAdicionarRevista.setEnabled(true);
+//                btnAdicionarArtigo.setEnabled(true);
 //            } else {
 //                JOptionPane.showMessageDialog(null, "Não foi possível editar o Pesquisador.");
 //            }
 //        }
-    }//GEN-LAST:event_btnEditarRevistaActionPerformed
+    }//GEN-LAST:event_btnEditarArtigoActionPerformed
 
-    private void btnDeletarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarRevistaActionPerformed
+    private void btnDeletarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarArtigoActionPerformed
 //        // TODO add your handling code here:
 //        if ((txtIdRevista.getText().isEmpty())) {
 //            JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
@@ -290,14 +290,14 @@ public class TelaArtigo extends javax.swing.JFrame {
 //                    JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
 //                    limparCampos();
 //                    listarTabelaRevista();
-//                    btnAdicionarRevista.setEnabled(true);
+//                    btnAdicionarArtigo.setEnabled(true);
 //                    tblRevista.setEnabled(true);
 //                } else {
 //                    JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
 //                }
 //            }
 //        }
-    }//GEN-LAST:event_btnDeletarRevistaActionPerformed
+    }//GEN-LAST:event_btnDeletarArtigoActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         // TODO add your handling code here:
@@ -334,7 +334,7 @@ public class TelaArtigo extends javax.swing.JFrame {
 //        // A linha abaixo desabilitar o botão adicionar
 
     }
-    private void btnAdicionarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRevistaActionPerformed
+    private void btnAdicionarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarArtigoActionPerformed
         // Adcionar pesquisador
 //        try {
 //            if (validacao()) {
@@ -359,7 +359,7 @@ public class TelaArtigo extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "Revista já existe");
 ////            limparCampos();
 //        }
-    }//GEN-LAST:event_btnAdicionarRevistaActionPerformed
+    }//GEN-LAST:event_btnAdicionarArtigoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Voltar página principal
@@ -402,9 +402,9 @@ public class TelaArtigo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionarRevista;
-    private javax.swing.JButton btnDeletarRevista;
-    private javax.swing.JButton btnEditarRevista;
+    private javax.swing.JButton btnAdicionarArtigo;
+    private javax.swing.JButton btnDeletarArtigo;
+    private javax.swing.JButton btnEditarArtigo;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -59,6 +59,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtUniversidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,7 +85,6 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisador");
-        setPreferredSize(new java.awt.Dimension(600, 430));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 0));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,11 +93,11 @@ public class TelaPesquisador extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -133,6 +133,10 @@ public class TelaPesquisador extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblPesquisador);
+        if (tblPesquisador.getColumnModel().getColumnCount() > 0) {
+            tblPesquisador.getColumnModel().getColumn(0).setHeaderValue("Nome");
+            tblPesquisador.getColumnModel().getColumn(1).setHeaderValue("Universidade");
+        }
         tblPesquisador.setModel( new javax.swing.table.DefaultTableModel(
 
             new Object[][]{}, new String []{ "Nome", "Universidade"}
@@ -185,7 +189,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
                 .addComponent(btnVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,6 +210,13 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
         jLabel6.setText("Buscar:");
 
+        jButton1.setText("Desbloquear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,42 +224,44 @@ public class TelaPesquisador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addGap(81, 81, 81)))
-                        .addGap(119, 119, 119))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtIdPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btnAdicionarPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(62, 62, 62)
-                                            .addComponent(btnEditarPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(64, 64, 64)
-                                            .addComponent(btnDeletarPesquisador))
-                                        .addComponent(txtNomePesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(139, 139, Short.MAX_VALUE))))
+                                        .addComponent(txtUniversidade))
+                                    .addComponent(txtNomePesquisador)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
+                                        .addComponent(btnAdicionarPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(btnEditarPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(btnDeletarPesquisador)))))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionarPesquisador, btnDeletarPesquisador, btnEditarPesquisador});
@@ -264,7 +277,9 @@ public class TelaPesquisador extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtIdPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,12 +294,12 @@ public class TelaPesquisador extends javax.swing.JFrame {
                     .addComponent(btnEditarPesquisador)
                     .addComponent(btnAdicionarPesquisador)
                     .addComponent(btnDeletarPesquisador))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(570, 460));
+        setSize(new java.awt.Dimension(595, 521));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -365,16 +380,6 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBuscarPesquisadorActionPerformed
 
-    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-        // TODO add your handling code here:
-        try {
-            listarTabelaPesquisador();
-            tblPesquisador.setEnabled(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro na transação");
-        }
-    }//GEN-LAST:event_txtBuscarKeyReleased
-
     private void listarTabelaPesquisador() {
         Pesquisador pesquisador = new Pesquisador();
         pesquisador.setNome_Pesq(txtBuscar.getText());
@@ -386,6 +391,8 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void tblPesquisadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesquisadorMouseClicked
         // prencher os campos do pesquisador
+        btnDeletarPesquisador.setEnabled(true);
+        btnEditarPesquisador.setEnabled(true);
         setarCampos();
         btnAdicionarPesquisador.setEnabled(false);
         tblPesquisador.setEnabled(false);
@@ -422,18 +429,15 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Popular a tabela quando iniciar o form
+        btnDeletarPesquisador.setEnabled(false);
+        btnEditarPesquisador.setEnabled(false);
         listarTabelaPesquisador();
-        
 
 
     }//GEN-LAST:event_formWindowOpened
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // Halitar e limpar os campos do form
-        btnAdicionarPesquisador.setEnabled(true);
-        limparCampos();
-        tblPesquisador.setEnabled(true);
-        txtUniversidade.setEditable(true);
 
     }//GEN-LAST:event_formMouseClicked
 
@@ -445,6 +449,27 @@ public class TelaPesquisador extends javax.swing.JFrame {
         // Voltar página principal
         this.voltar();
     }//GEN-LAST:event_formWindowClosing
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        try {
+            listarTabelaPesquisador();
+            tblPesquisador.setEnabled(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro na transação");
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        btnAdicionarPesquisador.setEnabled(true);
+        btnDeletarPesquisador.setEnabled(false);
+        btnEditarPesquisador.setEnabled(false);
+        limparCampos();
+        tblPesquisador.setEnabled(true);
+        txtUniversidade.setEditable(true);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void limparCampos() {
         txtIdPesquisador.setText(null);
@@ -497,6 +522,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
     private javax.swing.JButton btnDeletarPesquisador;
     private javax.swing.JButton btnEditarPesquisador;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

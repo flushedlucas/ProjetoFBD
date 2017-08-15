@@ -68,11 +68,11 @@
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btnAdicionarRevista" min="-2" pref="93" max="-2" attributes="0"/>
+                                      <Component id="btnAdicionarArtigo" min="-2" pref="93" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btnEditarRevista" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="btnEditarArtigo" min="-2" pref="95" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                      <Component id="btnDeletarRevista" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="btnDeletarArtigo" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="txtNomeRevista" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -115,9 +115,9 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnEditarRevista" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAdicionarRevista" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDeletarRevista" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditarArtigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAdicionarArtigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDeletarArtigo" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
@@ -127,24 +127,24 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnEditarRevista">
+    <Component class="javax.swing.JButton" name="btnEditarArtigo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/projetofbd/icones/edit.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarRevistaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarArtigoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnDeletarRevista">
+    <Component class="javax.swing.JButton" name="btnDeletarArtigo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/projetofbd/icones/delete.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeletarRevistaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeletarArtigoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscar">
@@ -340,14 +340,14 @@
         <Property name="text" type="java.lang.String" value="Buscar:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAdicionarRevista">
+    <Component class="javax.swing.JButton" name="btnAdicionarArtigo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/projetofbd/icones/add.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarRevistaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarArtigoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
