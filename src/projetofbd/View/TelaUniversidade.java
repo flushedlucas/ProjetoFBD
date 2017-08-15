@@ -64,11 +64,11 @@ public class TelaUniversidade extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
-            }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
             }
         });
 
@@ -102,12 +102,14 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblUniversidade.setColumnSelectionAllowed(true);
         tblUniversidade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblUniversidadeMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblUniversidade);
+        tblUniversidade.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLabel2.setText("Numero: ");
 
@@ -341,11 +343,6 @@ public class TelaUniversidade extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeletarUniversidadeActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        voltar();
-    }//GEN-LAST:event_formWindowClosed
-
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         btnAdicionarUniversidade.setEnabled(true);
@@ -362,6 +359,11 @@ public class TelaUniversidade extends javax.swing.JFrame {
         // TODO add your handling code here:
         voltar();
     }//GEN-LAST:event_btnVoltar1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // Voltar página principal
+        this.voltar();
+    }//GEN-LAST:event_formWindowClosing
 
     public void setarCampos() {
         int setar = tblUniversidade.getSelectedRow();

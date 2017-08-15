@@ -52,7 +52,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
+        btnArtigo = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
         btnRevista = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -72,7 +72,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bem-Vindo");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(386, 348));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -87,10 +86,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Projeto de Fundamentos de Banco de Dados");
 
-        btnEditar.setText("Artigo");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnArtigo.setText("Artigo");
+        btnArtigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnArtigoActionPerformed(evt);
             }
         });
 
@@ -221,7 +220,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -235,7 +234,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
+                    .addComponent(btnArtigo)
                     .addComponent(btnPesquisar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -245,7 +244,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditar, btnPesquisar, btnRevista});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnArtigo, btnPesquisar, btnRevista});
 
         setSize(new java.awt.Dimension(382, 353));
         setLocationRelativeTo(null);
@@ -257,9 +256,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
+    private void btnArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArtigoActionPerformed
+        // Chamando a tela artigo
+        TelaArtigo artigo = new TelaArtigo();
+        artigo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnArtigoActionPerformed
 
     private void btnRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevistaActionPerformed
         TelaRevista revista = new TelaRevista();
@@ -376,7 +378,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Pesquisador;
     private javax.swing.JMenuItem Revista;
     private javax.swing.JMenuItem Sair;
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnArtigo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRevista;
     private javax.swing.JButton btnSair;

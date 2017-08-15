@@ -29,13 +29,13 @@ public class PesquisadorDAO {
         PreparedStatement statement = null;
         int add = 0;
         String univer = null;
-        
+
         try {
             statement = Conexao.abrir().prepareStatement(sql);
             statement.setString(1, pesquisador.getNome_Pesq());
             int univerInt = transformandoInt(pesquisador, univer);
             statement.setInt(2, univerInt);
-                
+
             add = statement.executeUpdate();
 
         } catch (Exception e) {
@@ -91,8 +91,7 @@ public class PesquisadorDAO {
 
     public int update(Pesquisador pesquisador) {
         String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=?, cod_univer=? WHERE cod_pesq=?";
-       
-        
+
         int adicionado = 0;
         PreparedStatement statement = null;
         String univer = null;
@@ -101,7 +100,7 @@ public class PesquisadorDAO {
             statement.setInt(1, pesquisador.getCod_Pesq());
             statement.setString(2, pesquisador.getNome_Pesq());
             int univerInt = transformandoInt(pesquisador, univer);
-            statement.setInt(3,univerInt);
+            statement.setInt(3, univerInt);
             statement.setInt(4, pesquisador.getCod_Pesq());
             adicionado = statement.executeUpdate();
             return adicionado;
@@ -113,8 +112,8 @@ public class PesquisadorDAO {
 
     private int transformandoInt(Pesquisador pesquisador, String univer) throws SQLException, NumberFormatException {
         UniversidadeDAO uni = new UniversidadeDAO();
-        resultSet= uni.read(pesquisador.getUniversidade());
-        while(resultSet.next()){
+        resultSet = uni.read(pesquisador.getUniversidade());
+        while (resultSet.next()) {
             univer = String.valueOf(resultSet.getString("cod_univer"));
         }
         int univerInt = Integer.parseInt(univer);

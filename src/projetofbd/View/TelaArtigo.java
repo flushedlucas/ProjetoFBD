@@ -37,7 +37,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblRevista = new javax.swing.JTable();
+        tblArtigo = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -56,6 +56,11 @@ public class TelaArtigo extends javax.swing.JFrame {
         btnAdicionarRevista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnEditarRevista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/edit.png"))); // NOI18N
         btnEditarRevista.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +112,7 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/lupa.png"))); // NOI18N
 
-        tblRevista.setModel(new javax.swing.table.DefaultTableModel(
+        tblArtigo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -126,12 +131,12 @@ public class TelaArtigo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblRevista.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblArtigo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblRevistaMouseClicked(evt);
+                tblArtigoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblRevista);
+        jScrollPane1.setViewportView(tblArtigo);
 
         jLabel5.setText("*Editora:");
 
@@ -298,7 +303,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
 //            listarTabelaRevista();
-            tblRevista.setEnabled(true);
+            tblArtigo.setEnabled(true);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na transação");
@@ -306,15 +311,29 @@ public class TelaArtigo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-//        voltar();
+
+        voltar();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void tblRevistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRevistaMouseClicked
+    private void voltar() {
+        TelaPrincipal telaprincipal = new TelaPrincipal();
+        telaprincipal.setVisible(true);
+        this.dispose();
+    }
+
+    private void tblArtigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArtigoMouseClicked
         // prencher os campos do pesquisador
 //        setarCampos();
-    }//GEN-LAST:event_tblRevistaMouseClicked
+    }//GEN-LAST:event_tblArtigoMouseClicked
 
+    public void setarCampos() {
+//        int setar = tblArtigo.getSelectedRow();
+//        txt.setText(tblPesquisador.getModel().getValueAt(setar, 0).toString());
+//        txtNomePesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 1).toString());
+//        txtUniversidade.setText(tblPesquisador.getModel().getValueAt(setar, 2).toString());
+//        // A linha abaixo desabilitar o botão adicionar
+
+    }
     private void btnAdicionarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRevistaActionPerformed
         // Adcionar pesquisador
 //        try {
@@ -341,6 +360,11 @@ public class TelaArtigo extends javax.swing.JFrame {
 ////            limparCampos();
 //        }
     }//GEN-LAST:event_btnAdicionarRevistaActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // Voltar página principal
+        this.voltar();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -391,7 +415,7 @@ public class TelaArtigo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblRevista;
+    private javax.swing.JTable tblArtigo;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtEditora;
     private javax.swing.JTextField txtISSN;

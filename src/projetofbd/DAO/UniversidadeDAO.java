@@ -82,9 +82,9 @@ public class UniversidadeDAO {
         }
         return resultSet;
     }
-    
+
     public ResultSet read(String universidade) {
-        String sql = "select cod_univer from universidade where sigla like ?"; 
+        String sql = "select cod_univer from universidade where sigla like ?";
         PreparedStatement statement;
 
         try {
@@ -92,7 +92,7 @@ public class UniversidadeDAO {
             statement = Conexao.abrir().prepareCall(sql);
             //passando o conteudo  da caixa de texto para o ?
             //atenção ao % - continuação da string sql
-            statement.setString(1,  universidade);
+            statement.setString(1, universidade);
 //            System.out.println(statement);
             resultSet = statement.executeQuery();
 //            while(resultSet.next()){
@@ -108,10 +108,6 @@ public class UniversidadeDAO {
         }
         return resultSet;
     }
-    
-    
-    
-    
 
     public int update(Universidade universidade) {
         String sql = "UPDATE universidade SET cod_univer=?, nome=?, sigla=?, uf=? WHERE cod_univer=?";

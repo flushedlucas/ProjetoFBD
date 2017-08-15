@@ -93,8 +93,8 @@ public class TelaPesquisador extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -387,7 +387,6 @@ public class TelaPesquisador extends javax.swing.JFrame {
     private void tblPesquisadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesquisadorMouseClicked
         // prencher os campos do pesquisador
         setarCampos();
-        txtUniversidade.setEditable(false);
         btnAdicionarPesquisador.setEnabled(false);
         tblPesquisador.setEnabled(false);
     }//GEN-LAST:event_tblPesquisadorMouseClicked
@@ -439,14 +438,14 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formMouseClicked
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        voltar();
-    }//GEN-LAST:event_formWindowClosed
-
     private void txtUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUniversidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUniversidadeActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // Voltar página principal
+        this.voltar();
+    }//GEN-LAST:event_formWindowClosing
 
     private void limparCampos() {
         txtIdPesquisador.setText(null);
