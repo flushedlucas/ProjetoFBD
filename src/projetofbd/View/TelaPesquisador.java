@@ -429,7 +429,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Voltar página principal
-        this.voltar();
+        voltar();
     }//GEN-LAST:event_formWindowClosing
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased

@@ -375,7 +375,7 @@ public class TelaRevista extends javax.swing.JFrame {
     private void voltar() {
         TelaPrincipal telaprincipal = new TelaPrincipal();
         telaprincipal.setVisible(true);
-        dispose();
+        this.dispose();
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -422,7 +422,7 @@ public class TelaRevista extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Voltar página principal
-        this.voltar();
+        voltar();
     }//GEN-LAST:event_formWindowClosing
 
     /**

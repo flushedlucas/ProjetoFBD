@@ -13,14 +13,14 @@ import projetofbd.Model.Universidade;
 
 /**
  *
- * @author lucas
+ * @author WELLINGTON
  */
 public class TelaUniversidade extends javax.swing.JFrame {
-
+    
     ResultSet resultSet = null;
-
+    
     /**
-     * Creates new form TelaUniversidade
+     * Creates new form TelaUNiver
      */
     public TelaUniversidade() {
         initComponents();
@@ -35,28 +35,26 @@ public class TelaUniversidade extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUniversidade = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblUniversidade = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        txtIdUniversidade = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtNomeUniversidade = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         txtSigla = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        txtIdUniversidade = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         txtUF = new javax.swing.JTextField();
-        btnVoltar1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        txtNomeUniversidade = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         btnAdicionarUniversidade = new javax.swing.JButton();
         btnEditarUniversidade = new javax.swing.JButton();
         btnDeletarUniversidade = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnVoltar1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Universidade");
-        setPreferredSize(new java.awt.Dimension(570, 460));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -72,16 +70,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
             }
         });
 
-        txtBuscar.setPreferredSize(new java.awt.Dimension(40, 25));
-        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyReleased(evt);
-            }
-        });
-
-        jLabel7.setText("Buscar:");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/lupa.png"))); // NOI18N
+        jLabel6.setText("*UF:");
 
         tblUniversidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,28 +98,25 @@ public class TelaUniversidade extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblUniversidade);
-        tblUniversidade.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jLabel2.setText("Numero: ");
-
-        txtIdUniversidade.setEditable(false);
-
-        jLabel3.setText("* Nome:");
-
-        jLabel5.setText("*Sigla:");
-
-        jLabel6.setText("*UF:");
-
-        btnVoltar1.setText("Voltar");
-        btnVoltar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar1ActionPerformed(evt);
+        txtBuscar.setPreferredSize(new java.awt.Dimension(40, 25));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setText("* Campos Obrigatórios");
+        jLabel7.setText("Buscar:");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/lupa.png"))); // NOI18N
+
+        txtIdUniversidade.setEditable(false);
+
+        jLabel2.setText("Numero: ");
+
+        jLabel5.setText("*Sigla:");
+
+        jLabel3.setText("* Nome:");
 
         btnAdicionarUniversidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/add.png"))); // NOI18N
         btnAdicionarUniversidade.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +136,17 @@ public class TelaUniversidade extends javax.swing.JFrame {
         btnDeletarUniversidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletarUniversidadeActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("* Campos Obrigatórios");
+
+        btnVoltar1.setText("Voltar");
+        btnVoltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltar1ActionPerformed(evt);
             }
         });
 
@@ -239,9 +236,14 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(527, 443));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblUniversidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUniversidadeMouseClicked
+        // prencher os campos do universidade
+        setarCampos();
+    }//GEN-LAST:event_tblUniversidadeMouseClicked
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         // TODO add your handling code here:
@@ -253,11 +255,6 @@ public class TelaUniversidade extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro na transação");
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
-
-    private void tblUniversidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUniversidadeMouseClicked
-        // prencher os campos do universidade
-        setarCampos();
-    }//GEN-LAST:event_tblUniversidadeMouseClicked
 
     private void btnAdicionarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarUniversidadeActionPerformed
         // Adcionar universidade
@@ -284,7 +281,6 @@ public class TelaUniversidade extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Universidade já existe");
             limparCampos();
         }
-
     }//GEN-LAST:event_btnAdicionarUniversidadeActionPerformed
 
     private void btnEditarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUniversidadeActionPerformed
@@ -318,7 +314,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         } else {
             int remove = 0;
             int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
-                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+                + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
             if (confirma == JOptionPane.YES_OPTION) {
                 Universidade universidade = new Universidade();
                 int id = Integer.parseInt(txtIdUniversidade.getText());
@@ -343,6 +339,16 @@ public class TelaUniversidade extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeletarUniversidadeActionPerformed
 
+    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
+        // TODO add your handling code here:
+        voltar();
+    }//GEN-LAST:event_btnVoltar1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        voltar();
+    }//GEN-LAST:event_formWindowClosing
+
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         btnAdicionarUniversidade.setEnabled(true);
@@ -354,17 +360,12 @@ public class TelaUniversidade extends javax.swing.JFrame {
         // TODO add your handling code here:
         listarTabelaUniversidade();
     }//GEN-LAST:event_formWindowOpened
-
-    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
-        // TODO add your handling code here:
-        voltar();
-    }//GEN-LAST:event_btnVoltar1ActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // Voltar página principal
-        this.voltar();
-    }//GEN-LAST:event_formWindowClosing
-
+    
+     private void voltar() {
+        TelaPrincipal telaprincipal = new TelaPrincipal();
+        telaprincipal.setVisible(true);
+        this.dispose();
+    }
     public void setarCampos() {
         int setar = tblUniversidade.getSelectedRow();
         txtIdUniversidade.setText(tblUniversidade.getModel().getValueAt(setar, 0).toString());
@@ -398,13 +399,9 @@ public class TelaUniversidade extends javax.swing.JFrame {
         //usando a bibliboteca rs2xml.jar para preencher a tabela
         tblUniversidade.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
-
-    private void voltar() {
-        TelaPrincipal telaprincipal = new TelaPrincipal();
-        telaprincipal.setVisible(true);
-        dispose();
-    }
-
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -430,6 +427,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaUniversidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

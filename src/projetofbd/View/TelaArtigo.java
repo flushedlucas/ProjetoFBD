@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author lucas
+ * @author WELLINGTON
  */
 public class TelaArtigo extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaArtigo
+     * Creates new form TelaArt
      */
     public TelaArtigo() {
         initComponents();
@@ -29,15 +29,6 @@ public class TelaArtigo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnEditarArtigo = new javax.swing.JButton();
-        btnDeletarArtigo = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        btnVoltar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblArtigo = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -53,14 +44,36 @@ public class TelaArtigo extends javax.swing.JFrame {
         txtEditora = new javax.swing.JTextField();
         txtNomeRevista = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        btnEditarArtigo = new javax.swing.JButton();
+        btnDeletarArtigo = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        btnVoltar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblArtigo = new javax.swing.JTable();
         btnAdicionarArtigo = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
+
+        jLabel5.setText("*Editora:");
+
+        jLabel2.setText("Numero: ");
+
+        jLabel6.setText("*ISSN:");
+
+        txtIdRevista.setEditable(false);
+
+        jLabel3.setText("*Título:");
+
+        jLabel7.setText("Buscar:");
 
         btnEditarArtigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/edit.png"))); // NOI18N
         btnEditarArtigo.addActionListener(new java.awt.event.ActionListener() {
@@ -137,18 +150,6 @@ public class TelaArtigo extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblArtigo);
-
-        jLabel5.setText("*Editora:");
-
-        jLabel2.setText("Numero: ");
-
-        jLabel6.setText("*ISSN:");
-
-        txtIdRevista.setEditable(false);
-
-        jLabel3.setText("*Título:");
-
-        jLabel7.setText("Buscar:");
 
         btnAdicionarArtigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/add.png"))); // NOI18N
         btnAdicionarArtigo.addActionListener(new java.awt.event.ActionListener() {
@@ -240,69 +241,69 @@ public class TelaArtigo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(542, 430));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarArtigoActionPerformed
         // TODO add your handling code here:
-//        if (validacao()) {
-//            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
-//        } else {
-//            Revista revista = new Revista();
-//            int id = Integer.parseInt(txtIdRevista.getText());
-//            revista.setCod_Revista((id));
-//            revista.setNome_Revista(txtNomeRevista.getText());
-//            revista.setEditora(txtEditora.getText());
-//            revista.setISSN(txtISSN.getText());
-//            RevistaDAO revistaDAO = new RevistaDAO();
-//            int editado = revistaDAO.update(revista);
-//            if (editado > 0) {
-//                JOptionPane.showMessageDialog(null, "Revista editado com sucesso.");
-//                limparCampos();
-//                listarTabelaRevista();
-//                btnAdicionarArtigo.setEnabled(true);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Não foi possível editar o Pesquisador.");
-//            }
-//        }
+        //        if (validacao()) {
+            //            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
+            //        } else {
+            //            Revista revista = new Revista();
+            //            int id = Integer.parseInt(txtIdRevista.getText());
+            //            revista.setCod_Revista((id));
+            //            revista.setNome_Revista(txtNomeRevista.getText());
+            //            revista.setEditora(txtEditora.getText());
+            //            revista.setISSN(txtISSN.getText());
+            //            RevistaDAO revistaDAO = new RevistaDAO();
+            //            int editado = revistaDAO.update(revista);
+            //            if (editado > 0) {
+                //                JOptionPane.showMessageDialog(null, "Revista editado com sucesso.");
+                //                limparCampos();
+                //                listarTabelaRevista();
+                //                btnAdicionarArtigo.setEnabled(true);
+                //            } else {
+                //                JOptionPane.showMessageDialog(null, "Não foi possível editar o Pesquisador.");
+                //            }
+            //        }
     }//GEN-LAST:event_btnEditarArtigoActionPerformed
 
     private void btnDeletarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarArtigoActionPerformed
-//        // TODO add your handling code here:
-//        if ((txtIdRevista.getText().isEmpty())) {
-//            JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
-//        } else {
-//            int remove = 0;
-//            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
-//                + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
-//            if (confirma == JOptionPane.YES_OPTION) {
-//                Revista revista = new Revista();
-//                int id = Integer.parseInt(txtIdRevista.getText());
-//                revista.setCod_Revista((id));
-//                revista.setEditora(txtEditora.getText());
-//                revista.setISSN(txtISSN.getText());
-//
-//                RevistaDAO revistaDAO = new RevistaDAO();
-//                remove = revistaDAO.delete(revista);
-//                System.out.println(remove);
-//                if (remove > 0) {
-//                    JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
-//                    limparCampos();
-//                    listarTabelaRevista();
-//                    btnAdicionarArtigo.setEnabled(true);
-//                    tblRevista.setEnabled(true);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
-//                }
-//            }
-//        }
+        //        // TODO add your handling code here:
+        //        if ((txtIdRevista.getText().isEmpty())) {
+            //            JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
+            //        } else {
+            //            int remove = 0;
+            //            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
+                //                + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+            //            if (confirma == JOptionPane.YES_OPTION) {
+                //                Revista revista = new Revista();
+                //                int id = Integer.parseInt(txtIdRevista.getText());
+                //                revista.setCod_Revista((id));
+                //                revista.setEditora(txtEditora.getText());
+                //                revista.setISSN(txtISSN.getText());
+                //
+                //                RevistaDAO revistaDAO = new RevistaDAO();
+                //                remove = revistaDAO.delete(revista);
+                //                System.out.println(remove);
+                //                if (remove > 0) {
+                    //                    JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
+                    //                    limparCampos();
+                    //                    listarTabelaRevista();
+                    //                    btnAdicionarArtigo.setEnabled(true);
+                    //                    tblRevista.setEnabled(true);
+                    //                } else {
+                    //                    JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
+                    //                }
+                //            }
+            //        }
     }//GEN-LAST:event_btnDeletarArtigoActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         // TODO add your handling code here:
         try {
-//            listarTabelaRevista();
+            //            listarTabelaRevista();
             tblArtigo.setEnabled(true);
 
         } catch (Exception e) {
@@ -311,61 +312,53 @@ public class TelaArtigo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-
         voltar();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void tblArtigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArtigoMouseClicked
+        // prencher os campos do pesquisador
+        //        setarCampos();
+    }//GEN-LAST:event_tblArtigoMouseClicked
+
+    private void btnAdicionarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarArtigoActionPerformed
+        // Adcionar pesquisador
+        //        try {
+            //            if (validacao()) {
+                //                JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
+                //            } else {
+                //                Revista revista = new Revista();
+                //                revista.setNome_Revista(txtNomeRevista.getText());
+                //                revista.setEditora(txtEditora.getText());
+                //                revista.setISSN(txtISSN.getText());
+                //                RevistaDAO revistaDAO = new RevistaDAO();
+                //                int adicionadao = revistaDAO.create(revista);
+                //                if (adicionadao > 0) {
+                    //                    JOptionPane.showMessageDialog(null, "Revista Salva com sucesso.");
+                    //                    limparCampos();
+                    ////                    listarTabelaRevista();
+                    //                } else {
+                    //                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar o Pesquisador.");
+                    ////                    limparCampos();
+                    //                }
+                //            }
+            //        } catch (Exception e) {
+            //            JOptionPane.showMessageDialog(null, "Revista já existe");
+            ////            limparCampos();
+            //        }
+    }//GEN-LAST:event_btnAdicionarArtigoActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        voltar();
+    }//GEN-LAST:event_formWindowClosing
+    
     private void voltar() {
         TelaPrincipal telaprincipal = new TelaPrincipal();
         telaprincipal.setVisible(true);
         this.dispose();
     }
-
-    private void tblArtigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArtigoMouseClicked
-        // prencher os campos do pesquisador
-//        setarCampos();
-    }//GEN-LAST:event_tblArtigoMouseClicked
-
-    public void setarCampos() {
-//        int setar = tblArtigo.getSelectedRow();
-//        txt.setText(tblPesquisador.getModel().getValueAt(setar, 0).toString());
-//        txtNomePesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 1).toString());
-//        txtUniversidade.setText(tblPesquisador.getModel().getValueAt(setar, 2).toString());
-//        // A linha abaixo desabilitar o botão adicionar
-
-    }
-    private void btnAdicionarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarArtigoActionPerformed
-        // Adcionar pesquisador
-//        try {
-//            if (validacao()) {
-//                JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
-//            } else {
-//                Revista revista = new Revista();
-//                revista.setNome_Revista(txtNomeRevista.getText());
-//                revista.setEditora(txtEditora.getText());
-//                revista.setISSN(txtISSN.getText());
-//                RevistaDAO revistaDAO = new RevistaDAO();
-//                int adicionadao = revistaDAO.create(revista);
-//                if (adicionadao > 0) {
-//                    JOptionPane.showMessageDialog(null, "Revista Salva com sucesso.");
-//                    limparCampos();
-////                    listarTabelaRevista();
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar o Pesquisador.");
-////                    limparCampos();
-//                }
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Revista já existe");
-////            limparCampos();
-//        }
-    }//GEN-LAST:event_btnAdicionarArtigoActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // Voltar página principal
-        this.voltar();
-    }//GEN-LAST:event_formWindowClosing
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -391,6 +384,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaArtigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
