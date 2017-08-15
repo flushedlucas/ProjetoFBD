@@ -16,9 +16,9 @@ import projetofbd.Model.Universidade;
  * @author WELLINGTON
  */
 public class TelaUniversidade extends javax.swing.JFrame {
-    
+
     ResultSet resultSet = null;
-    
+
     /**
      * Creates new form TelaUNiver
      */
@@ -53,8 +53,10 @@ public class TelaUniversidade extends javax.swing.JFrame {
         btnDeletarUniversidade = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnVoltar1 = new javax.swing.JButton();
+        btnDesbloquear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Universidade");
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -150,6 +152,13 @@ public class TelaUniversidade extends javax.swing.JFrame {
             }
         });
 
+        btnDesbloquear.setText("Desbloquear");
+        btnDesbloquear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesbloquearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,25 +175,13 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtIdUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addComponent(btnAdicionarUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
+                                .addGap(83, 83, 83)
                                 .addComponent(btnEditarUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txtNomeUniversidade)))
@@ -193,7 +190,21 @@ public class TelaUniversidade extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDeletarUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDesbloquear)
+                            .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -202,33 +213,31 @@ public class TelaUniversidade extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtIdUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNomeUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdicionarUniversidade, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnDeletarUniversidade, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEditarUniversidade)))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDesbloquear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtIdUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNomeUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdicionarUniversidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDeletarUniversidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnEditarUniversidade, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar1)
@@ -236,13 +245,18 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(527, 443));
+        setSize(new java.awt.Dimension(595, 521));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblUniversidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUniversidadeMouseClicked
         // prencher os campos do universidade
+        btnAdicionarUniversidade.setEnabled(false);
+        btnDeletarUniversidade.setEnabled(true);
+        btnEditarUniversidade.setEnabled(true);
         setarCampos();
+        tblUniversidade.setEnabled(false);
+        btnDesbloquear.setEnabled(true);
     }//GEN-LAST:event_tblUniversidadeMouseClicked
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -250,6 +264,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         try {
             listarTabelaUniversidade();
             tblUniversidade.setEnabled(true);
+            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na transação");
@@ -258,6 +273,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
 
     private void btnAdicionarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarUniversidadeActionPerformed
         // Adcionar universidade
+        int existe = 0;
         try {
             if (validacao()) {
                 JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
@@ -267,13 +283,19 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 universidade.setSigla(txtSigla.getText());
                 universidade.setUF(txtUF.getText());
                 UniversidadeDAO universidadeDAO = new UniversidadeDAO();
-                int adicionadao = universidadeDAO.create(universidade);
-                if (adicionadao > 0) {
-                    JOptionPane.showMessageDialog(null, "Universidade Salva com sucesso.");
-                    limparCampos();
-                    listarTabelaUniversidade();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar a Universidade.");
+                existe = universidadeDAO.readNome(universidade.getNome_Univer());
+                if (existe == 0) {
+                    int adicionadao = universidadeDAO.create(universidade);
+                    if (adicionadao > 0) {
+                        JOptionPane.showMessageDialog(null, "Universidade Salva com sucesso.");
+                        limparCampos();
+                        listarTabelaUniversidade();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar a Universidade.");
+                        limparCampos();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Universidade já existe");
                     limparCampos();
                 }
             }
@@ -284,7 +306,8 @@ public class TelaUniversidade extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarUniversidadeActionPerformed
 
     private void btnEditarUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUniversidadeActionPerformed
-        // TODO add your handling code here:
+        // editar
+        int igual = 0;
         if (validacao()) {
             JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
         } else {
@@ -295,14 +318,20 @@ public class TelaUniversidade extends javax.swing.JFrame {
             universidade.setSigla(txtSigla.getText());
             universidade.setUF(txtUF.getText());
             UniversidadeDAO universidadeDAO = new UniversidadeDAO();
-            int editado = universidadeDAO.update(universidade);
-            if (editado > 0) {
-                JOptionPane.showMessageDialog(null, "Universidade editada com sucesso.");
-                limparCampos();
-                listarTabelaUniversidade();
-                btnAdicionarUniversidade.setEnabled(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Não foi possível editar a Universidade.");
+            igual = universidadeDAO.readNome(universidade.getNome_Univer());
+            if (igual == 0) {
+                int editado = universidadeDAO.update(universidade);
+                if (editado > 0) {
+                    JOptionPane.showMessageDialog(null, "Universidade editada com sucesso.");
+                    ativaTblBotao();
+                    listarTabelaUniversidade();
+                    btnAdicionarUniversidade.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível editar a Universidade.");
+                }
+            }else{
+                    JOptionPane.showMessageDialog(null, "A universidade não foi editada, pois, é igual ao atual.");
+                    ativaTblBotao();
             }
         }
     }//GEN-LAST:event_btnEditarUniversidadeActionPerformed
@@ -314,7 +343,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         } else {
             int remove = 0;
             int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
-                + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
             if (confirma == JOptionPane.YES_OPTION) {
                 Universidade universidade = new Universidade();
                 int id = Integer.parseInt(txtIdUniversidade.getText());
@@ -351,21 +380,40 @@ public class TelaUniversidade extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        btnAdicionarUniversidade.setEnabled(true);
-        limparCampos();
-        tblUniversidade.setEnabled(true);
+        
+//        limparCampos();
+        
+        
     }//GEN-LAST:event_formMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         listarTabelaUniversidade();
+        btnDesbloquear.setEnabled(false);
+        btnEditarUniversidade.setEnabled(false);
+        btnDeletarUniversidade.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
-    
-     private void voltar() {
+
+    private void btnDesbloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearActionPerformed
+        ativaTblBotao();
+    }//GEN-LAST:event_btnDesbloquearActionPerformed
+
+    private void ativaTblBotao() {
+        // TODO add your handling code here:
+        btnAdicionarUniversidade.setEnabled(true);
+        btnEditarUniversidade.setEnabled(false);
+        btnDeletarUniversidade.setEnabled(false);
+        limparCampos();
+        tblUniversidade.setEnabled(true);
+        btnDesbloquear.setEnabled(false);
+    }
+
+    private void voltar() {
         TelaPrincipal telaprincipal = new TelaPrincipal();
         telaprincipal.setVisible(true);
         this.dispose();
     }
+
     public void setarCampos() {
         int setar = tblUniversidade.getSelectedRow();
         txtIdUniversidade.setText(tblUniversidade.getModel().getValueAt(setar, 0).toString());
@@ -399,9 +447,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         //usando a bibliboteca rs2xml.jar para preencher a tabela
         tblUniversidade.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -441,6 +487,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarUniversidade;
     private javax.swing.JButton btnDeletarUniversidade;
+    private javax.swing.JButton btnDesbloquear;
     private javax.swing.JButton btnEditarUniversidade;
     private javax.swing.JButton btnVoltar1;
     private javax.swing.JLabel jLabel1;

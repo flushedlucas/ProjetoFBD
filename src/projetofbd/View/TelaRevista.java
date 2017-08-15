@@ -64,6 +64,7 @@ public class TelaRevista extends javax.swing.JFrame {
         }
         txtEditora = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        btnDesbloquear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Revista");
@@ -177,6 +178,13 @@ public class TelaRevista extends javax.swing.JFrame {
 
         jLabel7.setText("Buscar:");
 
+        btnDesbloquear.setText("Desbloquear");
+        btnDesbloquear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesbloquearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,31 +196,13 @@ public class TelaRevista extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addGap(62, 62, 62)))
-                        .addGap(46, 46, 46))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(36, 36, 36))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,10 +212,33 @@ public class TelaRevista extends javax.swing.JFrame {
                                         .addComponent(btnEditarRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(47, 47, 47)
                                         .addComponent(btnDeletarRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtNomeRevista))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtISSN, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                    .addComponent(txtNomeRevista))
+                                .addGap(108, 108, 108))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtIdRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtISSN, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addGap(108, 108, 108))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnDesbloquear)
+                                .addGap(19, 19, 19))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,9 +249,11 @@ public class TelaRevista extends javax.swing.JFrame {
                         .addComponent(txtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDesbloquear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtIdRevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,10 +272,10 @@ public class TelaRevista extends javax.swing.JFrame {
                     .addComponent(btnDeletarRevista))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
 
-        setSize(new java.awt.Dimension(570, 460));
+        setSize(new java.awt.Dimension(595, 521));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -277,12 +292,16 @@ public class TelaRevista extends javax.swing.JFrame {
 
     private void tblRevistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRevistaMouseClicked
         // prencher os campos do pesquisador
+        btnDeletarRevista.setEnabled(true);
+        btnEditarRevista.setEnabled(true);
         setarCampos();
+        btnDesbloquear.setEnabled(true);
 
     }//GEN-LAST:event_tblRevistaMouseClicked
 
     private void btnAdicionarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRevistaActionPerformed
         // Adcionar pesquisador
+        int existe = 0;
         try {
             if (validacao()) {
                 JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
@@ -292,14 +311,21 @@ public class TelaRevista extends javax.swing.JFrame {
                 revista.setEditora(txtEditora.getText());
                 revista.setISSN(txtISSN.getText());
                 RevistaDAO revistaDAO = new RevistaDAO();
-                int adicionadao = revistaDAO.create(revista);
-                if (adicionadao > 0) {
-                    JOptionPane.showMessageDialog(null, "Revista Salva com sucesso.");
-                    limparCampos();
-                    listarTabelaRevista();
+                existe = revistaDAO.read(revista.getNome_Revista());
+                if (existe == 0) {
+                    int adicionadao = revistaDAO.create(revista);
+                    if (adicionadao > 0) {
+                        JOptionPane.showMessageDialog(null, "Revista Salva com sucesso.");
+                        limparCampos();
+                        listarTabelaRevista();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar o Pesquisador.");
+                        limparCampos();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar o Pesquisador.");
+                    JOptionPane.showMessageDialog(null, "Usuário já existe");
                     limparCampos();
+
                 }
             }
         } catch (Exception e) {
@@ -311,6 +337,7 @@ public class TelaRevista extends javax.swing.JFrame {
 
     private void btnEditarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRevistaActionPerformed
         // TODO add your handling code here:
+        int igual = 0;
         if (validacao()) {
             JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
         } else {
@@ -321,17 +348,26 @@ public class TelaRevista extends javax.swing.JFrame {
             revista.setEditora(txtEditora.getText());
             revista.setISSN(txtISSN.getText());
             RevistaDAO revistaDAO = new RevistaDAO();
-            int editado = revistaDAO.update(revista);
-            if (editado > 0) {
-                JOptionPane.showMessageDialog(null, "Revista editado com sucesso.");
+            igual = revistaDAO.read(revista.getNome_Revista());
+            if (igual == 0) {
+                int editado = revistaDAO.update(revista);
+                if (editado > 0) {
+                    JOptionPane.showMessageDialog(null, "Revista editado com sucesso.");
+                    ativaTblBotao();
+                    listarTabelaRevista();
+                   
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível editar o Pesquisador.");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "A revista não foi editada, pois, é igual ao atual.");
                 limparCampos();
-                listarTabelaRevista();
-                btnAdicionarRevista.setEnabled(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Não foi possível editar o Pesquisador.");
+                ativaTblBotao();
             }
         }
     }//GEN-LAST:event_btnEditarRevistaActionPerformed
+    
+
     public void setarCampos() {
         int setar = tblRevista.getSelectedRow();
         txtIdRevista.setText(tblRevista.getModel().getValueAt(setar, 0).toString());
@@ -380,13 +416,17 @@ public class TelaRevista extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         listarTabelaRevista();
+        btnDesbloquear.setEnabled(false);
+        btnEditarRevista.setEnabled(false);
+        btnDeletarRevista.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // habilita e limpa os campos quando clica no form
-        btnAdicionarRevista.setEnabled(true);
-        limparCampos();
-        tblRevista.setEnabled(true);
+//        btnAdicionarRevista.setEnabled(true);
+//        limparCampos();
+//        tblRevista.setEnabled(true);
+        
     }//GEN-LAST:event_formMouseClicked
 
     private void btnDeletarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarRevistaActionPerformed
@@ -424,6 +464,20 @@ public class TelaRevista extends javax.swing.JFrame {
         // Voltar página principal
         voltar();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnDesbloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearActionPerformed
+        ativaTblBotao();
+    }//GEN-LAST:event_btnDesbloquearActionPerformed
+
+    private void ativaTblBotao() {
+        // TODO add your handling code here:
+        btnAdicionarRevista.setEnabled(true);
+        btnDeletarRevista.setEnabled(false);
+        btnEditarRevista.setEnabled(false);
+        limparCampos();
+        tblRevista.setEnabled(true);
+        btnDesbloquear.setEnabled(false);
+    }
 
     /**
      * @param args the command line arguments
@@ -463,6 +517,7 @@ public class TelaRevista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarRevista;
     private javax.swing.JButton btnDeletarRevista;
+    private javax.swing.JButton btnDesbloquear;
     private javax.swing.JButton btnEditarRevista;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;

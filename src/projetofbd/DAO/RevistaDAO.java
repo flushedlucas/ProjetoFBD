@@ -84,6 +84,32 @@ public class RevistaDAO {
         }
         return resultSet;
     }
+    
+    public int  read(String revista) {
+        String sql = "select nome from revista_cientifica where nome like ?";
+        PreparedStatement statement;
+        int existe = 0;
+        String nome = null;
+        int cont = 0;
+        try {
+//            System.out.println(pesquisador.getNome_Pesq());
+            statement = Conexao.abrir().prepareCall(sql);
+            //passando o conteudo  da caixa de texto para o ?
+            //atenção ao % - continuação da string sql
+            statement.setString(1, "%" + revista+ "%");
+//            System.out.println(statement);
+            resultSet = statement.executeQuery();
+//            System.out.println(resultSet);
+            while (resultSet.next()) {
+                nome= String.valueOf(resultSet.getString("nome"));
+                cont =  nome.length();
+            }                 
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return cont;
+    }
 
     public int update(Revista revista) {
         String sql = "UPDATE revista_cientifica SET cod_revista=?, nome=?, editora=?, issn=? WHERE cod_revista=?";

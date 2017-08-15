@@ -88,6 +88,32 @@ public class PesquisadorDAO {
         }
         return resultSet;
     }
+    
+    public int  read(String pesquisador) {
+        String sql = "select nome_pesq from pesquisador where nome_pesq like ?";
+        PreparedStatement statement;
+        int existe = 0;
+        String nome = null;
+        int cont = 0;
+        try {
+//            System.out.println(pesquisador.getNome_Pesq());
+            statement = Conexao.abrir().prepareCall(sql);
+            //passando o conteudo  da caixa de texto para o ?
+            //atenção ao % - continuação da string sql
+            statement.setString(1, "%" + pesquisador+ "%");
+//            System.out.println(statement);
+            resultSet = statement.executeQuery();
+//            System.out.println(resultSet);
+            while (resultSet.next()) {
+                nome= String.valueOf(resultSet.getString("nome_pesq"));
+                cont =  nome.length();
+            }            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        return cont;
+    }
 
     public int update(Pesquisador pesquisador) {
         String sql = "UPDATE pesquisador SET cod_pesq=?, nome_pesq=?, cod_univer=? WHERE cod_pesq=?";
@@ -118,6 +144,9 @@ public class PesquisadorDAO {
         }
         int univerInt = Integer.parseInt(univer);
         return univerInt;
+    }
+    private void transformandoInt(){
+    
     }
 
     public int delete(Pesquisador pesquisador) {

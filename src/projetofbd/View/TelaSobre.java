@@ -37,7 +37,6 @@ public class TelaSobre extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(530, 267));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -46,7 +45,7 @@ public class TelaSobre extends javax.swing.JFrame {
 
         jLabel3.setText("Discentes: Wellington Luiz Antonio, Lucas Vieira ");
 
-        jLabel2.setText("Professora:  Roberta Macedo");
+        jLabel2.setText("Professora:  Roberta Macêdo");
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 255)));

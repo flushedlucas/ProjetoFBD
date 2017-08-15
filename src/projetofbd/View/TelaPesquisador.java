@@ -305,24 +305,33 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnAdicionarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPesquisadorActionPerformed
         // Adcionar pesquisador
+
+        int existe = 0;
         try {
             if (validacao()) {
                 JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
             } else {
+
                 Pesquisador pesquisador = new Pesquisador();
                 pesquisador.setNome_Pesq(txtNomePesquisador.getText());
                 pesquisador.setUniversidade(txtUniversidade.getText());
                 PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-                int adicionadao = pesquisadorDAO.create(pesquisador);
-                if (adicionadao > 0) {
-                    JOptionPane.showMessageDialog(null, "Pesquisador Salva com sucesso.");
-                    limparCampos();
-                    listarTabelaPesquisador();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível adcionar o Pesquisador.");
+                existe = pesquisadorDAO.read(pesquisador.getNome_Pesq());
+                if (existe == 0) {
+                    int adicionadao = pesquisadorDAO.create(pesquisador);
+                    if (adicionadao > 0) {
+                        JOptionPane.showMessageDialog(null, "Pesquisador Salva com sucesso.");
+                        limparCampos();
+                        listarTabelaPesquisador();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível adcionar o Pesquisador.");
+                        limparCampos();
+                    }
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuário já existe");
                     limparCampos();
                 }
-
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Usuário já existe");
@@ -333,6 +342,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
     private void btnEditarPesquisadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPesquisadorActionPerformed
         // TODO add your handling code here:
+        int igual;
         if (validacao()) {
             JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
         } else {
@@ -342,15 +352,19 @@ public class TelaPesquisador extends javax.swing.JFrame {
             pesquisador.setNome_Pesq(txtNomePesquisador.getText());
             pesquisador.setUniversidade(txtUniversidade.getText());
             PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-            int adicionadao = pesquisadorDAO.update(pesquisador);
-            if (adicionadao > 0) {
-                JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
-                limparCampos();
-                listarTabelaPesquisador();
-                btnAdicionarPesquisador.setEnabled(true);
-                tblPesquisador.setEnabled(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Pesquisador não editado.");
+            igual = pesquisadorDAO.read(pesquisador.getNome_Pesq());
+            if (igual == 0) {
+                int adicionadao = pesquisadorDAO.update(pesquisador);
+                if (adicionadao > 0) {
+                    JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
+                    ativaTblBotao();
+                    listarTabelaPesquisador();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Pesquisador não editado. houve um erro no sistema.");
+                }
+            }else{
+                 JOptionPane.showMessageDialog(null, "O pesquisador não foi editado, pois, é igual ao atual.");
+                 ativaTblBotao();
             }
         }
     }//GEN-LAST:event_btnEditarPesquisadorActionPerformed
@@ -443,6 +457,11 @@ public class TelaPesquisador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnDesbloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearActionPerformed
+        ativaTblBotao();
+
+    }//GEN-LAST:event_btnDesbloquearActionPerformed
+
+    private void ativaTblBotao() {
         // TODO add your handling code here:
         btnAdicionarPesquisador.setEnabled(true);
         btnDeletarPesquisador.setEnabled(false);
@@ -451,8 +470,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
         tblPesquisador.setEnabled(true);
         txtUniversidade.setEditable(true);
         btnDesbloquear.setEnabled(false);
-
-    }//GEN-LAST:event_btnDesbloquearActionPerformed
+    }
 
     private void limparCampos() {
         txtIdPesquisador.setText(null);
