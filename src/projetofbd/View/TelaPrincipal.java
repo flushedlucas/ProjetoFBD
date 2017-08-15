@@ -67,18 +67,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Artigo = new javax.swing.JMenuItem();
         Revista = new javax.swing.JMenuItem();
         Sair = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        ajuda = new javax.swing.JMenu();
+        sobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bem-Vindo");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(386, 348));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -196,8 +198,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu5.setText("Sobre");
-        jMenuBar1.add(jMenu5);
+        ajuda.setText("Ajuda");
+
+        sobre.setText("Sobre");
+        sobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sobreActionPerformed(evt);
+            }
+        });
+        ajuda.add(sobre);
+
+        jMenuBar1.add(ajuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -264,12 +275,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnArtigoActionPerformed
 
     private void btnRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevistaActionPerformed
+        // Chamando a tela revista
         TelaRevista revista = new TelaRevista();
         revista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRevistaActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
+        // Chamando a caixa de diálogo sair
         sair();
     }//GEN-LAST:event_SairActionPerformed
 
@@ -278,8 +291,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Atenção", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
             System.exit(0);
-        } else {
-            voltar();
         }
     }
 
@@ -323,19 +334,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
             lblData.setText(formatdata.format(data));
             lblHora.setText(formatHora.format(data));
         }
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        TelaUniversidade universidade = new TelaUniversidade();
-        universidade.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         sair();
     }//GEN-LAST:event_formWindowClosing
+
+    private void sobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreActionPerformed
+        // chamando tela sobre
+        TelaSobre sobre = new TelaSobre();
+        sobre.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_sobreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +395,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Pesquisador;
     private javax.swing.JMenuItem Revista;
     private javax.swing.JMenuItem Sair;
+    private javax.swing.JMenu ajuda;
     private javax.swing.JButton btnArtigo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRevista;
@@ -385,11 +403,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JMenuItem sobre;
     // End of variables declaration//GEN-END:variables
 }

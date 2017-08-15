@@ -404,7 +404,6 @@ public class TelaPesquisador extends javax.swing.JFrame {
                 int id = Integer.parseInt(txtIdPesquisador.getText());
                 pesquisador.setCod_Pesq((id));
                 pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-                int universidade = Integer.parseInt(txtIdPesquisador.getText());
                 pesquisador.setUniversidade(txtUniversidade.getText());
 
                 PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
