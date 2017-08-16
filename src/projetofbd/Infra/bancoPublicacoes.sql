@@ -24,7 +24,7 @@ create table if not exists revista_cientifica(
 cod_revista int auto_increment primary key,
 nome varchar(30),
 editora varchar(30),
-issn varchar(8) 
+issn varchar(10) 
 );
 
 create table if not exists artigo(

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
+import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import net.proteanit.sql.DbUtils;
 import projetofbd.DAO.ArtigoDAO;
 import projetofbd.Model.Artigo;
@@ -81,6 +82,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         btnDesbloquear = new javax.swing.JButton();
         txtAno = new javax.swing.JTextField();
         try{    javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-##-##");    txtAno = new javax.swing.JFormattedTextField(issn); }    catch (Exception e){ }
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -206,9 +208,9 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         jLabel9.setText("*Ano:");
 
-        jLabel10.setText("*Volume:");
+        jLabel10.setText("Volume:");
 
-        jLabel11.setText("*Número:");
+        jLabel11.setText("Número:");
 
         jLabel12.setText("Código da Revista:");
 
@@ -230,6 +232,8 @@ public class TelaArtigo extends javax.swing.JFrame {
             }
         });
 
+        jLabel15.setText("Tipo:");
+
         txtIdArtigo.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,7 +241,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
@@ -246,79 +250,80 @@ public class TelaArtigo extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(46, 46, 46))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 167, Short.MAX_VALUE)
+                        .addGap(0, 199, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(798, 798, 798)
                                 .addComponent(btnDesbloquear)
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel12)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(10, 10, 10)
-                                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel6)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(txtNomeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabel13)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(btnAdicionarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(52, 52, 52)
-                                                        .addComponent(btnEditarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(2, 2, 2)))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(txtCidadeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(btnDeletarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel14)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtDataCongresso))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(67, 67, 67)
-                                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel11)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(126, 126, 126))))))
+                                .addGap(204, 204, 204)
+                                .addComponent(btnAdicionarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(btnEditarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(btnDeletarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(389, 389, 389))))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(352, 352, 352)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(352, 352, 352)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNomeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtCidadeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel14)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtDataCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel15)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(34, 34, 34)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -334,7 +339,7 @@ public class TelaArtigo extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDesbloquear)
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,12 +348,9 @@ public class TelaArtigo extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -364,8 +366,12 @@ public class TelaArtigo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditarArtigo)
                     .addComponent(btnAdicionarArtigo)
@@ -383,44 +389,42 @@ public class TelaArtigo extends javax.swing.JFrame {
         int igual = 0;
         if (validacao()) {
             JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
-        } else {
-            if (cbTipo.getSelectedItem().equals("P")) {
-                Artigo artigo = dadosPeriodicos();
-                ArtigoDAO artigoDAO = new ArtigoDAO(); 
+        } else if (cbTipo.getSelectedItem().equals("P")) {
+            Artigo artigo = dadosPeriodicos();
+            ArtigoDAO artigoDAO = new ArtigoDAO();
 //                igual = revistaDAO.read(revista.getNome_Revista());
 //                if (igual == 0) {
-                    int editado = artigoDAO.update(artigo);
-                    if (editado > 0) {
-                        JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
-                        ativaTblBotaoPeriodicos();
-                        listarTabelaArtigo();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
-                    }
-//                }else{
-//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
-//                    limparCampos();
-//                    ativaTblBotaoPeriodicos();
-//                }
-            }else{
-                Artigo artigo = dadosCongresso();
-                ArtigoDAO artigoDAO = new ArtigoDAO(); 
-//                igual = revistaDAO.read(revista.getNome_Revista());
-//                if (igual == 0) {
-                    int editado = artigoDAO.update(artigo);
-                    if (editado > 0) {
-                        JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
-                        ativaTblBotaoPeriodicos();
-                        listarTabelaArtigo();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
-                    }
-//                }else{
-//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
-//                    limparCampos();
-//                    ativaTblBotaoPeriodicos();
-//                }
+            int editado = artigoDAO.update(artigo);
+            if (editado > 0) {
+                JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
+                ativaTblBotaoPeriodicos();
+                listarTabelaArtigo();
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
             }
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
+//                    limparCampos();
+//                    ativaTblBotaoPeriodicos();
+//                }
+        } else {
+            Artigo artigo = dadosCongresso();
+            ArtigoDAO artigoDAO = new ArtigoDAO();
+//                igual = revistaDAO.read(revista.getNome_Revista());
+//                if (igual == 0) {
+            int editado = artigoDAO.update(artigo);
+            if (editado > 0) {
+                JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
+                ativaTblBotaoPeriodicos();
+                listarTabelaArtigo();
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
+            }
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
+//                    limparCampos();
+//                    ativaTblBotaoPeriodicos();
+//                }
         }
     }//GEN-LAST:event_btnEditarArtigoActionPerformed
 
@@ -433,7 +437,7 @@ public class TelaArtigo extends javax.swing.JFrame {
     private void btnDeletarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarArtigoActionPerformed
         if (validacao()) {
             JOptionPane.showMessageDialog(null, "Preencha todo os campos habiltados.");
-        }else{
+        } else {
             int remove = 0;
             int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
                     + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
@@ -499,34 +503,33 @@ public class TelaArtigo extends javax.swing.JFrame {
         try {
             if (validacao()) {
                 JOptionPane.showMessageDialog(null, "Preencha todo os campos habiltados.");
-            } else {
-                if (cbTipo.getSelectedItem().equals("P")) {
-                    Artigo artigo = dadosPeriodicos();
-                    ArtigoDAO artigoDAO = new ArtigoDAO();
-                    int adicionadao = artigoDAO.create(artigo);
-                    if (adicionadao > 0) {
-                        JOptionPane.showMessageDialog(null, "Artigo Salvo com sucesso.");
-                        limparCampos();
-                        listarTabelaArtigo();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar o artigo.");
-                        limparCampos();
-                    }
+            } else if (cbTipo.getSelectedItem().equals("P")) {
+                Artigo artigo = dadosPeriodicos();
+                ArtigoDAO artigoDAO = new ArtigoDAO();
+                int adicionadao = artigoDAO.create(artigo);
+                if (adicionadao > 0) {
+                    JOptionPane.showMessageDialog(null, "Artigo Salvo com sucesso.");
+                    limparCampos();
+                    listarTabelaArtigo();
                 } else {
-                    Artigo artigo = dadosCongresso();
-                    ArtigoDAO artigoDAO = new ArtigoDAO();
-                    int adicionadao = artigoDAO.create(artigo);
-                    if (adicionadao > 0) {
-                        JOptionPane.showMessageDialog(null, "Artigo Salvo com sucesso.");
-                        limparCampos();
-                        listarTabelaArtigo();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar o artigo.");
-                        limparCampos();
-                    }
+                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar o artigo.");
+                    limparCampos();
+                }
+            } else {
+                Artigo artigo = dadosCongresso();
+                ArtigoDAO artigoDAO = new ArtigoDAO();
+                int adicionadao = artigoDAO.create(artigo);
+                if (adicionadao > 0) {
+                    JOptionPane.showMessageDialog(null, "Artigo Salvo com sucesso.");
+                    limparCampos();
+                    listarTabelaArtigo();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar o artigo.");
+                    limparCampos();
                 }
             }
         } catch (Exception e) {
+            printStackTrace(e);
             JOptionPane.showMessageDialog(null, "Artigo já existe");
             limparCampos();
         }
@@ -534,8 +537,8 @@ public class TelaArtigo extends javax.swing.JFrame {
 
     private Artigo dadosPeriodicos() throws NumberFormatException {
         Artigo artigo = new Artigo();
-        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
-        artigo.setCod_Artigo(codArtigo);
+//        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
+//        artigo.setCod_Artigo(codArtigo);
         artigo.setTitulo(txtTitulo.getText());
         int pgInicial = Integer.parseInt(txtPagInicial.getText());
         artigo.setPag_Inicial(pgInicial);
@@ -545,7 +548,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         artigo.setAno(ano);
         int volume = Integer.parseInt(txtVolume.getText());
         artigo.setVolume(volume);
-        int codRevista = Integer.parseInt(txtVolume.getText());
+        int codRevista = Integer.parseInt(txtCodigoRevista.getText());
         artigo.setCod_Revista(codRevista);
         artigo.setTipo(cbTipo.getSelectedItem().toString());
         return artigo;
@@ -553,8 +556,8 @@ public class TelaArtigo extends javax.swing.JFrame {
 
     private Artigo dadosCongresso() throws NumberFormatException {
         Artigo artigo = new Artigo();
-        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
-        artigo.setCod_Artigo(codArtigo);
+//        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
+//        artigo.setCod_Artigo(codArtigo);
         artigo.setTitulo(txtTitulo.getText());
         int pgInicial = Integer.parseInt(txtPagInicial.getText());
         artigo.setPag_Inicial(pgInicial);
@@ -636,7 +639,6 @@ public class TelaArtigo extends javax.swing.JFrame {
     }
 
 
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Ao abrir a tela 
         listarTabelaArtigo();
@@ -669,7 +671,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         txtVolume.setEnabled(false);
         txtNumero.setEnabled(false);
         txtCodigoRevista.setEnabled(false);
-        
+
     }
 
     private void ativaTblBotaoPeriodicos() {
@@ -712,28 +714,24 @@ public class TelaArtigo extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaArtigo.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(TelaArtigo.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(TelaArtigo.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaArtigo.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -759,6 +757,7 @@ public class TelaArtigo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

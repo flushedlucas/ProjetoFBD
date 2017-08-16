@@ -319,7 +319,7 @@ public class TelaRevista extends javax.swing.JFrame {
                         limparCampos();
                         listarTabelaRevista();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar o Pesquisador.");
+                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar a Revista.");
                         limparCampos();
                     }
                 } else {

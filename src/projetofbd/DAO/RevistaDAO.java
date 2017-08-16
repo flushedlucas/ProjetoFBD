@@ -22,14 +22,13 @@ public class RevistaDAO {
     ResultSet resultSet = null;
 
     public int create(Revista revista) {
-        String sql = "INSERT INTO revista_cientifica (cod_revista, nome, editora, issn) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO revista_cientifica (nome, editora, issn) VALUES (?, ?, ?)";
         int add = 0;
         try {
             PreparedStatement statement = Conexao.abrir().prepareStatement(sql);
-            statement.setInt(1, revista.getCod_Revista());
-            statement.setString(2, revista.getNome_Revista());
-            statement.setString(3, revista.getEditora());
-            statement.setString(4, revista.getISSN());
+            statement.setString(1, revista.getNome_Revista());
+            statement.setString(2, revista.getEditora());
+            statement.setString(3, revista.getISSN());
 
             add = statement.executeUpdate();
 

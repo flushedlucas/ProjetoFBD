@@ -24,41 +24,39 @@ public class ArtigoDAO {
     public int create(Artigo artigo) {
         int add = 0;
         PreparedStatement statement = null;
-        
+
         if (artigo.getTipo().equals("P")) {
-            String sql = "INSERT INTO artigo (titulo,tipo, pag_inicial, pag_final, ano, "
-                        + "volume, numero, cod_revista) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
+            String sql = "INSERT INTO artigo (titulo, pag_inicial, pag_final, ano, "
+                    + "volume, numero, cod_revista, nome_congresso, cidade_congresso, data_congresso) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, null, null, null)";
+
             try {
                 statement = Conexao.abrir().prepareStatement(sql);
                 statement.setString(1, artigo.getTitulo());
-                statement.setString(2, artigo.getTipo());
-                statement.setInt(3, artigo.getPag_Inicial());
-                statement.setInt(4, artigo.getPag_final());
-                statement.setDate(5, artigo.getAno());
-                statement.setInt(6, artigo.getVolume());
-                statement.setInt(7, artigo.getNumero());
-                statement.setInt(8, artigo.getCod_Revista());
+                statement.setInt(2, artigo.getPag_Inicial());
+                statement.setInt(3, artigo.getPag_final());
+                statement.setDate(4, artigo.getAno());
+                statement.setInt(5, artigo.getVolume());
+                statement.setInt(6, artigo.getNumero());
+                statement.setInt(7, artigo.getCod_Revista());
                 add = statement.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
-            String sql = "INSERT INTO artigo (titulo,tipo, pag_inicial, pag_final, ano, "
-                + "nome_congresso, cidade_congresso, "
-                + "data_congresso) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            
-            
+        } else {
+            String sql = "INSERT INTO artigo (titulo, pag_inicial, pag_final, ano, "
+                    + "volume, numero, cod_revista, nome_congresso, cidade_congresso, data_congresso) "
+                    + "VALUES (?, ?, ?, ?, null, null, null, ?, ?, ?)";
+
             try {
                 statement = Conexao.abrir().prepareStatement(sql);
                 statement.setString(1, artigo.getTitulo());
-                statement.setString(2, artigo.getTipo());
-                statement.setInt(3, artigo.getPag_Inicial());
-                statement.setInt(4, artigo.getPag_final());
-                statement.setDate(5, artigo.getAno());
-                statement.setString(6, artigo.getNome_Congresso());
-                statement.setString(7, artigo.getCidade_congresso());
-                statement.setDate(8, artigo.getData_congresso());
+                statement.setInt(2, artigo.getPag_Inicial());
+                statement.setInt(3, artigo.getPag_final());
+                statement.setDate(4, artigo.getAno());
+                statement.setString(5, artigo.getNome_Congresso());
+                statement.setString(6, artigo.getCidade_congresso());
+                statement.setDate(7, artigo.getData_congresso());
                 add = statement.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -118,18 +116,18 @@ public class ArtigoDAO {
     }
 
     public int update(Artigo artigo) {
-        
+
         int up = 0;
         PreparedStatement statement = null;
-        
-        if (artigo.getTipo().equals("P")) {
+
+        if (artigo.getTipo().equals("C")) {
             String sql = "UPDATE artigo SET cod_artigo=?, tipo=?, titulo=?, "
                     + "pag_inicial=?, pag_final=?, ano=?, nome_congresso=?, cidade_congresso=?,"
-                    +"data_congresso=? WHERE cod_artigo=?";
-        
+                    + "data_congresso=? WHERE cod_artigo=?";
+
             try {
                 statement = Conexao.abrir().prepareStatement(sql);
-                
+
                 statement.setInt(1, artigo.getCod_Artigo());
                 statement.setString(2, artigo.getTipo());
                 statement.setString(3, artigo.getTitulo());
@@ -140,18 +138,18 @@ public class ArtigoDAO {
                 statement.setInt(8, artigo.getNumero());
                 statement.setInt(9, artigo.getCod_Revista());
                 statement.setInt(10, artigo.getCod_Artigo());
-                
+
                 up = statement.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             String sql = "UPDATE artigo SET cod_artigo=?, tipo= ?, titulo=?, "
                     + "pag_inicial=?, pag_final=?, ano=?, volume=?, numero=?, "
                     + "cod_revista=? WHERE cod_artigo=?";
             try {
                 statement = Conexao.abrir().prepareStatement(sql);
-                
+
                 statement.setInt(1, artigo.getCod_Artigo());
                 statement.setString(2, artigo.getTipo());
                 statement.setString(3, artigo.getTitulo());
@@ -162,7 +160,7 @@ public class ArtigoDAO {
                 statement.setString(8, artigo.getCidade_congresso());
                 statement.setDate(9, artigo.getData_congresso());
                 statement.setInt(10, artigo.getCod_Artigo());
-                
+
                 up = statement.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
