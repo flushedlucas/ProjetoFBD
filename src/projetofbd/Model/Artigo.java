@@ -19,6 +19,7 @@ public class Artigo {
     private int Pag_Inicial;
     private int Pag_final; 
     private Date Ano;
+    private String tipo;
     
     // Dados de Artigo_Periodico
     private int Volume;
@@ -33,8 +34,20 @@ public class Artigo {
     //Código do artigo referenciado
     private int Cod_Artigo_Referenciado;
 
+    
+    
+    
+    
     public int getCod_Artigo() {
         return Cod_Artigo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public void setCod_Artigo(int Cod_Artigo) {

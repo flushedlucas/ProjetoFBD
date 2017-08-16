@@ -5,15 +5,23 @@
  */
 package projetofbd.View;
 
+import java.sql.Date;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
+import net.proteanit.sql.DbUtils;
+import projetofbd.DAO.ArtigoDAO;
+import projetofbd.Model.Artigo;
+import projetofbd.Model.Revista;
 
 /**
  *
  * @author WELLINGTON
  */
 public class TelaArtigo extends javax.swing.JFrame {
+
+    ResultSet resultSet = null;
 
     /**
      * Creates new form TelaArt
@@ -36,12 +44,6 @@ public class TelaArtigo extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtIdArtigo = new javax.swing.JTextField();
         txtNomeCongresso = new javax.swing.JTextField();
-        try{
-            javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-####");
-            txtNomeCongresso = new javax.swing.JFormattedTextField(issn);
-        }
-        catch (Exception e){
-        }
         jLabel3 = new javax.swing.JLabel();
         txtPagInicial = new javax.swing.JTextField();
         txtTitulo = new javax.swing.JTextField();
@@ -58,7 +60,6 @@ public class TelaArtigo extends javax.swing.JFrame {
         btnAdicionarArtigo = new javax.swing.JButton();
         txtPagFinal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtAno = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtVolume = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -66,34 +67,29 @@ public class TelaArtigo extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtCodigoRevista = new javax.swing.JTextField();
-        try{
-            javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-####");
-            txtNomeCongresso = new javax.swing.JFormattedTextField(issn);
-        }
-        catch (Exception e){
-        }
         jLabel13 = new javax.swing.JLabel();
         txtCidadeCongresso = new javax.swing.JTextField();
-        try{
-            javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-####");
-            txtNomeCongresso = new javax.swing.JFormattedTextField(issn);
-        }
-        catch (Exception e){
-        }
         jLabel14 = new javax.swing.JLabel();
         txtDataCongresso = new javax.swing.JTextField();
         try{
-            javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-####");
-            txtNomeCongresso = new javax.swing.JFormattedTextField(issn);
+            javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-##-##");
+            txtDataCongresso = new javax.swing.JFormattedTextField(issn);
         }
         catch (Exception e){
         }
+        cbTipo = new javax.swing.JComboBox<>();
+        btnDesbloquear = new javax.swing.JButton();
+        txtAno = new javax.swing.JTextField();
+        try{    javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-##-##");    txtAno = new javax.swing.JFormattedTextField(issn); }    catch (Exception e){ }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -161,17 +157,17 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         tblArtigo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Número", "Titulo", "Página Inicial", "Página FInal", "Ano", "Volume", "Número", "Código da Revista", "Nome do Congresso", "Cidade do Congresso", "Data do Congresso"
+                "Número", "Tipo", "Titulo", "Página Inicial", "Página FInal", "Ano", "Volume", "Número", "Código da Revista", "Nome do Congresso", "Cidade do Congresso", "Data do Congresso"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, true, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -188,16 +184,15 @@ public class TelaArtigo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblArtigo);
         if (tblArtigo.getColumnModel().getColumnCount() > 0) {
             tblArtigo.getColumnModel().getColumn(0).setPreferredWidth(20);
-            tblArtigo.getColumnModel().getColumn(0).setCellRenderer(null);
-            tblArtigo.getColumnModel().getColumn(2).setPreferredWidth(50);
-            tblArtigo.getColumnModel().getColumn(3).setPreferredWidth(44);
-            tblArtigo.getColumnModel().getColumn(4).setPreferredWidth(1);
-            tblArtigo.getColumnModel().getColumn(5).setPreferredWidth(20);
-            tblArtigo.getColumnModel().getColumn(6).setPreferredWidth(25);
-            tblArtigo.getColumnModel().getColumn(7).setPreferredWidth(80);
-            tblArtigo.getColumnModel().getColumn(8).setPreferredWidth(100);
-            tblArtigo.getColumnModel().getColumn(9).setPreferredWidth(105);
-            tblArtigo.getColumnModel().getColumn(10).setPreferredWidth(90);
+            tblArtigo.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tblArtigo.getColumnModel().getColumn(4).setPreferredWidth(44);
+            tblArtigo.getColumnModel().getColumn(5).setPreferredWidth(1);
+            tblArtigo.getColumnModel().getColumn(6).setPreferredWidth(20);
+            tblArtigo.getColumnModel().getColumn(7).setPreferredWidth(25);
+            tblArtigo.getColumnModel().getColumn(8).setPreferredWidth(80);
+            tblArtigo.getColumnModel().getColumn(9).setPreferredWidth(100);
+            tblArtigo.getColumnModel().getColumn(10).setPreferredWidth(105);
+            tblArtigo.getColumnModel().getColumn(11).setPreferredWidth(90);
         }
 
         btnAdicionarArtigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/add.png"))); // NOI18N
@@ -209,27 +204,9 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         jLabel8.setText("*Página Final:");
 
-        txtAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAnoActionPerformed(evt);
-            }
-        });
-
         jLabel9.setText("*Ano:");
 
-        txtVolume.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVolumeActionPerformed(evt);
-            }
-        });
-
         jLabel10.setText("*Volume:");
-
-        txtNumero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroActionPerformed(evt);
-            }
-        });
 
         jLabel11.setText("*Número:");
 
@@ -239,12 +216,28 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         jLabel14.setText("Data do Congresso:");
 
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P", "C" }));
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
+
+        btnDesbloquear.setText("Desbloquear");
+        btnDesbloquear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesbloquearActionPerformed(evt);
+            }
+        });
+
+        txtIdArtigo.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
@@ -253,64 +246,72 @@ public class TelaArtigo extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(46, 46, 46))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 128, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 167, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(798, 798, 798)
+                                .addComponent(btnDesbloquear)
+                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(10, 10, 10)
-                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel12)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtNomeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel13)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(236, 236, 236)
-                                            .addComponent(btnAdicionarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnEditarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(2, 2, 2)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtCidadeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnDeletarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel14)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtDataCongresso))))
-                        .addGap(126, 126, 126))))
+                                            .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jLabel6)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(txtNomeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLabel13)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addComponent(btnAdicionarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(52, 52, 52)
+                                                        .addComponent(btnEditarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(2, 2, 2)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(txtCidadeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btnDeletarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel14)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtDataCongresso))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(67, 67, 67)
+                                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel11)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(126, 126, 126))))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(352, 352, 352)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,7 +332,9 @@ public class TelaArtigo extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDesbloquear)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,11 +343,12 @@ public class TelaArtigo extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -376,64 +380,103 @@ public class TelaArtigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarArtigoActionPerformed
-        // TODO add your handling code here:
-        //        if (validacao()) {
-            //            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
-            //        } else {
-            //            Revista revista = new Revista();
-            //            int id = Integer.parseInt(txtIdRevista.getText());
-            //            revista.setCod_Revista((id));
-            //            revista.setNome_Revista(txtNomeRevista.getText());
-            //            revista.setEditora(txtEditora.getText());
-            //            revista.setISSN(txtISSN.getText());
-            //            RevistaDAO revistaDAO = new RevistaDAO();
-            //            int editado = revistaDAO.update(revista);
-            //            if (editado > 0) {
-                //                JOptionPane.showMessageDialog(null, "Revista editado com sucesso.");
-                //                limparCampos();
-                //                listarTabelaRevista();
-                //                btnAdicionarArtigo.setEnabled(true);
-                //            } else {
-                //                JOptionPane.showMessageDialog(null, "Não foi possível editar o Pesquisador.");
-                //            }
-            //        }
+        int igual = 0;
+        if (validacao()) {
+            JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
+        } else {
+            if (cbTipo.getSelectedItem().equals("P")) {
+                Artigo artigo = dadosPeriodicos();
+                ArtigoDAO artigoDAO = new ArtigoDAO(); 
+//                igual = revistaDAO.read(revista.getNome_Revista());
+//                if (igual == 0) {
+                    int editado = artigoDAO.update(artigo);
+                    if (editado > 0) {
+                        JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
+                        ativaTblBotaoPeriodicos();
+                        listarTabelaArtigo();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
+                    }
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
+//                    limparCampos();
+//                    ativaTblBotaoPeriodicos();
+//                }
+            }else{
+                Artigo artigo = dadosCongresso();
+                ArtigoDAO artigoDAO = new ArtigoDAO(); 
+//                igual = revistaDAO.read(revista.getNome_Revista());
+//                if (igual == 0) {
+                    int editado = artigoDAO.update(artigo);
+                    if (editado > 0) {
+                        JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
+                        ativaTblBotaoPeriodicos();
+                        listarTabelaArtigo();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
+                    }
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
+//                    limparCampos();
+//                    ativaTblBotaoPeriodicos();
+//                }
+            }
+        }
     }//GEN-LAST:event_btnEditarArtigoActionPerformed
 
+    private boolean validacao() {
+        return (txtTitulo.getText().isEmpty()
+                || txtPagFinal.getText().isEmpty()
+                || txtPagInicial.getText().isEmpty()
+                || txtAno.getText().isEmpty());
+    }
     private void btnDeletarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarArtigoActionPerformed
-        //        // TODO add your handling code here:
-        //        if ((txtIdRevista.getText().isEmpty())) {
-            //            JOptionPane.showMessageDialog(null, "Selecione um item, para poder excluí-lo.");
-            //        } else {
-            //            int remove = 0;
-            //            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
-                //                + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
-            //            if (confirma == JOptionPane.YES_OPTION) {
-                //                Revista revista = new Revista();
-                //                int id = Integer.parseInt(txtIdRevista.getText());
-                //                revista.setCod_Revista((id));
-                //                revista.setEditora(txtEditora.getText());
-                //                revista.setISSN(txtISSN.getText());
-                //
-                //                RevistaDAO revistaDAO = new RevistaDAO();
-                //                remove = revistaDAO.delete(revista);
-                //                System.out.println(remove);
-                //                if (remove > 0) {
-                    //                    JOptionPane.showMessageDialog(null, "Pesquisador excluído com sucesso.");
-                    //                    limparCampos();
-                    //                    listarTabelaRevista();
-                    //                    btnAdicionarArtigo.setEnabled(true);
-                    //                    tblRevista.setEnabled(true);
-                    //                } else {
-                    //                    JOptionPane.showMessageDialog(null, "Não foi possível exluir o Pesquisador.");
-                    //                }
-                //            }
-            //        }
+        if (validacao()) {
+            JOptionPane.showMessageDialog(null, "Preencha todo os campos habiltados.");
+        }else{
+            int remove = 0;
+            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
+                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+            if (confirma == JOptionPane.YES_OPTION) {
+                if (cbTipo.getSelectedItem().equals("P")) {
+                    Artigo artigo = dadosPeriodicos();
+                    ArtigoDAO artigoDAO = new ArtigoDAO();
+                    remove = artigoDAO.delete(artigo);
+                    if (remove > 0) {
+                        JOptionPane.showMessageDialog(null, "Artigo Excluído com sucesso.");
+                        limparCampos();
+                        listarTabelaArtigo();
+                        btnAdicionarArtigo.setEnabled(true);
+                        tblArtigo.setEnabled(true);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível excluído o artigo.");
+                        limparCampos();
+                    }
+                } else {
+                    Artigo artigo = dadosCongresso();
+                    ArtigoDAO artigoDAO = new ArtigoDAO();
+                    remove = artigoDAO.delete(artigo);
+                    if (remove > 0) {
+                        JOptionPane.showMessageDialog(null, "Artigo excluído com sucesso.");
+                        limparCampos();
+                        listarTabelaArtigo();
+                        btnAdicionarArtigo.setEnabled(true);
+                        tblArtigo.setEnabled(true);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível exluir o artigo.");
+                        limparCampos();
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnDeletarArtigoActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         // TODO add your handling code here:
         try {
-            //            listarTabelaRevista();
+            listarTabelaArtigo();
             tblArtigo.setEnabled(true);
 
         } catch (Exception e) {
@@ -447,60 +490,214 @@ public class TelaArtigo extends javax.swing.JFrame {
 
     private void tblArtigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArtigoMouseClicked
         // prencher os campos do pesquisador
-        //        setarCampos();
+        setarCampos();
+
     }//GEN-LAST:event_tblArtigoMouseClicked
 
     private void btnAdicionarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarArtigoActionPerformed
         // Adcionar pesquisador
-        //        try {
-            //            if (validacao()) {
-                //                JOptionPane.showMessageDialog(null, "Preencha todo os campos obrigátorios.");
-                //            } else {
-                //                Revista revista = new Revista();
-                //                revista.setNome_Revista(txtNomeRevista.getText());
-                //                revista.setEditora(txtEditora.getText());
-                //                revista.setISSN(txtISSN.getText());
-                //                RevistaDAO revistaDAO = new RevistaDAO();
-                //                int adicionadao = revistaDAO.create(revista);
-                //                if (adicionadao > 0) {
-                    //                    JOptionPane.showMessageDialog(null, "Revista Salva com sucesso.");
-                    //                    limparCampos();
-                    ////                    listarTabelaRevista();
-                    //                } else {
-                    //                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar o Pesquisador.");
-                    ////                    limparCampos();
-                    //                }
-                //            }
-            //        } catch (Exception e) {
-            //            JOptionPane.showMessageDialog(null, "Revista já existe");
-            ////            limparCampos();
-            //        }
+        try {
+            if (validacao()) {
+                JOptionPane.showMessageDialog(null, "Preencha todo os campos habiltados.");
+            } else {
+                if (cbTipo.getSelectedItem().equals("P")) {
+                    Artigo artigo = dadosPeriodicos();
+                    ArtigoDAO artigoDAO = new ArtigoDAO();
+                    int adicionadao = artigoDAO.create(artigo);
+                    if (adicionadao > 0) {
+                        JOptionPane.showMessageDialog(null, "Artigo Salvo com sucesso.");
+                        limparCampos();
+                        listarTabelaArtigo();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar o artigo.");
+                        limparCampos();
+                    }
+                } else {
+                    Artigo artigo = dadosCongresso();
+                    ArtigoDAO artigoDAO = new ArtigoDAO();
+                    int adicionadao = artigoDAO.create(artigo);
+                    if (adicionadao > 0) {
+                        JOptionPane.showMessageDialog(null, "Artigo Salvo com sucesso.");
+                        limparCampos();
+                        listarTabelaArtigo();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar o artigo.");
+                        limparCampos();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Artigo já existe");
+            limparCampos();
+        }
     }//GEN-LAST:event_btnAdicionarArtigoActionPerformed
+
+    private Artigo dadosPeriodicos() throws NumberFormatException {
+        Artigo artigo = new Artigo();
+        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
+        artigo.setCod_Artigo(codArtigo);
+        artigo.setTitulo(txtTitulo.getText());
+        int pgInicial = Integer.parseInt(txtPagInicial.getText());
+        artigo.setPag_Inicial(pgInicial);
+        int pgFinal = Integer.parseInt(txtPagFinal.getText());
+        artigo.setPag_final(pgFinal);
+        Date ano = Date.valueOf(txtAno.getText());
+        artigo.setAno(ano);
+        int volume = Integer.parseInt(txtVolume.getText());
+        artigo.setVolume(volume);
+        int codRevista = Integer.parseInt(txtVolume.getText());
+        artigo.setCod_Revista(codRevista);
+        artigo.setTipo(cbTipo.getSelectedItem().toString());
+        return artigo;
+    }
+
+    private Artigo dadosCongresso() throws NumberFormatException {
+        Artigo artigo = new Artigo();
+        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
+        artigo.setCod_Artigo(codArtigo);
+        artigo.setTitulo(txtTitulo.getText());
+        int pgInicial = Integer.parseInt(txtPagInicial.getText());
+        artigo.setPag_Inicial(pgInicial);
+        int pgFinal = Integer.parseInt(txtPagFinal.getText());
+        artigo.setPag_final(pgFinal);
+        Date ano = Date.valueOf(txtAno.getText());
+        artigo.setAno(ano);
+        artigo.setNome_Congresso(txtNomeCongresso.getText());
+        artigo.setCidade_congresso(txtCidadeCongresso.getText());
+        Date dataCongresso = Date.valueOf(txtDataCongresso.getText());
+        artigo.setData_congresso(dataCongresso);
+        artigo.setTipo(cbTipo.getSelectedItem().toString());
+        return artigo;
+    }
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         voltar();
     }//GEN-LAST:event_formWindowClosing
 
-    private void txtAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAnoActionPerformed
+    private void listarTabelaArtigo() {
+        Artigo artigo = new Artigo();
+        artigo.setTitulo(txtBuscar.getText());
+        ArtigoDAO artigoDAO = new ArtigoDAO();
+        resultSet = artigoDAO.read(artigo);
+        //usando a bibliboteca rs2xml.jar para preencher a tabela
+        tblArtigo.setModel(DbUtils.resultSetToTableModel(resultSet));
+    }
 
-    private void txtVolumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVolumeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVolumeActionPerformed
+    private void limparCampos() {
+        txtIdArtigo.setText(null);
+        txtAno.setText(null);
+        txtTitulo.setText(null);
+        txtBuscar.setText(null);
+        txtPagFinal.setText(null);
+        txtPagInicial.setText(null);
 
-    private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
+        //congresso
+        txtCidadeCongresso.setText(null);
+        txtDataCongresso.setText(null);
+        txtNomeCongresso.setText(null);
+        //peródicos
+        txtVolume.setText(null);
+        txtNumero.setText(null);
+        txtCodigoRevista.setText(null);
+
+    }
+
+    public void setarCampos() {
+        btnDeletarArtigo.setEnabled(true);
+        btnEditarArtigo.setEnabled(true);
+        btnAdicionarArtigo.setEnabled(false);
+        btnDesbloquear.setEnabled(true);
+        cbTipo.setEnabled(false);
+        tblArtigo.setEnabled(false);
+
+        int setar = tblArtigo.getSelectedRow();
+        if (tblArtigo.getModel().getValueAt(setar, 1).toString().equals("P")) {
+            txtIdArtigo.setText(tblArtigo.getModel().getValueAt(setar, 0).toString());
+            cbTipo.setSelectedItem(tblArtigo.getModel().getValueAt(setar, 1).toString());
+            txtTitulo.setText(tblArtigo.getModel().getValueAt(setar, 2).toString());
+            txtPagInicial.setText(tblArtigo.getModel().getValueAt(setar, 3).toString());
+            txtPagFinal.setText(tblArtigo.getModel().getValueAt(setar, 4).toString());
+            txtAno.setText(tblArtigo.getModel().getValueAt(setar, 5).toString());
+            txtVolume.setText(tblArtigo.getModel().getValueAt(setar, 6).toString());
+            txtNumero.setText(tblArtigo.getModel().getValueAt(setar, 7).toString());
+            txtCodigoRevista.setText(tblArtigo.getModel().getValueAt(setar, 8).toString());
+        } else {
+            txtIdArtigo.setText(tblArtigo.getModel().getValueAt(setar, 0).toString());
+            cbTipo.setSelectedItem(tblArtigo.getModel().getValueAt(setar, 1).toString());
+            txtTitulo.setText(tblArtigo.getModel().getValueAt(setar, 2).toString());
+            txtPagInicial.setText(tblArtigo.getModel().getValueAt(setar, 3).toString());
+            txtPagFinal.setText(tblArtigo.getModel().getValueAt(setar, 4).toString());
+            txtAno.setText(tblArtigo.getModel().getValueAt(setar, 5).toString());
+            txtNomeCongresso.setText(tblArtigo.getModel().getValueAt(setar, 9).toString());
+            txtCidadeCongresso.setText(tblArtigo.getModel().getValueAt(setar, 10).toString());
+            txtDataCongresso.setText(tblArtigo.getModel().getValueAt(setar, 11).toString());
+        }
+    }
+
+
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // Ao abrir a tela 
+        listarTabelaArtigo();
+        ativaTblBotaoPeriodicos();
+        btnDeletarArtigo.setEnabled(false);
+        btnEditarArtigo.setEnabled(false);
+        btnDesbloquear.setEnabled(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroActionPerformed
-    
+        if (cbTipo.getSelectedItem().equals("P")) {
+            ativaTblBotaoPeriodicos();
+            txtCidadeCongresso.setText(null);
+            txtDataCongresso.setText(null);
+            txtNomeCongresso.setText(null);
+        } else {
+            txtVolume.setText(null);
+            txtNumero.setText(null);
+            txtCodigoRevista.setText(null);
+            ativaTblBotaoCongresso();
+
+        }
+    }//GEN-LAST:event_cbTipoActionPerformed
+
+    private void ativaTblBotaoCongresso() {
+        txtCidadeCongresso.setEnabled(true);
+        txtDataCongresso.setEnabled(true);
+        txtNomeCongresso.setEnabled(true);
+        txtVolume.setEnabled(false);
+        txtNumero.setEnabled(false);
+        txtCodigoRevista.setEnabled(false);
+        
+    }
+
+    private void ativaTblBotaoPeriodicos() {
+        txtCidadeCongresso.setEnabled(false);
+        txtDataCongresso.setEnabled(false);
+        txtNomeCongresso.setEnabled(false);
+        txtVolume.setEnabled(true);
+        txtNumero.setEnabled(true);
+        txtCodigoRevista.setEnabled(true);
+    }
+
+    private void btnDesbloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearActionPerformed
+        ativaTblBotaoPeriodicos();
+        btnAdicionarArtigo.setEnabled(true);
+        btnDeletarArtigo.setEnabled(false);
+        btnEditarArtigo.setEnabled(false);
+        tblArtigo.setEnabled(true);
+        cbTipo.setEnabled(true);
+        limparCampos();
+        btnDesbloquear.setEnabled(false);
+    }//GEN-LAST:event_btnDesbloquearActionPerformed
+
     private void voltar() {
         TelaPrincipal telaprincipal = new TelaPrincipal();
         telaprincipal.setVisible(true);
         this.dispose();
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -515,16 +712,28 @@ public class TelaArtigo extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaArtigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaArtigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaArtigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaArtigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaArtigo.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaArtigo.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaArtigo.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaArtigo.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -540,8 +749,10 @@ public class TelaArtigo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarArtigo;
     private javax.swing.JButton btnDeletarArtigo;
+    private javax.swing.JButton btnDesbloquear;
     private javax.swing.JButton btnEditarArtigo;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
