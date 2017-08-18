@@ -12,32 +12,30 @@ import java.sql.Date;
  * @author lucas
  */
 public class Artigo {
-    
+
     // Dados de Artigo
     private int Cod_Artigo;
     private String Titulo;
     private int Pag_Inicial;
-    private int Pag_final; 
+    private int Pag_final;
     private Date Ano;
     private String tipo;
-    
+    private int Autor;
+    private int CoAutor;
+
     // Dados de Artigo_Periodico
     private int Volume;
     private int Numero;
     private int Cod_Revista;
-    
+
     // Dados de Artigo_Congresso
     private String Nome_Congresso;
     private String Cidade_congresso;
     private Date Data_congresso;
-    
+
     //Código do artigo referenciado
     private int Cod_Artigo_Referenciado;
 
-    
-    
-    
-    
     public int getCod_Artigo() {
         return Cod_Artigo;
     }
@@ -141,5 +139,21 @@ public class Artigo {
     public void setCod_Artigo_Referenciado(int Cod_Artigo_Referenciado) {
         this.Cod_Artigo_Referenciado = Cod_Artigo_Referenciado;
     }
-    
+
+    public int getAutor() {
+        return Autor;
+    }
+
+    public void setAutor(int Autor) {
+        this.Autor = Autor;
+    }
+
+    public int getCoAutor() {
+        return CoAutor;
+    }
+
+    public void setCoAutor(int CoAutor) {
+        this.CoAutor = CoAutor;
+    }
+
 }

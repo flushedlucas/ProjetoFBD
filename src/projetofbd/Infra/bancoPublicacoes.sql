@@ -6,7 +6,7 @@ use publicacoes;
 
 create table if not exists universidade(
 cod_univer int auto_increment primary key,
-nome varchar(30),
+nome varchar(100),
 sigla varchar(30),
 uf varchar(2)
 );
@@ -14,7 +14,7 @@ uf varchar(2)
 
 create table if not exists pesquisador (
   cod_pesq int auto_increment primary key,
-  nome_pesq varchar(30),
+  nome_pesq varchar(100),
   cod_univer int not null,
   foreign Key (cod_univer) references universidade(cod_univer) on delete cascade on update cascade
   
@@ -22,25 +22,25 @@ create table if not exists pesquisador (
 
 create table if not exists revista_cientifica(
 cod_revista int auto_increment primary key,
-nome varchar(30),
-editora varchar(30),
+nome varchar(100),
+editora varchar(100),
 issn varchar(10) 
 );
 
 create table if not exists artigo(
 cod_artigo int auto_increment primary key,
-titulo varchar(30) not null,
+titulo varchar(100) not null,
 pag_inicial int,
 pag_final int,
 ano date,
 volume int ,
 numero int ,
 cod_revista int,
-nome_congresso varchar(30),
-cidade_congresso varchar(30), 
+nome_congresso varchar(100),
+cidade_congresso varchar(100), 
 data_congresso date,
 
-foreign key (cod_revista) references revista_cientifica(cod_revista) on delete set null on update set null
+foreign key (cod_revista) references revista_cientifica(cod_revista) on delete set null on update cascade
 );
 
 
@@ -57,6 +57,7 @@ on delete cascade on update cascade
 create table if not exists referencia(
 cod_artigo int not null, 
 cod_artigo_referenciado int not null,
+primary key(cod_artigo, cod_artigo_referenciado),
 foreign key(cod_artigo) references artigo(cod_artigo) on delete cascade on update cascade,
 foreign key(cod_artigo_referenciado) references artigo(cod_artigo)
 on delete cascade on update cascade

@@ -7,13 +7,20 @@ package projetofbd.View;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import net.proteanit.sql.DbUtils;
 import projetofbd.DAO.ArtigoDAO;
+import projetofbd.DAO.PesquisadorDAO;
+import projetofbd.DAO.RevistaDAO;
 import projetofbd.Model.Artigo;
+import projetofbd.Model.Pesquisador;
 import projetofbd.Model.Revista;
 
 /**
@@ -53,8 +60,6 @@ public class TelaArtigo extends javax.swing.JFrame {
         btnDeletarArtigo = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
-        btnVoltar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArtigo = new javax.swing.JTable();
@@ -67,7 +72,6 @@ public class TelaArtigo extends javax.swing.JFrame {
         txtNumero = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txtCodigoRevista = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtCidadeCongresso = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -80,18 +84,27 @@ public class TelaArtigo extends javax.swing.JFrame {
         }
         cbTipo = new javax.swing.JComboBox<>();
         btnDesbloquear = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         txtAno = new javax.swing.JTextField();
         try{    javax.swing.text.MaskFormatter issn = new javax.swing.text.MaskFormatter("####-##-##");    txtAno = new javax.swing.JFormattedTextField(issn); }    catch (Exception e){ }
-        jLabel15 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
+        cbCodigoRevista = new javax.swing.JComboBox<>();
+        cbNomeAutor = new javax.swing.JComboBox<>();
+        cbNomeCoAutor = new javax.swing.JComboBox<>();
+        cbReferencia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -128,31 +141,15 @@ public class TelaArtigo extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setText("* Campos Obrigatórios");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(btnVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+            .addGap(0, 54, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnVoltar)
-                .addComponent(jLabel1))
+            .addGap(0, 29, Short.MAX_VALUE)
         );
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetofbd/icones/lupa.png"))); // NOI18N
@@ -212,7 +209,7 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         jLabel11.setText("Número:");
 
-        jLabel12.setText("Código da Revista:");
+        jLabel12.setText("Revista:");
 
         jLabel13.setText("Cidade do Congresso:");
 
@@ -234,35 +231,37 @@ public class TelaArtigo extends javax.swing.JFrame {
 
         jLabel15.setText("Tipo:");
 
+        jLabel16.setText("*Autor Principal:");
+
+        jLabel17.setText("Referencia:");
+
+        jLabel18.setText("Co-Autor:");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("* Campos Obrigatórios");
+
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        cbCodigoRevista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbNomeAutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbNomeCoAutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbReferencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         txtIdArtigo.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(46, 46, 46))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 199, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnDesbloquear)
-                                .addContainerGap())
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(204, 204, 204)
-                                .addComponent(btnAdicionarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(btnEditarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(btnDeletarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(389, 389, 389))))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -273,58 +272,96 @@ public class TelaArtigo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
+                        .addContainerGap()
+                        .addComponent(btnVoltar)
+                        .addGap(122, 122, 122)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(10, 10, 10)
-                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNomeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel13)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtCidadeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel14)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtDataCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel15)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(34, 34, 34)
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(10, 10, 10)
+                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNomeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCidadeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDataCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(278, 278, 278)
+                                .addComponent(btnAdicionarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(btnEditarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(btnDeletarArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel16)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbNomeAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbNomeCoAutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbReferencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(0, 113, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnDesbloquear)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,50 +375,91 @@ public class TelaArtigo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDesbloquear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDesbloquear, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel2))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel5))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9)
+                                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel15)
+                                .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtIdArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPagInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtPagFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18)
+                    .addComponent(cbNomeAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbNomeCoAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel3))
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6))
                     .addComponent(txtNomeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel13))
                     .addComponent(txtCidadeCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel14))
                     .addComponent(txtDataCongresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(cbCodigoRevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditarArtigo)
-                    .addComponent(btnAdicionarArtigo)
-                    .addComponent(btnDeletarArtigo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnEditarArtigo)
+                        .addComponent(btnAdicionarArtigo)
+                        .addComponent(btnDeletarArtigo))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)))
         );
 
-        setSize(new java.awt.Dimension(1210, 574));
+        setSize(new java.awt.Dimension(1210, 612));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -390,10 +468,10 @@ public class TelaArtigo extends javax.swing.JFrame {
         if (validacao()) {
             JOptionPane.showMessageDialog(null, "Selecione um item, para poder editá-lo.");
         } else if (cbTipo.getSelectedItem().equals("P")) {
-            Artigo artigo = dadosPeriodicos();
+            Artigo artigo = dadosPeriodicosEditar();
             ArtigoDAO artigoDAO = new ArtigoDAO();
-//                igual = revistaDAO.read(revista.getNome_Revista());
-//                if (igual == 0) {
+
+            artigo.setTipo("P");
             int editado = artigoDAO.update(artigo);
             if (editado > 0) {
                 JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
@@ -402,16 +480,11 @@ public class TelaArtigo extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
             }
-//                }else{
-//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
-//                    limparCampos();
-//                    ativaTblBotaoPeriodicos();
-//                }
+
         } else {
-            Artigo artigo = dadosCongresso();
+            Artigo artigo = dadosCongressoEditar();
             ArtigoDAO artigoDAO = new ArtigoDAO();
-//                igual = revistaDAO.read(revista.getNome_Revista());
-//                if (igual == 0) {
+
             int editado = artigoDAO.update(artigo);
             if (editado > 0) {
                 JOptionPane.showMessageDialog(null, "Artigo editado com sucesso.");
@@ -420,11 +493,7 @@ public class TelaArtigo extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Não foi possível editar o artigo.");
             }
-//                }else{
-//                    JOptionPane.showMessageDialog(null, "O artigo não foi editada, pois, é igual ao atual.");
-//                    limparCampos();
-//                    ativaTblBotaoPeriodicos();
-//                }
+
         }
     }//GEN-LAST:event_btnEditarArtigoActionPerformed
 
@@ -432,46 +501,47 @@ public class TelaArtigo extends javax.swing.JFrame {
         return (txtTitulo.getText().isEmpty()
                 || txtPagFinal.getText().isEmpty()
                 || txtPagInicial.getText().isEmpty()
-                || txtAno.getText().isEmpty());
+                || txtAno.getText().isEmpty()
+                || cbNomeAutor.getSelectedItem().equals(""));
     }
     private void btnDeletarArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarArtigoActionPerformed
-        if (validacao()) {
-            JOptionPane.showMessageDialog(null, "Preencha todo os campos habiltados.");
-        } else {
-            int remove = 0;
-            int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
-                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
-            if (confirma == JOptionPane.YES_OPTION) {
-                if (cbTipo.getSelectedItem().equals("P")) {
-                    Artigo artigo = dadosPeriodicos();
-                    ArtigoDAO artigoDAO = new ArtigoDAO();
-                    remove = artigoDAO.delete(artigo);
-                    if (remove > 0) {
-                        JOptionPane.showMessageDialog(null, "Artigo Excluído com sucesso.");
-                        limparCampos();
-                        listarTabelaArtigo();
-                        btnAdicionarArtigo.setEnabled(true);
-                        tblArtigo.setEnabled(true);
 
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível excluído o artigo.");
-                        limparCampos();
-                    }
+        int remove = 0;
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
+                + " este Artigo?", "Atenção!", JOptionPane.YES_OPTION);
+        if (confirma == JOptionPane.YES_OPTION) {
+            if (cbTipo.getSelectedItem().equals("P")) {
+                Artigo artigo = new Artigo();
+                artigo.setCod_Artigo(Integer.parseInt(txtIdArtigo.getText()));
+                ArtigoDAO artigoDAO = new ArtigoDAO();
+                remove = artigoDAO.delete(artigo);
+                if (remove > 0) {
+                    JOptionPane.showMessageDialog(null, "Artigo Excluído com sucesso.");
+                    limparCampos();
+                    listarTabelaArtigo();
+                    btnAdicionarArtigo.setEnabled(true);
+                    tblArtigo.setEnabled(true);
+
                 } else {
-                    Artigo artigo = dadosCongresso();
-                    ArtigoDAO artigoDAO = new ArtigoDAO();
-                    remove = artigoDAO.delete(artigo);
-                    if (remove > 0) {
-                        JOptionPane.showMessageDialog(null, "Artigo excluído com sucesso.");
-                        limparCampos();
-                        listarTabelaArtigo();
-                        btnAdicionarArtigo.setEnabled(true);
-                        tblArtigo.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Não foi possível excluír o artigo.");
+                    limparCampos();
+                }
+            } else {
+                Artigo artigo = new Artigo();
+                artigo.setCod_Artigo(Integer.parseInt(txtIdArtigo.getText()));
+                ArtigoDAO artigoDAO = new ArtigoDAO();
+                remove = artigoDAO.delete(artigo);
+                if (remove > 0) {
+                    JOptionPane.showMessageDialog(null, "Artigo excluído com sucesso.");
+                    limparCampos();
+                    listarTabelaArtigo();
+                    btnAdicionarArtigo.setEnabled(true);
+                    tblArtigo.setEnabled(true);
 
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível exluir o artigo.");
-                        limparCampos();
-                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível exluir o artigo.");
+                    limparCampos();
+
                 }
             }
         }
@@ -493,8 +563,12 @@ public class TelaArtigo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tblArtigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArtigoMouseClicked
-        // prencher os campos do pesquisador
-        setarCampos();
+        try {
+            // prencher os campos do pesquisador
+            setarCampos();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaArtigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_tblArtigoMouseClicked
 
@@ -536,9 +610,11 @@ public class TelaArtigo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarArtigoActionPerformed
 
     private Artigo dadosPeriodicos() throws NumberFormatException {
+        PesquisadorDAO pdao = new PesquisadorDAO();
+        RevistaDAO rdao = new RevistaDAO();
+        ArtigoDAO adao = new ArtigoDAO();
+
         Artigo artigo = new Artigo();
-//        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
-//        artigo.setCod_Artigo(codArtigo);
         artigo.setTitulo(txtTitulo.getText());
         int pgInicial = Integer.parseInt(txtPagInicial.getText());
         artigo.setPag_Inicial(pgInicial);
@@ -548,16 +624,25 @@ public class TelaArtigo extends javax.swing.JFrame {
         artigo.setAno(ano);
         int volume = Integer.parseInt(txtVolume.getText());
         artigo.setVolume(volume);
-        int codRevista = Integer.parseInt(txtCodigoRevista.getText());
-        artigo.setCod_Revista(codRevista);
+        int numero = Integer.parseInt(txtNumero.getText());
+        artigo.setNumero(numero);
+        artigo.setCod_Revista(rdao.read(cbCodigoRevista.getSelectedItem().toString()));
+        artigo.setAutor(pdao.read(cbNomeAutor.getSelectedItem().toString()));
+        if (!"".equals(cbNomeCoAutor.getSelectedItem().toString())) {
+            artigo.setCoAutor(pdao.read(cbNomeCoAutor.getSelectedItem().toString()));
+        }
+        if (!"".equals(cbReferencia.getSelectedItem().toString())) {
+            artigo.setCod_Artigo_Referenciado(adao.read(cbReferencia.getSelectedItem().toString()));
+        }
         artigo.setTipo(cbTipo.getSelectedItem().toString());
         return artigo;
     }
 
     private Artigo dadosCongresso() throws NumberFormatException {
+        PesquisadorDAO pdao = new PesquisadorDAO();
         Artigo artigo = new Artigo();
-//        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
-//        artigo.setCod_Artigo(codArtigo);
+        ArtigoDAO adao = new ArtigoDAO();
+
         artigo.setTitulo(txtTitulo.getText());
         int pgInicial = Integer.parseInt(txtPagInicial.getText());
         artigo.setPag_Inicial(pgInicial);
@@ -569,9 +654,77 @@ public class TelaArtigo extends javax.swing.JFrame {
         artigo.setCidade_congresso(txtCidadeCongresso.getText());
         Date dataCongresso = Date.valueOf(txtDataCongresso.getText());
         artigo.setData_congresso(dataCongresso);
+        artigo.setAutor(pdao.read(cbNomeAutor.getSelectedItem().toString()));
+        if (!"".equals(cbNomeCoAutor.getSelectedItem().toString())) {
+            artigo.setCoAutor(pdao.read(cbNomeCoAutor.getSelectedItem().toString()));
+        }
+        if (!"".equals(cbReferencia.getSelectedItem().toString())) {
+            artigo.setCod_Artigo_Referenciado(adao.read(cbReferencia.getSelectedItem().toString()));
+        }
         artigo.setTipo(cbTipo.getSelectedItem().toString());
         return artigo;
     }
+
+    private Artigo dadosCongressoEditar() throws NumberFormatException {
+        PesquisadorDAO pdao = new PesquisadorDAO();
+        ArtigoDAO adao = new ArtigoDAO();
+
+        Artigo artigo = new Artigo();
+        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
+        artigo.setCod_Artigo(codArtigo);
+        artigo.setTitulo(txtTitulo.getText());
+        int pgInicial = Integer.parseInt(txtPagInicial.getText());
+        artigo.setPag_Inicial(pgInicial);
+        int pgFinal = Integer.parseInt(txtPagFinal.getText());
+        artigo.setPag_final(pgFinal);
+        Date ano = Date.valueOf(txtAno.getText());
+        artigo.setAno(ano);
+        artigo.setNome_Congresso(txtNomeCongresso.getText());
+        artigo.setCidade_congresso(txtCidadeCongresso.getText());
+        Date dataCongresso = Date.valueOf(txtDataCongresso.getText());
+        artigo.setData_congresso(dataCongresso);
+        artigo.setAutor(pdao.read(cbNomeAutor.getSelectedItem().toString()));
+        if (!"".equals(cbNomeCoAutor.getSelectedItem().toString())) {
+            artigo.setCoAutor(pdao.read(cbNomeCoAutor.getSelectedItem().toString()));
+        }
+        if (!"".equals(cbReferencia.getSelectedItem().toString())) {
+            artigo.setCod_Artigo_Referenciado(adao.read(cbReferencia.getSelectedItem().toString()));
+        }
+        artigo.setTipo(cbTipo.getSelectedItem().toString());
+        return artigo;
+    }
+
+    private Artigo dadosPeriodicosEditar() throws NumberFormatException {
+        PesquisadorDAO pdao = new PesquisadorDAO();
+        ArtigoDAO adao = new ArtigoDAO();
+        RevistaDAO rdao = new RevistaDAO();
+        Artigo artigo = new Artigo();
+
+        int codArtigo = Integer.parseInt(txtIdArtigo.getText());
+        artigo.setCod_Artigo(codArtigo);
+        artigo.setTitulo(txtTitulo.getText());
+        int pgInicial = Integer.parseInt(txtPagInicial.getText());
+        artigo.setPag_Inicial(pgInicial);
+        int pgFinal = Integer.parseInt(txtPagFinal.getText());
+        artigo.setPag_final(pgFinal);
+        Date ano = Date.valueOf(txtAno.getText());
+        artigo.setAno(ano);
+        int volume = Integer.parseInt(txtVolume.getText());
+        artigo.setVolume(volume);
+        int numero = Integer.parseInt(txtNumero.getText());
+        artigo.setNumero(numero);
+        artigo.setCod_Revista(rdao.read(cbCodigoRevista.getSelectedItem().toString()));
+        artigo.setAutor(pdao.read(cbNomeAutor.getSelectedItem().toString()));
+        if (!"".equals(cbNomeCoAutor.getSelectedItem().toString())) {
+            artigo.setCoAutor(pdao.read(cbNomeCoAutor.getSelectedItem().toString()));
+        }
+        if (!"".equals(cbReferencia.getSelectedItem().toString())) {
+            artigo.setCod_Artigo_Referenciado(adao.read(cbReferencia.getSelectedItem().toString()));
+        }
+        artigo.setTipo(cbTipo.getSelectedItem().toString());
+        return artigo;
+    }
+
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -589,11 +742,12 @@ public class TelaArtigo extends javax.swing.JFrame {
 
     private void limparCampos() {
         txtIdArtigo.setText(null);
-        txtAno.setText(null);
+        cbReferencia.setSelectedItem(null);
         txtTitulo.setText(null);
         txtBuscar.setText(null);
         txtPagFinal.setText(null);
         txtPagInicial.setText(null);
+        txtAno.setText(null);
 
         //congresso
         txtCidadeCongresso.setText(null);
@@ -602,11 +756,14 @@ public class TelaArtigo extends javax.swing.JFrame {
         //peródicos
         txtVolume.setText(null);
         txtNumero.setText(null);
-        txtCodigoRevista.setText(null);
+        cbCodigoRevista.setSelectedItem(null);
 
+        cbNomeAutor.setSelectedItem(null);
+        cbNomeCoAutor.setSelectedItem(null);
+        listarDadosCombo();
     }
 
-    public void setarCampos() {
+    public void setarCampos() throws SQLException {
         btnDeletarArtigo.setEnabled(true);
         btnEditarArtigo.setEnabled(true);
         btnAdicionarArtigo.setEnabled(false);
@@ -614,27 +771,36 @@ public class TelaArtigo extends javax.swing.JFrame {
         cbTipo.setEnabled(false);
         tblArtigo.setEnabled(false);
 
+        ArtigoDAO adao = new ArtigoDAO();
+        RevistaDAO rdao = new RevistaDAO();
+
         int setar = tblArtigo.getSelectedRow();
-        if (tblArtigo.getModel().getValueAt(setar, 1).toString().equals("P")) {
+        if (tblArtigo.getModel().getValueAt(setar, 8) == null) {
             txtIdArtigo.setText(tblArtigo.getModel().getValueAt(setar, 0).toString());
-            cbTipo.setSelectedItem(tblArtigo.getModel().getValueAt(setar, 1).toString());
-            txtTitulo.setText(tblArtigo.getModel().getValueAt(setar, 2).toString());
-            txtPagInicial.setText(tblArtigo.getModel().getValueAt(setar, 3).toString());
-            txtPagFinal.setText(tblArtigo.getModel().getValueAt(setar, 4).toString());
-            txtAno.setText(tblArtigo.getModel().getValueAt(setar, 5).toString());
-            txtVolume.setText(tblArtigo.getModel().getValueAt(setar, 6).toString());
-            txtNumero.setText(tblArtigo.getModel().getValueAt(setar, 7).toString());
-            txtCodigoRevista.setText(tblArtigo.getModel().getValueAt(setar, 8).toString());
+            cbTipo.setSelectedItem("P");
+            txtTitulo.setText(tblArtigo.getModel().getValueAt(setar, 1).toString());
+            txtPagInicial.setText(tblArtigo.getModel().getValueAt(setar, 2).toString());
+            txtPagFinal.setText(tblArtigo.getModel().getValueAt(setar, 3).toString());
+            txtAno.setText(tblArtigo.getModel().getValueAt(setar, 4).toString());
+            cbNomeAutor.setSelectedItem(adao.buscaAutor(Integer.parseInt(tblArtigo.getModel().getValueAt(setar, 0).toString())));
+            cbNomeCoAutor.setSelectedItem(adao.buscaCoAutor(Integer.parseInt(tblArtigo.getModel().getValueAt(setar, 0).toString())));
+            txtVolume.setText(tblArtigo.getModel().getValueAt(setar, 5).toString());
+            txtNumero.setText(tblArtigo.getModel().getValueAt(setar, 6).toString());
+            cbCodigoRevista.setSelectedItem(rdao.readNome(Integer.parseInt(tblArtigo.getModel().getValueAt(setar, 7).toString())));
+            cbReferencia.setSelectedItem(adao.buscaReferencia(Integer.parseInt(tblArtigo.getModel().getValueAt(setar, 0).toString())));
         } else {
             txtIdArtigo.setText(tblArtigo.getModel().getValueAt(setar, 0).toString());
-            cbTipo.setSelectedItem(tblArtigo.getModel().getValueAt(setar, 1).toString());
-            txtTitulo.setText(tblArtigo.getModel().getValueAt(setar, 2).toString());
-            txtPagInicial.setText(tblArtigo.getModel().getValueAt(setar, 3).toString());
-            txtPagFinal.setText(tblArtigo.getModel().getValueAt(setar, 4).toString());
-            txtAno.setText(tblArtigo.getModel().getValueAt(setar, 5).toString());
-            txtNomeCongresso.setText(tblArtigo.getModel().getValueAt(setar, 9).toString());
-            txtCidadeCongresso.setText(tblArtigo.getModel().getValueAt(setar, 10).toString());
-            txtDataCongresso.setText(tblArtigo.getModel().getValueAt(setar, 11).toString());
+            cbTipo.setSelectedItem("C");
+            txtTitulo.setText(tblArtigo.getModel().getValueAt(setar, 1).toString());
+            txtPagInicial.setText(tblArtigo.getModel().getValueAt(setar, 2).toString());
+            txtPagFinal.setText(tblArtigo.getModel().getValueAt(setar, 3).toString());
+            txtAno.setText(tblArtigo.getModel().getValueAt(setar, 4).toString());
+            cbNomeAutor.setSelectedItem(adao.buscaAutor(Integer.parseInt(tblArtigo.getModel().getValueAt(setar, 0).toString())));
+            cbNomeCoAutor.setSelectedItem(adao.buscaCoAutor(Integer.parseInt(tblArtigo.getModel().getValueAt(setar, 0).toString())));
+            txtNomeCongresso.setText(tblArtigo.getModel().getValueAt(setar, 8).toString());
+            txtCidadeCongresso.setText(tblArtigo.getModel().getValueAt(setar, 9).toString());
+            txtDataCongresso.setText(tblArtigo.getModel().getValueAt(setar, 10).toString());
+            cbReferencia.setSelectedItem(adao.buscaReferencia(Integer.parseInt(tblArtigo.getModel().getValueAt(setar, 0).toString())));
         }
     }
 
@@ -642,11 +808,47 @@ public class TelaArtigo extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Ao abrir a tela 
         listarTabelaArtigo();
+        listarDadosCombo();
         ativaTblBotaoPeriodicos();
         btnDeletarArtigo.setEnabled(false);
         btnEditarArtigo.setEnabled(false);
         btnDesbloquear.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
+
+    private void listarDadosCombo() {
+        cbCodigoRevista.removeAllItems();
+        cbNomeAutor.removeAllItems();
+        cbNomeCoAutor.removeAllItems();
+        cbReferencia.removeAllItems();
+
+        cbCodigoRevista.addItem("");
+        cbNomeAutor.addItem("");
+        cbNomeCoAutor.addItem("");
+        cbReferencia.addItem("");
+
+        ArtigoDAO artigoDAO = new ArtigoDAO();
+        RevistaDAO revistaDAO = new RevistaDAO();
+        PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
+
+        ArrayList<Artigo> artigos = artigoDAO.read();
+        ArrayList<Revista> revistas = revistaDAO.read();
+        ArrayList<Pesquisador> pesquisadores = pesquisadorDAO.read();
+
+        for (int i = 0; i < revistas.size(); i++) {
+            cbCodigoRevista.addItem(revistas.get(i).getNome_Revista());
+        }
+
+        for (int i = 0; i < pesquisadores.size(); i++) {
+            cbNomeAutor.addItem(pesquisadores.get(i).getNome_Pesq());
+            cbNomeCoAutor.addItem(pesquisadores.get(i).getNome_Pesq());
+
+        }
+
+        for (int i = 0; i < artigos.size(); i++) {
+            cbReferencia.addItem(artigos.get(i).getTitulo());
+        }
+
+    }
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         // TODO add your handling code here:
@@ -658,7 +860,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         } else {
             txtVolume.setText(null);
             txtNumero.setText(null);
-            txtCodigoRevista.setText(null);
+            cbCodigoRevista.setSelectedItem(null);
             ativaTblBotaoCongresso();
 
         }
@@ -670,7 +872,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         txtNomeCongresso.setEnabled(true);
         txtVolume.setEnabled(false);
         txtNumero.setEnabled(false);
-        txtCodigoRevista.setEnabled(false);
+        cbCodigoRevista.setEnabled(false);
 
     }
 
@@ -680,7 +882,7 @@ public class TelaArtigo extends javax.swing.JFrame {
         txtNomeCongresso.setEnabled(false);
         txtVolume.setEnabled(true);
         txtNumero.setEnabled(true);
-        txtCodigoRevista.setEnabled(true);
+        cbCodigoRevista.setEnabled(true);
     }
 
     private void btnDesbloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearActionPerformed
@@ -692,6 +894,12 @@ public class TelaArtigo extends javax.swing.JFrame {
         cbTipo.setEnabled(true);
         limparCampos();
         btnDesbloquear.setEnabled(false);
+        cbCodigoRevista.setSelectedItem(" ");
+        cbNomeAutor.setSelectedItem(" ");
+        cbNomeCoAutor.setSelectedItem(" ");
+        cbReferencia.setSelectedItem(" ");
+
+
     }//GEN-LAST:event_btnDesbloquearActionPerformed
 
     private void voltar() {
@@ -750,6 +958,10 @@ public class TelaArtigo extends javax.swing.JFrame {
     private javax.swing.JButton btnDesbloquear;
     private javax.swing.JButton btnEditarArtigo;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JComboBox<String> cbCodigoRevista;
+    private javax.swing.JComboBox<String> cbNomeAutor;
+    private javax.swing.JComboBox<String> cbNomeCoAutor;
+    private javax.swing.JComboBox<String> cbReferencia;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -758,6 +970,9 @@ public class TelaArtigo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -772,7 +987,6 @@ public class TelaArtigo extends javax.swing.JFrame {
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCidadeCongresso;
-    private javax.swing.JTextField txtCodigoRevista;
     private javax.swing.JTextField txtDataCongresso;
     private javax.swing.JTextField txtIdArtigo;
     private javax.swing.JTextField txtNomeCongresso;

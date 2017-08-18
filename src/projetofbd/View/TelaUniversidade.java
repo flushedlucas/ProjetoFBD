@@ -264,7 +264,6 @@ public class TelaUniversidade extends javax.swing.JFrame {
         try {
             listarTabelaUniversidade();
             tblUniversidade.setEnabled(true);
-            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na transação");
@@ -284,20 +283,17 @@ public class TelaUniversidade extends javax.swing.JFrame {
                 universidade.setUF(txtUF.getText());
                 UniversidadeDAO universidadeDAO = new UniversidadeDAO();
                 existe = universidadeDAO.readNome(universidade.getNome_Univer());
-                if (existe == 0) {
-                    int adicionadao = universidadeDAO.create(universidade);
-                    if (adicionadao > 0) {
-                        JOptionPane.showMessageDialog(null, "Universidade Salva com sucesso.");
-                        limparCampos();
-                        listarTabelaUniversidade();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Não foi possível adicionar a Universidade.");
-                        limparCampos();
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Universidade já existe");
+
+                int adicionadao = universidadeDAO.create(universidade);
+                if (adicionadao > 0) {
+                    JOptionPane.showMessageDialog(null, "Universidade Salva com sucesso.");
+                    limparCampos();
+                    listarTabelaUniversidade();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possível adicionar a Universidade.");
                     limparCampos();
                 }
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Universidade já existe");
@@ -318,20 +314,14 @@ public class TelaUniversidade extends javax.swing.JFrame {
             universidade.setSigla(txtSigla.getText());
             universidade.setUF(txtUF.getText());
             UniversidadeDAO universidadeDAO = new UniversidadeDAO();
-            igual = universidadeDAO.readNome(universidade.getNome_Univer());
-            if (igual == 0) {
-                int editado = universidadeDAO.update(universidade);
-                if (editado > 0) {
-                    JOptionPane.showMessageDialog(null, "Universidade editada com sucesso.");
-                    ativaTblBotao();
-                    listarTabelaUniversidade();
-                    btnAdicionarUniversidade.setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível editar a Universidade.");
-                }
-            }else{
-                    JOptionPane.showMessageDialog(null, "A universidade não foi editada, pois, é igual ao atual.");
-                    ativaTblBotao();
+            int editado = universidadeDAO.update(universidade);
+            if (editado > 0) {
+                JOptionPane.showMessageDialog(null, "Universidade editada com sucesso.");
+                ativaTblBotao();
+                listarTabelaUniversidade();
+                btnAdicionarUniversidade.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível editar a Universidade.");
             }
         }
     }//GEN-LAST:event_btnEditarUniversidadeActionPerformed
@@ -343,7 +333,7 @@ public class TelaUniversidade extends javax.swing.JFrame {
         } else {
             int remove = 0;
             int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
-                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+                    + " esta Universidade?", "Atenção!", JOptionPane.YES_OPTION);
             if (confirma == JOptionPane.YES_OPTION) {
                 Universidade universidade = new Universidade();
                 int id = Integer.parseInt(txtIdUniversidade.getText());
@@ -380,10 +370,9 @@ public class TelaUniversidade extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        
+
 //        limparCampos();
-        
-        
+
     }//GEN-LAST:event_formMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

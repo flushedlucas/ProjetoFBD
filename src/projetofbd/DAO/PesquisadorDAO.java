@@ -89,12 +89,11 @@ public class PesquisadorDAO {
         return resultSet;
     }
     
-    public int  read(String pesquisador) {
-        String sql = "select nome_pesq from pesquisador where nome_pesq like ?";
+    public int read(String pesquisador) {
+        String sql = "select cod_pesq from pesquisador where nome_pesq like ?";
         PreparedStatement statement;
         int existe = 0;
-        String nome = null;
-        int cont = 0;
+        int nome = 0;
         try {
 //            System.out.println(pesquisador.getNome_Pesq());
             statement = Conexao.abrir().prepareCall(sql);
@@ -105,14 +104,13 @@ public class PesquisadorDAO {
             resultSet = statement.executeQuery();
 //            System.out.println(resultSet);
             while (resultSet.next()) {
-                nome= String.valueOf(resultSet.getString("nome_pesq"));
-                cont =  nome.length();
+                nome= resultSet.getInt("cod_pesq");
             }            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
 
         }
-        return cont;
+        return nome;
     }
 
     public int update(Pesquisador pesquisador) {

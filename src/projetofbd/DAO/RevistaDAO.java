@@ -84,12 +84,11 @@ public class RevistaDAO {
         return resultSet;
     }
     
-    public int  read(String revista) {
-        String sql = "select nome from revista_cientifica where nome like ?";
+    public int read(String revista) {
+        String sql = "select cod_revista from revista_cientifica where nome like ?";
         PreparedStatement statement;
         int existe = 0;
-        String nome = null;
-        int cont = 0;
+        int nome = 0;
         try {
 //            System.out.println(pesquisador.getNome_Pesq());
             statement = Conexao.abrir().prepareCall(sql);
@@ -100,14 +99,37 @@ public class RevistaDAO {
             resultSet = statement.executeQuery();
 //            System.out.println(resultSet);
             while (resultSet.next()) {
-                nome= String.valueOf(resultSet.getString("nome"));
-                cont =  nome.length();
+                nome = resultSet.getInt("cod_revista");
             }                 
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        return cont;
+        return nome;
+    }
+    
+       public String readNome(int revista) {
+        String sql = "select nome from revista_cientifica where cod_revista = ?";
+        PreparedStatement statement;
+        int existe = 0;
+        String nome = null;
+        try {
+//            System.out.println(pesquisador.getNome_Pesq());
+            statement = Conexao.abrir().prepareCall(sql);
+            //passando o conteudo  da caixa de texto para o ?
+            //atenção ao % - continuação da string sql
+            statement.setInt(1, revista);
+//            System.out.println(statement);
+            resultSet = statement.executeQuery();
+//            System.out.println(resultSet);
+            while (resultSet.next()) {
+                nome = resultSet.getString("nome");
+            }                 
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return nome;
     }
 
     public int update(Revista revista) {

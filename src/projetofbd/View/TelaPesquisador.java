@@ -13,7 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import projetofbd.DAO.PesquisadorDAO;
+import projetofbd.DAO.UniversidadeDAO;
 import projetofbd.Model.Pesquisador;
+import projetofbd.Model.Universidade;
 
 /**
  *
@@ -57,9 +59,9 @@ public class TelaPesquisador extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtUniversidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnDesbloquear = new javax.swing.JButton();
+        cbUniversidade = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -206,6 +208,8 @@ public class TelaPesquisador extends javax.swing.JFrame {
             }
         });
 
+        cbUniversidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,8 +244,8 @@ public class TelaPesquisador extends javax.swing.JFrame {
                                         .addComponent(txtIdPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtUniversidade))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtNomePesquisador)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
@@ -273,7 +277,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtIdPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(txtUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -314,13 +318,13 @@ public class TelaPesquisador extends javax.swing.JFrame {
 
                 Pesquisador pesquisador = new Pesquisador();
                 pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-                pesquisador.setUniversidade(txtUniversidade.getText());
+                pesquisador.setUniversidade(cbUniversidade.getSelectedItem().toString());
                 PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
                 existe = pesquisadorDAO.read(pesquisador.getNome_Pesq());
                 if (existe == 0) {
                     int adicionadao = pesquisadorDAO.create(pesquisador);
                     if (adicionadao > 0) {
-                        JOptionPane.showMessageDialog(null, "Pesquisador Salva com sucesso.");
+                        JOptionPane.showMessageDialog(null, "Pesquisador Salvo com sucesso.");
                         limparCampos();
                         listarTabelaPesquisador();
                     } else {
@@ -328,7 +332,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
                         limparCampos();
                     }
 
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Usuário já existe");
                     limparCampos();
                 }
@@ -350,29 +354,25 @@ public class TelaPesquisador extends javax.swing.JFrame {
             int id = Integer.parseInt(txtIdPesquisador.getText());
             pesquisador.setCod_Pesq((id));
             pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-            pesquisador.setUniversidade(txtUniversidade.getText());
+            pesquisador.setUniversidade(cbUniversidade.getSelectedItem().toString());
             PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
-            igual = pesquisadorDAO.read(pesquisador.getNome_Pesq());
-            if (igual == 0) {
-                int adicionadao = pesquisadorDAO.update(pesquisador);
-                if (adicionadao > 0) {
-                    JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
-                    ativaTblBotao();
-                    listarTabelaPesquisador();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Pesquisador não editado. houve um erro no sistema.");
-                }
-            }else{
-                 JOptionPane.showMessageDialog(null, "O pesquisador não foi editado, pois, é igual ao atual.");
-                 ativaTblBotao();
+
+            int adicionadao = pesquisadorDAO.update(pesquisador);
+            if (adicionadao > 0) {
+                JOptionPane.showMessageDialog(null, "Pesquisador editado com sucesso.");
+                ativaTblBotao();
+                listarTabelaPesquisador();
+            } else {
+                JOptionPane.showMessageDialog(null, "Pesquisador não editado. houve um erro no sistema.");
             }
+
         }
     }//GEN-LAST:event_btnEditarPesquisadorActionPerformed
     public void setarCampos() {
         int setar = tblPesquisador.getSelectedRow();
         txtIdPesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 0).toString());
         txtNomePesquisador.setText(tblPesquisador.getModel().getValueAt(setar, 1).toString());
-        txtUniversidade.setText(tblPesquisador.getModel().getValueAt(setar, 2).toString());
+        cbUniversidade.setSelectedItem(tblPesquisador.getModel().getValueAt(setar, 2).toString());
         // A linha abaixo desabilitar o botão adicionar
 
     }
@@ -409,13 +409,13 @@ public class TelaPesquisador extends javax.swing.JFrame {
         } else {
             int remove = 0;
             int confirma = JOptionPane.showConfirmDialog(null, "Tem certza que deseja excluir"
-                    + " este cliente?", "Atenção!", JOptionPane.YES_OPTION);
+                    + " este Pesquisador?", "Atenção!", JOptionPane.YES_OPTION);
             if (confirma == JOptionPane.YES_OPTION) {
                 Pesquisador pesquisador = new Pesquisador();
                 int id = Integer.parseInt(txtIdPesquisador.getText());
                 pesquisador.setCod_Pesq((id));
                 pesquisador.setNome_Pesq(txtNomePesquisador.getText());
-                pesquisador.setUniversidade(txtUniversidade.getText());
+//                pesquisador.setUniversidade(cbUniversidade.get);
 
                 PesquisadorDAO pesquisadorDAO = new PesquisadorDAO();
                 remove = pesquisadorDAO.delete(pesquisador);
@@ -437,10 +437,19 @@ public class TelaPesquisador extends javax.swing.JFrame {
         btnEditarPesquisador.setEnabled(false);
         btnDesbloquear.setEnabled(false);
         listarTabelaPesquisador();
+        listarUniversidades();
 
 
     }//GEN-LAST:event_formWindowOpened
 
+    private void listarUniversidades() {
+        cbUniversidade.removeAllItems();
+        UniversidadeDAO universidadeDAO = new UniversidadeDAO();
+        ArrayList<Universidade> arrayList = universidadeDAO.read();
+        for (int i = 0; i < arrayList.size(); i++) {
+            cbUniversidade.addItem(arrayList.get(i).getSigla());
+        }
+    }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Voltar página principal
         voltar();
@@ -468,19 +477,19 @@ public class TelaPesquisador extends javax.swing.JFrame {
         btnEditarPesquisador.setEnabled(false);
         limparCampos();
         tblPesquisador.setEnabled(true);
-        txtUniversidade.setEditable(true);
+        cbUniversidade.setEditable(true);
         btnDesbloquear.setEnabled(false);
     }
 
     private void limparCampos() {
         txtIdPesquisador.setText(null);
         txtNomePesquisador.setText(null);
-        txtUniversidade.setText(null);
+//        cbUniversidade.setText(null);
         txtBuscar.setText(null);
     }
 
     private boolean validacao() {
-        return (txtNomePesquisador.getText().isEmpty() || txtUniversidade.getText().isEmpty());
+        return (txtNomePesquisador.getText().isEmpty()); //|| cbUniversidade.getText().isEmpty());
     }
 
     /**
@@ -524,6 +533,7 @@ public class TelaPesquisador extends javax.swing.JFrame {
     private javax.swing.JButton btnDesbloquear;
     private javax.swing.JButton btnEditarPesquisador;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JComboBox<String> cbUniversidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -538,6 +548,5 @@ public class TelaPesquisador extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtIdPesquisador;
     private javax.swing.JTextField txtNomePesquisador;
-    private javax.swing.JTextField txtUniversidade;
     // End of variables declaration//GEN-END:variables
 }

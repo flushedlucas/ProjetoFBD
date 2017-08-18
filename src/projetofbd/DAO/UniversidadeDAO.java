@@ -47,7 +47,7 @@ public class UniversidadeDAO {
 
             while (resultSet.next()) {
                 Universidade universidade = new Universidade();
-                universidade.setCod_Univer(resultSet.getInt("univer"));
+                universidade.setCod_Univer(resultSet.getInt("cod_univer"));
                 universidade.setNome_Univer(resultSet.getString("nome"));
                 universidade.setSigla(resultSet.getString("sigla"));
                 universidade.setUF(resultSet.getString("uf"));
